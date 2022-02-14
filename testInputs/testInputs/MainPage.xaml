@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="testInputs.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:testInputs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    >
+    <Page.Resources>
+
+        <Storyboard x:Name="miStoryboard">
+            <DoubleAnimation AutoReverse="False" Storyboard.TargetProperty="(Ellipse.RenderTransform).(CompositeTransform.TranslateY)"
+                             To="730" Storyboard.TargetName="nota1"/>
+        </Storyboard>
+
+
+    </Page.Resources>
+
+    <StackPanel Orientation="Vertical" >
+        <StackPanel Orientation="Horizontal" Width="600" Height="500" Margin="0,100,0,60">
+            <Grid>
+                <Ellipse  Canvas.Left="800" Canvas.Top="300" x:Name="nota1" Width="50" Height="50" Fill="red">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform TranslateX="0"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Rectangle Name="espacio1" Width="100" Height="35" Margin="0,465,25,0"/>
+            </Grid>
+            <Grid>
+                <Rectangle Name="espacio2" Width="100" Height="35" Margin="0,465,25,0"/>
+            </Grid>
+            <Grid>
+                <Rectangle Name="espacio3" Width="100" Height="35" Margin="0,465,25,0"/>
+            </Grid>
+            <Grid>
+                <Rectangle Name="espacio4" Width="100" Height="35" Margin="0,465,25,0"/>
+            </Grid>
+            <Grid>
+                <Rectangle Name="espacio5" Width="100" Height="35" Margin="0,465,0,0" />
+            </Grid>
+        </StackPanel>
+        <Rectangle Name="espacio6" Width="400" Height="35" Margin="0,20,0,0"/>
+        <TextBlock Name="noitif" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+    </StackPanel>
+</Page>
