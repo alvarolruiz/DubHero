@@ -48,7 +48,7 @@ namespace PruebasAnimaciones
 
                 new NotePlaybackData(
 
-                    nota(rawNoteData, playbackTime),
+                nota(rawNoteData, playbackTime),
                 rawNoteData.Velocity,     // leave velocity as is
                 rawNoteData.OffVelocity,  // leave off velocity as is
                 rawNoteData.Channel);
@@ -62,8 +62,6 @@ namespace PruebasAnimaciones
 
             private SevenBitNumber nota(NotePlaybackData rawNoteData, TimeSpan playbackTime)
             {
-
-
                 return rawNoteData.NoteNumber;
             }
 
