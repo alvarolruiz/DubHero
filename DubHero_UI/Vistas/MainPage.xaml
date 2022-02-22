@@ -9,6 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     
+    
     RequestedTheme="Dark"
     >
     <Page.Resources>
@@ -33,24 +34,23 @@
             </Setter.Value>
         </Setter>
     </Style>
+     
+
     </Page.Resources>
 
     <RelativePanel Margin="10,10,0,0">
         <RelativePanel.Background>
-            <ImageBrush ImageSource="Assets/Imagenes/fondoSimple.jpg"   Stretch="None"  ></ImageBrush>
+            <ImageBrush ImageSource="/Assets/Imagenes/fondoSimple.jpg"   Stretch="None"  ></ImageBrush>
         </RelativePanel.Background>
         <Image Source="Assets/icono.png" RelativePanel.AlignTopWithPanel="True" Width="300"  />
 
 
-        <Button RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" x:Name="altavoz"  Width="500" Height="400">
-            <Button.Background>
-                <ImageBrush ImageSource="/Assets/Imagenes/icono.png" >
-                </ImageBrush>
-            </Button.Background>
-        </Button>
-
-        <Image x:Name="presione" Source="Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.Below="altavoz" Margin="0,50,0,0"  Width="400"  />
-        <Image Source="Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="250" Margin="0,-30"  />
+        <Image x:Name="imgIconoAltavoz" Source="/Assets/Imagenes/icono.png" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="500" Height="400" >
+            
+        
+        </Image>
+        <Image x:Name="presione" Source="/Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.Below="altavoz" Margin="0,50,0,0"  Width="400"  />
+        <Image Source="/Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="250" Margin="0,-30"  />
 
     </RelativePanel>
 </Page>

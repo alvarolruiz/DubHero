@@ -174,7 +174,7 @@ namespace DubHero_UI.Vistas
 
         }
 
-        private delegate crearAnimacion();
+        
 
 
         private void ReproductorMidi_EventPlayed(object sender, MidiEventPlayedEventArgs e)
