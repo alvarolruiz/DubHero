@@ -1,4 +1,5 @@
-﻿using Melanchall.DryWetMidi.Common;
+﻿using DubHero_UI.Classes;
+using Melanchall.DryWetMidi.Common;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Multimedia;
 using System;
@@ -30,13 +31,16 @@ namespace DubHero_UI.Vistas
     /// </summary>
     public sealed partial class Juego : Page
     {
+        private PlaybackManager _playback;
 
         public Juego()
         {
             this.InitializeComponent();
 
-            myPlayBack myPlayBack = new myPlayBack();
+             _playback = new PlaybackManager();
         }
+
+        
 
         //    while (myPlayBack.ReproductorMidi.IsRunning)
         //    {
@@ -136,6 +140,9 @@ namespace DubHero_UI.Vistas
         private MidiFile midiFile;
         private SevenBitNumber note;
 
+
+
+
         public myPlayBack()
         {
             midiFile = MidiFile.Read("Assets/sevenNationArmyMap.mid");
@@ -171,7 +178,7 @@ namespace DubHero_UI.Vistas
 
         }
 
-        
+        private delegate crearAnimacion();
 
 
         private void ReproductorMidi_EventPlayed(object sender, MidiEventPlayedEventArgs e)
@@ -189,6 +196,27 @@ namespace DubHero_UI.Vistas
 
         public Playback ReproductorMidi { get => reproductorMidi; set => reproductorMidi = value; }
         public SevenBitNumber Note { get => note; set => note = value; }
+
+
+
+
+
+
+
+        public SevenBitNumber Note { get => note; set => note = value; }
+
+
+
+
+
+
+
+        public SevenBitNumber Note { get => note; set => note = value; }
+
+
+
+
+
 
 
     }
