@@ -136,9 +136,6 @@ namespace DubHero_UI.Vistas
         private MidiFile midiFile;
         private SevenBitNumber note;
 
-
-
-
         public myPlayBack()
         {
             midiFile = MidiFile.Read("Assets/sevenNationArmyMap.mid");
@@ -192,11 +189,6 @@ namespace DubHero_UI.Vistas
 
         public Playback ReproductorMidi { get => reproductorMidi; set => reproductorMidi = value; }
         public SevenBitNumber Note { get => note; set => note = value; }
-
-
-
-
-
 
 
     }
