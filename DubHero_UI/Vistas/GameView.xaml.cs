@@ -88,11 +88,14 @@ namespace DubHero_UI.Vistas
 
         void SongUpdate()
         {
-            _currentTime += _stopwatch.ElapsedMilliseconds;
-            CheckNotesToPush();
+            while (true)
+            {
+                _currentTime = _stopwatch.ElapsedMilliseconds;
+                CheckNotesToDestroy();
+            }
         }
 
-        private void CheckNotesToPush()
+        private void CheckNotesToDestroy()
         {
             foreach (var track in _tracks)
             {
