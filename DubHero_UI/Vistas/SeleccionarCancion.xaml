@@ -1,0 +1,64 @@
+﻿<Page
+    x:Class="DubHero_UI.Vistas.SeleccionarCancion"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DubHero_UI.Vistas"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:vm="using:DubHero_UI.Models"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    RequestedTheme="Dark"
+    >
+
+    <Page.DataContext>
+        <vm:SongSelect></vm:SongSelect>
+    </Page.DataContext>
+    
+
+    <RelativePanel>
+        <RelativePanel.Background>
+            <ImageBrush ImageSource="/Assets/Imagenes/fondoSimple.jpg"    ></ImageBrush>
+        </RelativePanel.Background>
+        <Image x:Name="imgIconoAltavoz" Source="/Assets/Imagenes/icono.png" RelativePanel.AlignLeftWithPanel="True"  Width="350" Height="350" />
+
+        <GridView MinWidth="350"  IsItemClickEnabled="True"  >
+            <!-- con la cita seleccionada podriamos enviarsela a la otra pantalla -->
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid >
+                        <Grid.Background>
+                            <SolidColorBrush Color="#FD2D3E5D" Opacity="0.07"/>
+                        </Grid.Background>
+                        <Grid.RowDefinitions>
+                            <RowDefinition MinHeight="130"></RowDefinition>
+                            <RowDefinition  Height="2*"></RowDefinition>
+                            <RowDefinition Height="6*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--<Image MaxHeight="100"  Margin="10,10,10,0" Source="{Binding SrcUbicacionImagen}" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" >
+                        </Image>
+                        <TextBlock Foreground="White"  Margin="10" Text="{Binding CodigoPostal}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1"></TextBlock>
+                        <TextBlock Foreground="White"  Margin="10,0,10,10" Text="{Binding Direccion}" Grid.ColumnSpan="2" TextWrapping="Wrap" Grid.Column="0" Grid.Row="2"></TextBlock>
+                        <TextBlock Foreground="White" Margin="10" HorizontalTextAlignment="Right" Text="{Binding Hora}"  Grid.Column="1" Grid.Row="1"
+                                               FontWeight="ExtraBold" ></TextBlock>-->
+                        <!-- como bindear algo fuera de la lista-->
+                        <!-- en que se diferencia bind del binding-->
+                        <!-- <Image Source="{Binding MvListaCitras.SrcUbicacionImagen}"></Image>-->
+                    </Grid>
+                </DataTemplate>
+
+            </GridView.ItemTemplate>
+        </GridView>
+
+
+
+
+        <AppBarButton RelativePanel.AlignRightWithPanel="True" Icon="LeaveChat" Width="200" Content="Botono bonito parar salir"/>
+
+
+    </RelativePanel>
+</Page>
