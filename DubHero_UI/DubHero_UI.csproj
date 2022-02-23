@@ -119,7 +119,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\AnimationCallback.cs" />
+    <Compile Include="Classes\GameNote.cs" />
+    <Compile Include="Classes\PlaybackManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vistas\GameView.xaml.cs">
+      <DependentUpon>GameView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Juego.xaml.cs">
       <DependentUpon>Juego.xaml</DependentUpon>
     </Compile>
@@ -163,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Vistas\GameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vistas\Juego.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

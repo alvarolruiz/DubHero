@@ -11,62 +11,42 @@ namespace DubHero_UI.Classes
 {
     public class PlaybackManager
     {
-        private Playback reproductorMidi;
+        private Playback midiPlayer;
         private MidiFile midiFile;
-        private SevenBitNumber note;
+        public AnimationCallback AnimationCallback;
 
-        public PlaybackManager()
+        public PlaybackManager(string midiPath)
         {
-            midiFile = MidiFile.Read("Assets/sevenNationArmyMap.mid");
-            this.reproductorMidi = midiFile.GetPlayback();
-            this.reproductorMidi.NoteCallback += EventoNota;
-
-
-            //(rawNoteData, rawTime, rawLength, playbackTime) =>
-
-            // new NotePlaybackData(
-            // rawNoteData.NoteNumber,
-            // rawNoteData.Velocity,     // leave velocity as is
-            // rawNoteData.OffVelocity,  // leave off velocity as is
-            // rawNoteData.Channel);
-            // reproductorMidi.EventPlayed += ReproductorMidi_EventPlayed;
-            // reproductorMidi.TrackNotes = true;
-
+            midiFile = MidiFile.Read(midiPath);
+            this.midiPlayer = midiFile.GetPlayback();
+            this.midiPlayer.NoteCallback += NoteEvent;
 
         }
 
-        public void empezarMidi()
+        public void StartReading()
         {
+            midiPlayer.MoveToStart();
+            midiPlayer.Start();
+        }
 
-            reproductorMidi.Start();
+        public void PauseReading()
+        {
+            midiPlayer.Stop();
+        }
 
+        public void ResumeReading()
+        {
+            midiPlayer.Start();
         }
 
 
-        private NotePlaybackData EventoNota(NotePlaybackData rawData, long rawTime, long rawLength, TimeSpan playbackTime)
+        private NotePlaybackData NoteEvent(NotePlaybackData rawData, long rawTime, long rawLength, TimeSpan playbackTime)
         {
-
-
-            return rawData;
-
+            //TODO Sacar datos de las notas
+            throw new NotImplementedException();
         }
 
-
-        private void ReproductorMidi_EventPlayed(object sender, MidiEventPlayedEventArgs e)
-        {
-
-            if (e.Event.EventType == MidiEventType.NoteOn)
-            {
-
-
-            }
-            var evento = (NoteEvent)e.Event;
-            int numero = evento.NoteNumber;
-
-        }
-
-        public Playback ReproductorMidi { get => reproductorMidi; set => reproductorMidi = value; }
-        public SevenBitNumber Note { get => note; set => note = value; }
+        public Playback ReproductorMidi { get => midiPlayer; set => midiPlayer = value; }
 
 
 
