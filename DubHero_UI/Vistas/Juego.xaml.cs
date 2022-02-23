@@ -1,10 +1,13 @@
-﻿using Melanchall.DryWetMidi.Core;
+﻿using Melanchall.DryWetMidi.Common;
+using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Multimedia;
 using System;
 using System.Collections.Generic;
+
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -18,68 +21,51 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
+// La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0xc0a
 
-namespace PruebasAnimaciones
+namespace DubHero_UI.Vistas
 {
-
-    public sealed partial class MainPage : Page
+    /// <summary>
+    /// Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
+    /// </summary>
+    public sealed partial class Juego : Page
     {
 
-
-        /**todo: -crear y destuir objeto y animacion desde el viewModel parametros(tipo de nota, duracion), hacer un binding al Canva??? o hacer 5 listas, donde hacer
-         * aparecer el objeto(si le cmabiamos la animacion se veria), y borrarlo luego. Tendria la animacion si esta en una lista??
-       *              cambiar icono a una nota ya creada, crear 5 variable string, notaActual que guardara el Name de la nota que esta bajando,
-       *              cada nota actual, tendra su timmer(= que el de animacion), cuando el timmer se exceda  */
-
-
-
-
-        public class myPlayBack
-        {
-            private Playback reproductorMidi;
-            private MidiFile midiFile;
-
-            public myPlayBack()
-            {
-                midiFile = MidiFile.Read("Assets/sevenNationArmyMap.mid");
-                this.reproductorMidi = midiFile.GetPlayback();
-                this.reproductorMidi.NoteCallback =
-               (rawNoteData, rawTime, rawLength, playbackTime) =>
-
-                new NotePlaybackData(
-
-                nota(rawNoteData, playbackTime),
-                rawNoteData.Velocity,     // leave velocity as is
-                rawNoteData.OffVelocity,  // leave off velocity as is
-                rawNoteData.Channel);
-
-
-                reproductorMidi.TrackNotes = true;
-                reproductorMidi.Start()
-               ;
-
-            }
-
-            private SevenBitNumber nota(NotePlaybackData rawNoteData, TimeSpan playbackTime)
-            {
-                return rawNoteData.NoteNumber;
-            }
-
-
-
-        }
-
-
-
-        public MainPage()
+        public Juego()
         {
             this.InitializeComponent();
-            crearAnimacionBajadaEncoger(crearElementoEn(pista1));
-            crearAnimacionBajadaEncoger(crearElementoEn(pista2));
-            crearAnimacionBajadaEncoger(crearElementoEn(pista3));
-            crearAnimacionBajadaEncoger(crearElementoEn(pista4));
-            crearAnimacionBajadaEncoger(crearElementoEn(pista5));
+
+            myPlayBack myPlayBack = new myPlayBack();
         }
+
+        //    while (myPlayBack.ReproductorMidi.IsRunning)
+        //    {
+
+        //        switch (myPlayBack.Note)
+        //        {
+        //            case 67:
+        //                crearAnimacionBajadaEncoger(crearElementoEn(pista1));
+        //                break;
+        //            case 62:
+        //                crearAnimacionBajadaEncoger(crearElementoEn(pista2));
+        //                break;
+        //            case 64:
+        //                crearAnimacionBajadaEncoger(crearElementoEn(pista3));
+        //                break;
+        //        }
+        //    }
+        //}
+
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           // Frame.Navigate(typeof());
+
+        }
+
+
+
         public void crearAnimacionBajadaEncoger(Rectangle elemento)
         {
             Storyboard storyboardTamanio = new Storyboard();
@@ -99,7 +85,7 @@ namespace PruebasAnimaciones
             animation.From = fromX;
             animation.To = toX;
             animation.Duration = TimeSpan.FromSeconds(interval);
-            animation.EnableDependentAnimation=true;
+            animation.EnableDependentAnimation = true;
             return animation;
         }
 
@@ -140,7 +126,72 @@ namespace PruebasAnimaciones
         }
 
 
+    }
 
+
+
+    public class myPlayBack
+    {
+        private Playback reproductorMidi;
+        private MidiFile midiFile;
+        private SevenBitNumber note;
+
+
+
+
+        public myPlayBack()
+        {
+            midiFile = MidiFile.Read("Assets/sevenNationArmyMap.mid");
+            this.reproductorMidi = midiFile.GetPlayback();
+            this.reproductorMidi.NoteCallback += EventoNota;
+
+
+            //(rawNoteData, rawTime, rawLength, playbackTime) =>
+
+            // new NotePlaybackData(
+            // rawNoteData.NoteNumber,
+            // rawNoteData.Velocity,     // leave velocity as is
+            // rawNoteData.OffVelocity,  // leave off velocity as is
+            // rawNoteData.Channel);
+            // reproductorMidi.EventPlayed += ReproductorMidi_EventPlayed;
+            // reproductorMidi.TrackNotes = true;
+            
+
+        }
+
+        public void empezarMidi() {
+
+            reproductorMidi.Start();
+
+        }
+
+
+        private NotePlaybackData EventoNota(NotePlaybackData rawData, long rawTime, long rawLength, TimeSpan playbackTime)
+        {
+            
+
+            return rawData;
+
+        }
+
+        private delegate crearAnimacion();
+
+
+        private void ReproductorMidi_EventPlayed(object sender, MidiEventPlayedEventArgs e)
+        {
+
+            if (e.Event.EventType == MidiEventType.NoteOn)
+            {
+
+
+            }
+            var evento = (NoteEvent)e.Event;
+            int numero = evento.NoteNumber;
+
+        }
+
+        public Playback ReproductorMidi { get => reproductorMidi; set => reproductorMidi = value; }
+        public SevenBitNumber Note { get => note; set => note = value; }
 
 
 
@@ -150,3 +201,13 @@ namespace PruebasAnimaciones
 
     }
 }
+
+
+
+
+
+
+
+
+
+
