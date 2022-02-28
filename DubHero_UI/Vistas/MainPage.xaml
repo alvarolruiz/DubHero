@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    RequestedTheme="Dark"
+    RequestedTheme="Light"
     >
     <Page.Resources>
 
