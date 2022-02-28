@@ -37,49 +37,14 @@ namespace DubHero_UI.Vistas
         {
             this.InitializeComponent();
 
-             _playback = new PlaybackManager();
-        }
-
-        
-
-        //    while (myPlayBack.ReproductorMidi.IsRunning)
-        //    {
-
-        //        switch (myPlayBack.Note)
-        //        {
-        //            case 67:
-        //                crearAnimacionBajadaEncoger(crearElementoEn(pista1));
-        //                break;
-        //            case 62:
-        //                crearAnimacionBajadaEncoger(crearElementoEn(pista2));
-        //                break;
-        //            case 64:
-        //                crearAnimacionBajadaEncoger(crearElementoEn(pista3));
-        //                break;
-        //        }
-        //    }
-        //}
-
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           // Frame.Navigate(typeof());
+            //myPlayBack myPlayBack = new myPlayBack();
+            generarNota(new GameNote(67, 55));
+            generarNota(new GameNote(65, 100));
+            generarNota(new GameNote(64, 55));
 
         }
 
 
-
-        public void crearAnimacionBajadaEncoger(Rectangle elemento)
-        {
-            Storyboard storyboardTamanio = new Storyboard();
-            DoubleAnimation animateScaleX = CreateDoubleAnimation(elemento, 0, 800, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", 1.5);
-            storyboardTamanio.Children.Add(animateScaleX);
-            DoubleAnimation animacionTamanio = CreateDoubleAnimation(elemento, 115, 60, "Rectangle.Width", 1.5);
-            animacionTamanio.EnableDependentAnimation = true;
-            storyboardTamanio.Children.Add(animacionTamanio);
-            storyboardTamanio.Begin();
-        }
 
         private DoubleAnimation CreateDoubleAnimation(DependencyObject frameworkElement, double fromX, double toX, string propertyToAnimate, Double interval)
         {
@@ -89,45 +54,99 @@ namespace DubHero_UI.Vistas
             animation.From = fromX;
             animation.To = toX;
             animation.Duration = TimeSpan.FromSeconds(interval);
-            animation.EnableDependentAnimation = true;
+            animation.EnableDependentAnimation = true; // no se si hay que quitarlo
             return animation;
         }
 
-        public Rectangle crearElementoEn(Grid pistaObjetivo)
+
+        private void crearAnimacionBajadaEncoger(Rectangle elemento, Double tiempo)
         {
-            String nombrePista = (string)pistaObjetivo.GetType().GetProperty("Name").GetValue(pistaObjetivo, null);
+            Storyboard storyboardTamanio = new Storyboard();
+            //desde donde hasta donde quieres que se anime
+            DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 0, 800, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo);
+            storyboardTamanio.Children.Add(traslacionY);
+            // desde que tamanio hasta que tamanio
+            DoubleAnimation animacionTamanio = CreateDoubleAnimation(elemento, 115, 60, "Rectangle.Width", tiempo);
+            animacionTamanio.EnableDependentAnimation = true;
+            storyboardTamanio.Children.Add(animacionTamanio);
+            // anhadir animacion de traslacion en el eje x
+
+
+            storyboardTamanio.Begin();
+        }
+
+
+        public Rectangle generarNota(GameNote nota)
+        {
+            //String nombrePista = (string)pistaObjetivo.GetType().GetProperty("Name").GetValue(pistaObjetivo, null);
+            Grid pistaObjetivo = null;
+
             SolidColorBrush scb = new SolidColorBrush();
-            switch (nombrePista)
+            switch (nota.Type)
             {
-                case "pista1":
+                case 60:
                     scb = new SolidColorBrush(Colors.Red);
+                    pistaObjetivo = pista1; // hacer que aparezca en una coordinada 
                     break;
-                case "pista2":
+
+                case 62:
                     scb = new SolidColorBrush(Colors.Gray);
+                    pistaObjetivo = pista2;
                     break;
-                case "pista3":
+
+                case 64:
                     scb = new SolidColorBrush(Colors.Pink);
+                    pistaObjetivo = pista3;
                     break;
-                case "pista4":
+
+                case 65:
                     scb = new SolidColorBrush(Colors.Purple);
+                    pistaObjetivo = pista4;
                     break;
-                case "pista5":
+
+                case 67:
                     scb = new SolidColorBrush(Colors.Green);
+                    pistaObjetivo = pista5;
                     break;
             }
 
             Rectangle rec = new Rectangle
             {
                 Width = 80,
-                Height = 30,
+                Height = nota.Duration * 2, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
                 Fill = scb,
                 VerticalAlignment = VerticalAlignment.Top,
                 RenderTransform = new CompositeTransform { TranslateX = 0 }
             };
 
+
+            crearAnimacionBajadaEncoger(rec, nota.Duration);
             pistaObjetivo.Children.Add(rec);
             return rec;
         }
+
+
+    }
+
+
+
+    public class GameNote
+    {
+        private int type;
+        private float duration;
+
+        public GameNote(int tipo, float duration)
+        {
+
+            this.type = tipo;
+            this.duration = duration;
+
+        }
+
+
+
+        public int Type { get => type; set => type = value; }
+        public float Duration { get => duration; set => duration = value; }
 
 
     }
