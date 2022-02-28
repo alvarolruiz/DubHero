@@ -1,4 +1,4 @@
-﻿using DubHero_UI.Classes;
+﻿//using DubHero_UI.Classes;
 using Melanchall.DryWetMidi.Common;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Multimedia;
@@ -31,16 +31,16 @@ namespace DubHero_UI.Vistas
     /// </summary>
     public sealed partial class Juego : Page
     {
-        private PlaybackManager _playback;
+        //private PlaybackManager _playback;
 
         public Juego()
         {
             this.InitializeComponent();
 
             //myPlayBack myPlayBack = new myPlayBack();
-            generarNota(new GameNote(67, 55));
-            generarNota(new GameNote(65, 100));
-            generarNota(new GameNote(64, 55));
+            //generarNota(new GameNote(67, 55));
+            //generarNota(new GameNote(65, 100));
+            //generarNota(new GameNote(64, 55));
 
         }
 
@@ -76,54 +76,54 @@ namespace DubHero_UI.Vistas
         }
 
 
-        public Rectangle generarNota(GameNote nota)
-        {
-            //String nombrePista = (string)pistaObjetivo.GetType().GetProperty("Name").GetValue(pistaObjetivo, null);
-            Grid pistaObjetivo = null;
+        //public Rectangle generarNota(GameNote nota)
+        //{
+        //    //String nombrePista = (string)pistaObjetivo.GetType().GetProperty("Name").GetValue(pistaObjetivo, null);
+        //    Grid pistaObjetivo = null;
 
-            SolidColorBrush scb = new SolidColorBrush();
-            switch (nota.Type)
-            {
-                case 60:
-                    scb = new SolidColorBrush(Colors.Red);
-                    pistaObjetivo = pista1; // hacer que aparezca en una coordinada 
-                    break;
+        //    SolidColorBrush scb = new SolidColorBrush();
+        //    switch (nota.Type)
+        //    {
+        //        case 60:
+        //            scb = new SolidColorBrush(Colors.Red);
+        //            pistaObjetivo = pista1; // hacer que aparezca en una coordinada 
+        //            break;
 
-                case 62:
-                    scb = new SolidColorBrush(Colors.Gray);
-                    pistaObjetivo = pista2;
-                    break;
+        //        case 62:
+        //            scb = new SolidColorBrush(Colors.Gray);
+        //            pistaObjetivo = pista2;
+        //            break;
 
-                case 64:
-                    scb = new SolidColorBrush(Colors.Pink);
-                    pistaObjetivo = pista3;
-                    break;
+        //        case 64:
+        //            scb = new SolidColorBrush(Colors.Pink);
+        //            pistaObjetivo = pista3;
+        //            break;
 
-                case 65:
-                    scb = new SolidColorBrush(Colors.Purple);
-                    pistaObjetivo = pista4;
-                    break;
+        //        case 65:
+        //            scb = new SolidColorBrush(Colors.Purple);
+        //            pistaObjetivo = pista4;
+        //            break;
 
-                case 67:
-                    scb = new SolidColorBrush(Colors.Green);
-                    pistaObjetivo = pista5;
-                    break;
-            }
+        //        case 67:
+        //            scb = new SolidColorBrush(Colors.Green);
+        //            pistaObjetivo = pista5;
+        //            break;
+        //    }
 
-            Rectangle rec = new Rectangle
-            {
-                Width = 80,
-                Height = nota.Duration * 2, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
-                Fill = scb,
-                VerticalAlignment = VerticalAlignment.Top,
-                RenderTransform = new CompositeTransform { TranslateX = 0 }
-            };
+        //    Rectangle rec = new Rectangle
+        //    {
+        //        Width = 80,
+        //        Height = nota.Duration * 2, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
+        //        Fill = scb,
+        //        VerticalAlignment = VerticalAlignment.Top,
+        //        RenderTransform = new CompositeTransform { TranslateX = 0 }
+        //    };
 
 
-            crearAnimacionBajadaEncoger(rec, nota.Duration);
-            pistaObjetivo.Children.Add(rec);
-            return rec;
-        }
+        //    crearAnimacionBajadaEncoger(rec, nota.Duration);
+        //    pistaObjetivo.Children.Add(rec);
+        //    return rec;
+        //}
 
 
     }
@@ -197,7 +197,7 @@ namespace DubHero_UI.Vistas
 
         }
 
-        private delegate crearAnimacion();
+       // private delegate crearAnimacion();
 
 
         private void ReproductorMidi_EventPlayed(object sender, MidiEventPlayedEventArgs e)
@@ -222,7 +222,7 @@ namespace DubHero_UI.Vistas
 
 
 
-        public SevenBitNumber Note { get => note; set => note = value; }
+      ////  public SevenBitNumber Note { get => note; set => note = value; }
 
 
 
@@ -230,7 +230,7 @@ namespace DubHero_UI.Vistas
 
 
 
-        public SevenBitNumber Note { get => note; set => note = value; }
+      //  public SevenBitNumber Note { get => note; set => note = value; }
 
 
 
