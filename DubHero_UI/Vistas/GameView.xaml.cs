@@ -2,24 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Media.Core;
 using Windows.Media.Playback;
-using Windows.UI.Xaml;
+using Windows.System;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace DubHero_UI.Vistas
 {
     /// <summary>
@@ -27,17 +17,21 @@ namespace DubHero_UI.Vistas
     /// </summary>
     public sealed partial class GameView : Page
     {
+        #region Local Properties
         MediaPlayer _mediaPlayer = new MediaPlayer();
         Stopwatch _stopwatch = new Stopwatch();
         PlaybackManager _playback;
 
-        long timeToFall = 3000L;
-        long failOffset = 0L;
-        long _currentTime = 0;
+        long _timeToFall = 3000L;
+        long _failOffset = 300L;
+        long _tooSoonOffset = 1000L;//TODO Adjust these values
+        long _currentTime = 0L;
         Thread _playerThread;
 
         LinkedList<GameNote>[] _tracks;
+        #endregion
 
+        #region UWP Related
         public GameView()
         {
             _tracks = new LinkedList<GameNote>[5];
@@ -49,6 +43,24 @@ namespace DubHero_UI.Vistas
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// OnNavigatedTo parameter must be the name of the map's directory. The midi file must be named
+        /// "midimap.midi" and the song file "song.mp3" for it to work.
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
+            {
+                var songName = (string)e.Parameter;
+                _playback = new PlaybackManager(songName + "/midimap.midi");
+                _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(songName + "/song.mp3"));
+            }
+            base.OnNavigatedTo(e);
+        }
+        #endregion
+
+        #region Flow control
         public void AnimateNote(GameNote note)
         {
             //TODO haser bomnito esto
@@ -100,32 +112,55 @@ namespace DubHero_UI.Vistas
             foreach (var track in _tracks)
             {
                 var note = track.First();
-                if (note.MillisSinceRead >= timeToFall + failOffset)
+                if (note.MillisSinceRead >= _timeToFall + _failOffset)
                 {
                     //Destroy note in the view
                     track.Remove(note);
                 }
             }
         }
-
-        /// <summary>
-        /// OnNavigatedTo parameter must be the name of the map's directory. The midi file must be named
-        /// "midimap.midi" and the song file "song.mp3" for it to work.
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        void CheckPlayedNote(int trackIndex)
         {
-            if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
+            var targetTrack = _tracks[trackIndex];
+            var nextNote = targetTrack.First.Value;
+            if (nextNote != null)
             {
-                var songName = (string)e.Parameter;
-                _playback = new PlaybackManager(songName + "/midimap.midi");
-                _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(songName + "/song.mp3"));
+                var differenceToPerfect = Math.Abs(nextNote.MillisSinceRead - _timeToFall);
+                var isOnTime = differenceToPerfect <= _failOffset;//0 is perfect
+                if (isOnTime)
+                {
+                    targetTrack.RemoveFirst();
+                    //TODO Destroy the note (Correct note animation)
+                    //TODO Manage correct note
+                }
+                else if (differenceToPerfect <= _tooSoonOffset)
+                {
+                    targetTrack.RemoveFirst();
+                    //TODO Destroy note (Failed note animation)
+                    //TODO manage failed note
+                }
             }
-            base.OnNavigatedTo(e);
         }
+        #endregion
 
+        #region User Input
+        public void MainPage_KeyDown(object sender, KeyEventArgs args)
+        {
+            if (args.VirtualKey == VirtualKey.W)
+                CheckPlayedNote(0);
 
+            if (args.VirtualKey == VirtualKey.D)
+                CheckPlayedNote(1);
 
-        
+            if (args.VirtualKey == VirtualKey.J)
+                CheckPlayedNote(2);
+
+            if (args.VirtualKey == VirtualKey.I)
+                CheckPlayedNote(3);
+
+            if (args.VirtualKey == VirtualKey.O)
+                CheckPlayedNote(4);
+        }
+        #endregion
     }
 }
