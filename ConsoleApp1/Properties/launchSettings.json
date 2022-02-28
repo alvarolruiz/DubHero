@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "ConsoleApp1": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "environmentVariables": {},
+      "distributionName": ""
+    },
+    "Perfil 1": {
+      "commandName": "Executable"
+    }
+  }
+}
