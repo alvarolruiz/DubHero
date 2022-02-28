@@ -44,6 +44,19 @@ namespace DubHero_UI.Vistas
 
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e) // para recuperar los parametros 
+        {
+            base.OnNavigatedTo(e);
+
+            //var parameters = (RestaurantParams)e.Parameter;
+
+            // parameters.Name
+            // parameters.Text
+            // ...
+        }
+
+
+
 
 
         private DoubleAnimation CreateDoubleAnimation(DependencyObject frameworkElement, double fromX, double toX, string propertyToAnimate, Double interval)
@@ -214,7 +227,7 @@ namespace DubHero_UI.Vistas
         }
 
         public Playback ReproductorMidi { get => reproductorMidi; set => reproductorMidi = value; }
-        public SevenBitNumber Note { get => note; set => note = value; }
+ 
 
 
 

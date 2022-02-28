@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DubHero_UI.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,18 @@ namespace DubHero_UI.Vistas
     /// </summary>
     public sealed partial class SeleccionarCancion : Page
     {
+
+
         public SeleccionarCancion()
         {
             this.InitializeComponent();
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            String cancion = ((SongView)e.ClickedItem).Name;
+            Frame.Navigate(typeof(Juego), cancion);
+
         }
     }
 }
