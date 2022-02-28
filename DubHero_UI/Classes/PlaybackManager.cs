@@ -42,8 +42,9 @@ namespace DubHero_UI.Classes
 
         private NotePlaybackData NoteEvent(NotePlaybackData rawData, long rawTime, long rawLength, TimeSpan playbackTime)
         {
-            //TODO Sacar datos de las notas
-            throw new NotImplementedException();
+            var readNote = new GameNote(rawData.NoteNumber);
+            AnimationCallback(readNote);
+            return null;
         }
 
         public Playback ReproductorMidi { get => midiPlayer; set => midiPlayer = value; }

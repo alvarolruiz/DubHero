@@ -14,6 +14,7 @@ namespace DubHero_UI.Classes
         public GameNote(int noteNumber)
         {
             this.NoteNumber = noteNumber;
+            MillisSinceRead = 0L;
         }
     }
 }
