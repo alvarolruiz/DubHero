@@ -28,10 +28,10 @@ namespace ConsoleApp1
             this.reproductorMidi.NoteCallback = (rawNoteData, rawTime, rawLength, playbackTime) =>
            new NotePlaybackData(
             // Si se quisiera hacer alguna modificacion sobre las notas a la hora de reproducirlas se haria aqui
-            (SevenBitNumber)rawNoteData.NoteNumber,6
+            (SevenBitNumber)rawNoteData.NoteNumber,
             rawNoteData.Velocity,
             rawNoteData.OffVelocity,
-            rawNoteData.Channel) ;
+            rawNoteData.Channel); 
             /*
              * Si quisieramos bajar la velocidad de reproduccion. 0.5, 1, 2...
             reproductorMidi.Speed = 1;
@@ -50,7 +50,7 @@ namespace ConsoleApp1
         {
             if(e.Event.EventType==MidiEventType.NoteOn){
                 var eventoNota = (NoteEvent) e.Event;
-                eventoNota.NoteNumber;
+                //eventoNota.NoteNumber;
                 //setear una propiedad a el nombre de la nota 
             }else if (e.Event.EventType==MidiEventType.NoteOff){
                 Console.WriteLine(e.Event);
