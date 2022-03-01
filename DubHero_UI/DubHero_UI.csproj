@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imagenes\altavoz.gif" />
+    <Content Include="Assets\Imagenes\altavozJuego.png" />
     <Content Include="Assets\Imagenes\botones\paracom.png" />
     <Content Include="Assets\Imagenes\botones\presion.png" />
     <Content Include="Assets\Imagenes\diseñoFondoAltavoz.jpg" />
