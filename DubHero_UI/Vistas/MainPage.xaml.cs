@@ -26,7 +26,7 @@ namespace DubHero_UI.Vistas
         {
 
             this.InitializeComponent();
-           //AnimacionRespiracion.Begin();
+            pulse.Begin();
 
         }
     }

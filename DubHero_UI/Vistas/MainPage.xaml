@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     RequestedTheme="Light"
     >
@@ -32,32 +31,61 @@
             </Setter.Value>
         </Setter>
     </Style>
-     
 
+        <Storyboard x:Key="Pulse" x:Name="pulse" RepeatBehavior="Forever">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="PulseBox">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="PulseBox">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
 
-    <RelativePanel>
-        <RelativePanel.Background>
-            <ImageBrush ImageSource="/Assets/Imagenes/fondoSimple.jpg"   Stretch="None"  ></ImageBrush>
-        </RelativePanel.Background>
-        <Image Source="Assets/icono.png" RelativePanel.AlignTopWithPanel="True" Width="300"  />
+    <Page.Background>
+        <ImageBrush ImageSource="/Assets/Imagenes/fondoSimple.jpg"   Stretch="None"  ></ImageBrush>
+    </Page.Background>
 
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
 
-        <Image x:Name="imgIconoAltavoz" Source="/Assets/Imagenes/icono.png" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="500" Height="400" >
+        <StackPanel>
+            <!-- Pulse : Will not skew other elements location like width/height animations would. -->
+            <Grid>
+                <Border x:Name="PulseBox"
+                         RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+
+                    <Image Height="375" Source="/Assets/Imagenes/icono.png"></Image>
+
+                </Border>
+            <!-- End Pulse -->
+
+            </Grid>
             
-        
-        </Image>
-        <Image x:Name="presione" Source="/Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  Margin="0,50,0,0"  Width="500"  />
-        <Image Source="/Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="350" Margin="0,-30"  />
-        <TextBlock  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="imgIconoAltavoz" Margin="0,200" Text="Pulse cualquier boton" FontSize="72" FontFamily="Calibri" FontWeight="Bold" FocusVisualPrimaryBrush="#FFC31111">
-            <TextBlock.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFD6E20A" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBlock.Foreground>
-        </TextBlock>
+            <Image x:Name="presione" Source="/Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  Margin="0,50,0,0"  Width="500"  />
+            <Image Source="/Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="350" Margin="0,-30"  />
 
 
-    </RelativePanel>
+        </StackPanel>
+
+
+
+    </Grid>
 </Page>
+<!--
+    
+
+
+
+
+        </Grid>
+     -->
