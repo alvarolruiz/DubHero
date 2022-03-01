@@ -33,15 +33,15 @@
         <Image x:Name="imgIconoAltavoz" Source="/Assets/Imagenes/icono.png" RelativePanel.AlignLeftWithPanel="True"  Width="300" Height="300" />
 
         <GridView x:Name="SongList" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" MinWidth="500"  IsItemClickEnabled="True"
-                  
+                  ItemClick="GridView_ItemClick"
                   ItemsSource="{Binding SongList}"
                   >
             <!-- con la cita seleccionada podriamos enviarsela a la otra pantalla -->
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid >
+                    <Grid BorderBrush="#FF065426" BorderThickness="4" >
                         <Grid.Background>
-                            <SolidColorBrush Color="Black" Opacity="0.4"/>
+                            <SolidColorBrush Color="Black" Opacity="0.3"/>
                         </Grid.Background>
                         <Grid.RowDefinitions>
                             <RowDefinition MinHeight="130"></RowDefinition>
@@ -72,7 +72,17 @@
 
 
 
-        <AppBarButton RelativePanel.AlignRightWithPanel="True" Icon="LeaveChat" Width="200" Content="Botono bonito parar salir"/>
+        <AppBarButton RelativePanel.AlignRightWithPanel="True" Margin="130,0" x:Name="viewBtn" Label="Salir" Icon="Previous" Background="#00000000" FontWeight="Bold" Click="viewBtn_Click">
+            <AppBarButton.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FFD1DD0A" Offset="1"/>
+                </LinearGradientBrush>
+            </AppBarButton.Foreground>
+            <AppBarButton.RenderTransform>
+                <CompositeTransform ScaleX="3" ScaleY="3"/>
+            </AppBarButton.RenderTransform>
+        </AppBarButton>
 
 
     </RelativePanel>

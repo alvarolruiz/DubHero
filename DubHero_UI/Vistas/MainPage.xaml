@@ -47,8 +47,17 @@
             
         
         </Image>
-        <Image x:Name="presione" Source="/Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  Margin="0,50,0,0"  Width="400"  />
-        <Image Source="/Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="250" Margin="0,-30"  />
-         
+        <Image x:Name="presione" Source="/Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  Margin="0,50,0,0"  Width="500"  />
+        <Image Source="/Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="350" Margin="0,-30"  />
+        <TextBlock  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="imgIconoAltavoz" Margin="0,200" Text="Pulse cualquier boton" FontSize="72" FontFamily="Calibri" FontWeight="Bold" FocusVisualPrimaryBrush="#FFC31111">
+            <TextBlock.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FFD6E20A" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+        </TextBlock>
+
+
     </RelativePanel>
 </Page>

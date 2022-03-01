@@ -40,5 +40,10 @@ namespace DubHero_UI.Vistas
             Frame.Navigate(typeof(Juego), cancion);
 
         }
+
+        private void viewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
     }
 }

@@ -89,39 +89,41 @@ namespace DubHero_UI.Vistas
         }
 
 
+
+
         public Rectangle generarNota(GameNote nota)
         {
             //String nombrePista = (string)pistaObjetivo.GetType().GetProperty("Name").GetValue(pistaObjetivo, null);
-            Grid pistaObjetivo = null;
+            int tipo  = 0;
 
             SolidColorBrush scb = new SolidColorBrush();
-            //switch (nota.Type)
-            //{
-            //    case 60:
-            //        scb = new SolidColorBrush(Colors.Red);
-            //        pistaObjetivo = pista1; // hacer que aparezca en una coordinada 
-            //        break;
+            switch (nota.Type)
+            {
+                case 60:
+                    scb = new SolidColorBrush(Colors.Red);
+                    pistaObjetivo = pista1; // hacer que aparezca en una coordinada 
+                    break;
 
-            //    case 62:
-            //        scb = new SolidColorBrush(Colors.Gray);
-            //        pistaObjetivo = pista2;
-            //        break;
+                case 62:
+                    scb = new SolidColorBrush(Colors.Gray);
+                    pistaObjetivo = pista2;
+                    break;
 
-            //    case 64:
-            //        scb = new SolidColorBrush(Colors.Pink);
-            //        pistaObjetivo = pista3;
-            //        break;
+                case 64:
+                    scb = new SolidColorBrush(Colors.Pink);
+                    pistaObjetivo = pista3;
+                    break;
 
-            //    case 65:
-            //        scb = new SolidColorBrush(Colors.Purple);
-            //        pistaObjetivo = pista4;
-            //        break;
+                case 65:
+                    scb = new SolidColorBrush(Colors.Purple);
+                    pistaObjetivo = pista4;
+                    break;
 
-            //    case 67:
-            //        scb = new SolidColorBrush(Colors.Green);
-            //        pistaObjetivo = pista5;
-            //        break;
-            //}
+                case 67:
+                    scb = new SolidColorBrush(Colors.Green);
+                    pistaObjetivo = pista5;
+                    break;
+            }
 
             Rectangle rec = new Rectangle
             {
