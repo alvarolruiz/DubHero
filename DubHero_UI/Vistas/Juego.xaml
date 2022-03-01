@@ -16,7 +16,7 @@
         </Style>
     </Page.Resources>
     <RelativePanel>
-        <Canvas x:Name="miCanvas" >
+        <Canvas x:Name="pistaObjetivo">
             <Polyline x:Name="l1" Style="{StaticResource propLineas }" Points="600,0,150,1000"/>
             <Polyline x:Name="l2" Style="{StaticResource propLineas }" Points="650,0,400,1000"/>
             <Polyline x:Name="l3" Style="{StaticResource propLineas }" Points="700,0,650,1000"/>

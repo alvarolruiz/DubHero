@@ -72,12 +72,17 @@ namespace DubHero_UI.Vistas
         }
 
 
-        private void crearAnimacionBajadaEncoger(Rectangle elemento, Double tiempo)
+        private void crearAnimacionBajadaEncoger(Rectangle elemento, Double tiempo, int xInit,int xFin)
         {
             Storyboard storyboardTamanio = new Storyboard();
             //desde donde hasta donde quieres que se anime
             DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 0, 800, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo);
             storyboardTamanio.Children.Add(traslacionY);
+
+            //desde donde hasta donde quieres que se anime
+            DoubleAnimation traslacionX = CreateDoubleAnimation(elemento, xInit, xFin, "(Rectangle.RenderTransform).(CompositeTransform.TranslateX)", tiempo);
+            storyboardTamanio.Children.Add(traslacionX);
+
             // desde que tamanio hasta que tamanio
             DoubleAnimation animacionTamanio = CreateDoubleAnimation(elemento, 115, 60, "Rectangle.Width", tiempo);
             animacionTamanio.EnableDependentAnimation = true;
@@ -90,38 +95,42 @@ namespace DubHero_UI.Vistas
 
 
 
-
         public Rectangle generarNota(GameNote nota)
         {
             //String nombrePista = (string)pistaObjetivo.GetType().GetProperty("Name").GetValue(pistaObjetivo, null);
-            int tipo  = 0;
+            int tipo  = 0, xInit=0, xFin=0;
 
             SolidColorBrush scb = new SolidColorBrush();
             switch (nota.Type)
             {
                 case 60:
-                    scb = new SolidColorBrush(Colors.Red);
-                    pistaObjetivo = pista1; // hacer que aparezca en una coordinada 
+                    scb = new SolidColorBrush(Colors.Red); // hacer que aparezca en una coordinada 
+                    xInit = 200;
+                    xFin = 100;
                     break;
 
                 case 62:
                     scb = new SolidColorBrush(Colors.Gray);
-                    pistaObjetivo = pista2;
+                    xInit = 400;
+                    xFin = 100;
                     break;
 
                 case 64:
                     scb = new SolidColorBrush(Colors.Pink);
-                    pistaObjetivo = pista3;
+                    xInit = 500;
+                    xFin = 100;
                     break;
 
                 case 65:
                     scb = new SolidColorBrush(Colors.Purple);
-                    pistaObjetivo = pista4;
+                    xInit = 600;
+                    xFin = 100;
                     break;
 
                 case 67:
                     scb = new SolidColorBrush(Colors.Green);
-                    pistaObjetivo = pista5;
+                    xInit = 700;
+                    xFin = 100;
                     break;
             }
 
@@ -131,11 +140,9 @@ namespace DubHero_UI.Vistas
                 Height = nota.Duration * 2, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
                 Fill = scb,
                 VerticalAlignment = VerticalAlignment.Top,
-                RenderTransform = new CompositeTransform { TranslateX = 0 }
+                RenderTransform = new CompositeTransform { TranslateX = 0, TranslateY = 0 }
             };
-
-
-            crearAnimacionBajadaEncoger(rec, nota.Duration);
+            crearAnimacionBajadaEncoger(rec, nota.Duration, xInit, xFin);
             pistaObjetivo.Children.Add(rec);
             return rec;
         }

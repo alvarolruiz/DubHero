@@ -10,6 +10,16 @@ using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+
+using Windows.UI;
+using Windows.UI.Xaml;
+
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
+
+using Windows.UI.Xaml.Shapes;
+
+
 namespace DubHero_UI.Vistas
 {
     public sealed partial class GameView : Page
@@ -100,13 +110,107 @@ namespace DubHero_UI.Vistas
         public void AnimateNote(Classes.GameNote note)
         {
             //TODO haser bomnito esto
-            throw new NotImplementedException();
+            generarNota(note);
         }
 
-        /// <summary>
-        /// Starts the game, initializing all components for it.
-        /// </summary>
-        public void StartSong()
+
+        private DoubleAnimation CreateDoubleAnimation(DependencyObject frameworkElement, double fromX, double toX, string propertyToAnimate, Double interval)
+        {
+            DoubleAnimation animation = new DoubleAnimation();
+            Storyboard.SetTarget(animation, frameworkElement);
+            Storyboard.SetTargetProperty(animation, propertyToAnimate);
+            animation.From = fromX;
+            animation.To = toX;
+            animation.Duration = TimeSpan.FromSeconds(interval);
+            animation.EnableDependentAnimation = true; // no se si hay que quitarlo
+            return animation;
+        }
+
+
+        private void crearAnimacionBajadaEncoger(Rectangle elemento, Double tiempo, int xInit, int xFin)
+        {
+
+            tiempo = tiempo / 20;
+            Storyboard storyboardTamanio = new Storyboard();
+            //desde donde hasta donde quieres que se anime
+            DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 0, 800, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo); //todo change time to fall
+            storyboardTamanio.Children.Add(traslacionY);
+
+            //desde donde hasta donde quieres que se anime
+            DoubleAnimation traslacionX = CreateDoubleAnimation(elemento, xInit, xFin, "(Rectangle.RenderTransform).(CompositeTransform.TranslateX)", tiempo); //todo change time to fall
+            storyboardTamanio.Children.Add(traslacionX);
+
+            // desde que tamanio hasta que tamanio
+            DoubleAnimation animacionTamanio = CreateDoubleAnimation(elemento, 115, 60, "Rectangle.Width", tiempo);
+            animacionTamanio.EnableDependentAnimation = true;
+            storyboardTamanio.Children.Add(animacionTamanio);
+            // anhadir animacion de traslacion en el eje x
+
+
+            storyboardTamanio.Begin();
+        }
+
+
+
+        public Rectangle generarNota(Classes.GameNote nota)
+        {
+            //String nombrePista = (string)pistaObjetivo.GetType().GetProperty("Name").GetValue(pistaObjetivo, null);
+            int xInit = 0, xFin = 0;
+
+            SolidColorBrush scb = new SolidColorBrush();
+            switch (nota.NoteNumber)
+            {
+                case 60:
+                    scb = new SolidColorBrush(Colors.Red); // hacer que aparezca en una coordinada 
+                    xInit = 200;
+                    xFin = 100;
+                    break;
+
+                case 62:
+                    scb = new SolidColorBrush(Colors.Gray);
+                    xInit = 400;
+                    xFin = 100;
+                    break;
+
+                case 64:
+                    scb = new SolidColorBrush(Colors.Pink);
+                    xInit = 500;
+                    xFin = 100;
+                    break;
+
+                case 65:
+                    scb = new SolidColorBrush(Colors.Purple);
+                    xInit = 600;
+                    xFin = 100;
+                    break;
+
+                case 67:
+                    scb = new SolidColorBrush(Colors.Green);
+                    xInit = 700;
+                    xFin = 100;
+                    break;
+            }
+
+            Rectangle rec = new Rectangle
+            {
+                Width = 80,
+                Height = nota.MillisSinceRead, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
+                Fill = scb,
+                VerticalAlignment = VerticalAlignment.Top,
+                RenderTransform = new CompositeTransform { TranslateX = 0, TranslateY = 0 }
+            };
+            crearAnimacionBajadaEncoger(rec, nota.MillisSinceRead, xInit, xFin);
+            pistaObjetivo.Children.Add(rec);
+            return rec;
+        }
+
+
+    
+
+    /// <summary>
+    /// Starts the game, initializing all components for it.
+    /// </summary>
+    public void StartSong()
         {
             
             _playback.StartReading();
