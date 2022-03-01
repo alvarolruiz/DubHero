@@ -7,22 +7,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-        RequestedTheme="Light"
+        RequestedTheme="Dark"
 >
     <Page.Resources>
         <Style TargetType="Polyline" x:Key="propLineas">
-            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="Stroke" Value="Orange"/>
             <Setter Property="StrokeThickness" Value="7"/>
         </Style>
     </Page.Resources>
     <RelativePanel>
         <Canvas x:Name="pistaObjetivo">
-            <Polyline x:Name="l1" Style="{StaticResource propLineas }" Points="600,0,150,1000"/>
-            <Polyline x:Name="l2" Style="{StaticResource propLineas }" Points="650,0,400,1000"/>
-            <Polyline x:Name="l3" Style="{StaticResource propLineas }" Points="700,0,650,1000"/>
-            <Polyline x:Name="l4" Style="{StaticResource propLineas }" Points="750,0,900,1000"/>
-            <Polyline x:Name="l5" Style="{StaticResource propLineas }" Points="800,0,1150,1000"/>
-            <Polyline x:Name="l6" Style="{StaticResource propLineas }" Points="850,0,1350,1000"/>
+            <Image Source="../Assets/Imagenes/altavozJuego.png" Width="500" Canvas.Left="482" Canvas.ZIndex="4"></Image>
+            <Polyline x:Name="l1" Style="{StaticResource propLineas }" Points="485,270,150,1000"/>
+            <Polyline x:Name="l2" Style="{StaticResource propLineas }" Points="580,270,400,1000"/>
+            <Polyline x:Name="l3" Style="{StaticResource propLineas }" Points="680,270,650,1000"/>
+            <Polyline x:Name="l4" Style="{StaticResource propLineas }" Points="780,270,900,1000"/>
+            <Polyline x:Name="l5" Style="{StaticResource propLineas }" Points="880,270,1150,1000"/>
+            <Polyline x:Name="l6" Style="{StaticResource propLineas }" Points="980,270,1380,1000"/>
         </Canvas>
         <Line X1="0" X2="1200" RelativePanel.AlignBottomWithPanel="True" Margin="150,20" StrokeThickness="4" Fill="Black"/>
         <Ellipse Width="190" Height="190" Fill="Aqua" RelativePanel.AlignBottomWithPanel="True" Margin="230,30"/>
