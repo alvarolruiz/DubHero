@@ -15,7 +15,7 @@
 
   <Properties>
     <DisplayName>DubHero_UI</DisplayName>
-    <PublisherDisplayName>alaurino</PublisherDisplayName>
+    <PublisherDisplayName>georgesdsk</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -45,5 +45,9 @@
 
   <Capabilities>
     <Capability Name="internetClient" />
+    <uap:Capability Name="videosLibrary"/>
+    <uap:Capability Name="musicLibrary"/>
+    <uap:Capability Name="picturesLibrary"/>
+    <DeviceCapability Name="location"/>
   </Capabilities>
 </Package>
