@@ -75,6 +75,7 @@ namespace DubHero_UI.Vistas
         #region UWP Related
         public GameView()
         {
+
             _tracks = new LinkedList<Classes.GameNote>[5];
             for (var i = 0; i < _tracks.Length; i++)
             {
@@ -91,15 +92,23 @@ namespace DubHero_UI.Vistas
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
+            string songName = @"..\..\..\..\Assets\Songs\Seven_Nation_Army.mp3";
+            _playback = new PlaybackManager(@"..\..\..\..\Assets\sevenNationArmyMap.mid");
+            _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(songName));
+
             if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
             {
-                var songName = (string)e.Parameter;
-                _playback = new PlaybackManager(songName + "/midimap.midi");
-                _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(songName + "/song.mp3"));
+                //var songName = (string)e.Parameter;
+                //_playback = new PlaybackManager(songName + "/midimap.midi");
+                //_mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(songName + "/song.mp3")); 
+                
+                
             }
             base.OnNavigatedTo(e);
         }
         #endregion
+
 
         #region Flow control
         /// <summary>
@@ -107,12 +116,13 @@ namespace DubHero_UI.Vistas
         /// </summary>
         /// <param name="note"></param>
         /// <exception cref="NotImplementedException"></exception>
+        
+        
         public void AnimateNote(Classes.GameNote note)
         {
             //TODO haser bomnito esto
             generarNota(note);
         }
-
 
         private DoubleAnimation CreateDoubleAnimation(DependencyObject frameworkElement, double fromX, double toX, string propertyToAnimate, Double interval)
         {
@@ -149,6 +159,7 @@ namespace DubHero_UI.Vistas
 
             storyboardTamanio.Begin();
         }
+
 
 
 
@@ -212,7 +223,7 @@ namespace DubHero_UI.Vistas
     /// </summary>
     public void StartSong()
         {
-            
+           
             _playback.StartReading();
             _stopwatch.Reset();
             _currentTime = 0L;

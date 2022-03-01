@@ -8,7 +8,35 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Style TargetType="Polyline" x:Key="propLineas">
+            <Setter Property="Stroke" Value="White"/>
+            <Setter Property="StrokeThickness" Value="7"/>
+        </Style>
+    </Page.Resources>
     <Grid x:Name="pistaObjetivo">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="143*"/>
+            <RowDefinition Height="107*"/>
+        </Grid.RowDefinitions>
+
+
+        <RelativePanel Grid.RowSpan="2" >
+            <Canvas>
+                <Polyline x:Name="l1" Style="{StaticResource propLineas }" Points="600,0,150,1000">
+                    <Polyline.Fill>
+                        <ImageBrush/>
+                    </Polyline.Fill>
+                </Polyline>
+                <Polyline x:Name="l2" Style="{StaticResource propLineas }" Points="650,0,400,1000"/>
+                <Polyline x:Name="l3" Style="{StaticResource propLineas }" Points="700,0,650,1000"/>
+                <Polyline x:Name="l4" Style="{StaticResource propLineas }" Points="750,0,900,1000"/>
+                <Polyline x:Name="l5" Style="{StaticResource propLineas }" Points="800,0,1150,1000"/>
+                <Polyline x:Name="l6" Style="{StaticResource propLineas }" Points="850,0,1350,1000"/>
+            </Canvas>
+            <Line X1="0" X2="1200" RelativePanel.AlignBottomWithPanel="True" Margin="150,20" StrokeThickness="4" Fill="White"/>
+            <Ellipse Width="190" Height="190" Fill="Aqua" RelativePanel.AlignBottomWithPanel="True" Margin="230,30"/>
+        </RelativePanel>
 
     </Grid>
 </Page>
