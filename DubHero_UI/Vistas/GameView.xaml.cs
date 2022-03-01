@@ -59,16 +59,16 @@ namespace DubHero_UI.Vistas
         /// <summary>
         /// A list of tracks containing a heap of notes that are already falling.
         /// </summary>
-        LinkedList<GameNote>[] _tracks;
+        LinkedList<Classes.GameNote>[] _tracks;
         #endregion
 
         #region UWP Related
         public GameView()
         {
-            _tracks = new LinkedList<GameNote>[5];
+            _tracks = new LinkedList<Classes.GameNote>[5];
             for (var i = 0; i < _tracks.Length; i++)
             {
-                _tracks[i] = new LinkedList<GameNote>();
+                _tracks[i] = new LinkedList<Classes.GameNote>();
             }
             _playerThread = new Thread(SongUpdate);
             this.InitializeComponent();
