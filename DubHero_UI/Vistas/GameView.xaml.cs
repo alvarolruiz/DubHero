@@ -108,12 +108,34 @@ namespace DubHero_UI.Vistas
         /// </summary>
         public void StartSong()
         {
-            _mediaPlayer.Play();
+            
             _playback.StartReading();
             _stopwatch.Reset();
             _currentTime = 0L;
             _stopwatch.Start();
+            var songInitThread = new Thread(StartMusicAfterOffset);
+            songInitThread.Start();
             _playerThread.Start();
+        }
+
+        /// <summary>
+        /// Starts playing the music after <see cref="_timeToFall"/> has passed, making the
+        /// song playable.
+        /// </summary>
+        void StartMusicAfterOffset()
+        {
+            var startTime = _currentTime;
+            var started = false;
+            while (!started)
+            {
+                //Thread.Sleep((int)_timeToFall);?? Parece regulero así que mejor me quedo con el bucle más legible
+                var waitedTime = _currentTime - startTime;
+                if(waitedTime >= _timeToFall)
+                {
+                    _mediaPlayer.Play();
+                    started = true;
+                }
+            }
         }
 
         /// <summary>
