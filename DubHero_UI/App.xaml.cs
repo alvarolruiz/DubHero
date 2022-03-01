@@ -67,7 +67,11 @@ namespace DubHero_UI
                     // Cuando no se restaura la pila de navegación, navegar a la primera página,
                     // configurando la nueva página pasándole la información requerida como
                     //parámetro de navegación
+<<<<<<< HEAD
                     rootFrame.Navigate(typeof(BlankPage1), e.Arguments);
+=======
+                    rootFrame.Navigate(typeof(SelectSong), e.Arguments);
+>>>>>>> view-model
                 }
                 // Asegurarse de que la ventana actual está activa.
                 Window.Current.Activate();

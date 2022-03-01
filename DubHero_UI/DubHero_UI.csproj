@@ -119,7 +119,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Classes\PlaybackManager.cs" />
+=======
+    <Compile Include="Models\SongSelect.cs" />
+    <Compile Include="Models\SongView.cs" />
+>>>>>>> view-model
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vistas\BlankPage1.xaml.cs">
       <DependentUpon>BlankPage1.xaml</DependentUpon>
@@ -130,8 +135,10 @@
     <Compile Include="Vistas\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\SeleccionarCancion.xaml.cs">
-      <DependentUpon>SeleccionarCancion.xaml</DependentUpon>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ViewModelPrincipal.cs" />
+    <Compile Include="Vistas\SelectSong.xaml.cs">
+      <DependentUpon>SelectSong.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +159,8 @@
     <Content Include="Assets\Imagenes\paracom.png" />
     <Content Include="Assets\Imagenes\presion.png" />
     <Content Include="Assets\Imagenes\presioneBtn.png" />
+    <Content Include="Assets\Imagenes\SongsImages\PERRRO.jfif" />
+    <Content Include="Assets\PERRRO.jfif" />
     <Content Include="Assets\sevenNationArmyMap.mid" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -179,7 +188,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Vistas\SeleccionarCancion.xaml">
+    <Page Include="Vistas\SelectSong.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,10 +200,14 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>7.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime">
+      <Version>4.3.1</Version>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
