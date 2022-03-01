@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imagenes\altavoz.gif" />
+    <Content Include="Assets\Imagenes\altavozJuego.png" />
     <Content Include="Assets\Imagenes\botones\paracom.png" />
     <Content Include="Assets\Imagenes\botones\presion.png" />
     <Content Include="Assets\Imagenes\diseñoFondoAltavoz.jpg" />
@@ -161,6 +162,7 @@
     <Content Include="Assets\Imagenes\SongsImages\PERRRO.jfif" />
     <Content Include="Assets\PERRRO.jfif" />
     <Content Include="Assets\sevenNationArmyMap.mid" />
+    <Content Include="Assets\Songs\Seven_Nation_Army.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
