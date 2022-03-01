@@ -97,7 +97,7 @@ namespace DubHero_UI.Vistas
         /// </summary>
         /// <param name="note"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void AnimateNote(GameNote note)
+        public void AnimateNote(Classes.GameNote note)
         {
             //TODO haser bomnito esto
             throw new NotImplementedException();
