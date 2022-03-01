@@ -153,9 +153,11 @@
     <Content Include="Assets\Imagenes\diseñoFondoAltavoz.jpg" />
     <Content Include="Assets\Imagenes\fondoJuego.jpg" />
     <Content Include="Assets\Imagenes\fondoSimple.jpg" />
+    <Content Include="Assets\Imagenes\gameView\Fire_sprites-original.gif" />
+    <Content Include="Assets\Imagenes\gameView\fireEffect.gif" />
+    <Content Include="Assets\Imagenes\gameView\failEffect.gif" />
     <Content Include="Assets\Imagenes\icono.png" />
     <Content Include="Assets\Imagenes\linea.png" />
-    <Content Include="Assets\Imagenes\lineInversa.png" />
     <Content Include="Assets\Imagenes\paracom.png" />
     <Content Include="Assets\Imagenes\presion.png" />
     <Content Include="Assets\Imagenes\presioneBtn.png" />

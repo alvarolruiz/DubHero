@@ -14,6 +14,24 @@
             <Setter Property="Stroke" Value="Black"/>
             <Setter Property="StrokeThickness" Value="4"/>
         </Style>
+        
+        <Storyboard x:Name="succesAnimation">
+            <DoubleAnimation
+            Storyboard.TargetName="succesImg"
+            Storyboard.TargetProperty="Opacity"
+            From="1.5" To="0" Duration="0:0:0.5"/>
+           
+        </Storyboard>
+
+        <Storyboard x:Name="failAnimation">
+            <DoubleAnimation
+            Storyboard.TargetName="succesImg2"
+            Storyboard.TargetProperty="Opacity"
+            From="1.5" To="0" Duration="0:0:0.5"/>
+
+        </Storyboard>
+
+
         <ResourceDictionary x:Key="Default">
             <media:AcrylicBrush x:Key="CustomAcrylicBrush" BackgroundSource="Backdrop"
             TintOpacity="0.271000012871809" TintColor="#FF0000FF" FallbackColor="#FFFFFF00" />
@@ -50,14 +68,30 @@
         <!--<Ellipse Width="190" Height="190" Fill="Aqua" RelativePanel.AlignBottomWithPanel="True" Margin="230,30"/>-->
     </RelativePanel>
 
-    <!--<Canvas x:Name="miCanvas" >
-        <StackPanel Orientation="Horizontal">
-            <Grid  x:Name="pista1" BorderBrush="Red" BorderThickness="1" Width="125" Height="900"/>
-            <Grid x:Name="pista2" BorderBrush="Red" BorderThickness="1" Width="125" Height="900"/>
-            <Grid x:Name="pista3" BorderBrush="Red" BorderThickness="1" Width="125" Height="900"/>
-            <Grid x:Name="pista4" BorderBrush="Red" BorderThickness="1" Width="125" Height="900"/>
-            <Grid x:Name="pista5" BorderBrush="Red" BorderThickness="1" Width="125" Height="900"/>
-        </StackPanel>
-    </Canvas>-->
 
+        <RelativePanel Grid.RowSpan="2" >
+            <Canvas>
+                <Polyline x:Name="l1" Style="{StaticResource propLineas }" Points="600,0,150,1000">
+                    <Polyline.Fill>
+                        <ImageBrush/>
+                    </Polyline.Fill>
+                </Polyline>
+                <Polyline x:Name="l2" Style="{StaticResource propLineas }" Points="650,0,400,1000"/>
+                <Polyline x:Name="l3" Style="{StaticResource propLineas }" Points="700,0,650,1000"/>
+                <Polyline x:Name="l4" Style="{StaticResource propLineas }" Points="750,0,900,1000"/>
+                <Polyline x:Name="l5" Style="{StaticResource propLineas }" Points="800,0,1150,1000"/>
+                <Polyline x:Name="l6" Style="{StaticResource propLineas }" Points="850,0,1350,1000"/>
+            </Canvas>
+
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg" Source="/Assets/Imagenes/gameView/failEffect.gif" Width="250" Height="250"   />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg2" Source="/Assets/Imagenes/gameView/fireEffect.gif" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="500" Height="400"   />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg3" Source="/Assets/Imagenes/gameView/fireEffect.gif" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="500" Height="400"   />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg4" Source="/Assets/Imagenes/gameView/fireEffect.gif" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="500" Height="400"   />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg5" Source="/Assets/Imagenes/gameView/fireEffect.gif" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="500" Height="400"   />
+
+
+
+        </RelativePanel>
+
+    </Grid>
 </Page>

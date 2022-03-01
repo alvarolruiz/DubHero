@@ -37,10 +37,14 @@ namespace DubHero_UI.Vistas
         {
             this.InitializeComponent();
 
+
+            succesAnimation.Begin();
+            failAnimation.Begin();
+
             //myPlayBack myPlayBack = new myPlayBack();
-            generarNota(new GameNote(67, 55));
-            generarNota(new GameNote(65, 100));
-            generarNota(new GameNote(64, 55));
+            //generarNota(new GameNote(67, 55));
+            //generarNota(new GameNote(65, 100));
+            //generarNota(new GameNote(64, 55));
 
         }
 
@@ -58,6 +62,8 @@ namespace DubHero_UI.Vistas
 
 
 
+        
+
 
         private DoubleAnimation CreateDoubleAnimation(DependencyObject frameworkElement, double fromX, double toX, string propertyToAnimate, Double interval)
         {
@@ -70,6 +76,9 @@ namespace DubHero_UI.Vistas
             animation.EnableDependentAnimation = true; // no se si hay que quitarlo
             return animation;
         }
+
+
+
 
 
         private void crearAnimacionBajadaEncoger(Rectangle elemento, Double tiempo, int xInit,int xFin)
@@ -146,9 +155,10 @@ namespace DubHero_UI.Vistas
             pistaObjetivo.Children.Add(rec);
             return rec;
         }
-
-
     }
+
+
+
 
 
 

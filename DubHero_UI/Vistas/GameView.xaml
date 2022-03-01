@@ -8,11 +8,25 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+
+
+
     <Page.Resources>
         <Style TargetType="Polyline" x:Key="propLineas">
             <Setter Property="Stroke" Value="White"/>
             <Setter Property="StrokeThickness" Value="7"/>
         </Style>
+        <Storyboard x:Name="succesAnimation">
+            <DoubleAnimation
+            Storyboard.TargetName="succesImge"
+            Storyboard.TargetProperty="Opacity"
+            From="0.0" To="0.5" Duration="0:0:1"/>
+            <DoubleAnimation
+            Storyboard.TargetName="succesImge"
+            Storyboard.TargetProperty="Opacity"
+            From="0.5" To="0.0" Duration="0:0:1"/>
+        </Storyboard>
+
     </Page.Resources>
     <Grid x:Name="pistaObjetivo">
         <Grid.RowDefinitions>
@@ -35,7 +49,11 @@
                 <Polyline x:Name="l6" Style="{StaticResource propLineas }" Points="850,0,1350,1000"/>
             </Canvas>
             <Line X1="0" X2="1200" RelativePanel.AlignBottomWithPanel="True" Margin="150,20" StrokeThickness="4" Fill="White"/>
-            <Ellipse Width="190" Height="190" Fill="Aqua" RelativePanel.AlignBottomWithPanel="True" Margin="230,30"/>
+
+
+            <Image  RelativePanel.AlignBottomWithPanel="True" Margin="230,30" x:Name="succesImg" Source="/Assets/Imagenes/gameView/fireEffect.gif" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="500" Height="400" />
+
+
         </RelativePanel>
 
     </Grid>
