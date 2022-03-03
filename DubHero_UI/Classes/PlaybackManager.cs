@@ -48,10 +48,6 @@ namespace DubHero_UI.Classes
         }
 
         public Playback ReproductorMidi { get => midiPlayer; set => midiPlayer = value; }
-
-
-
-
     }
 
 

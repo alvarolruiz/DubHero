@@ -18,7 +18,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
 using Windows.UI.Xaml.Shapes;
-
+using Windows.Storage;
+using Windows.ApplicationModel;
 
 namespace DubHero_UI.Vistas
 {
@@ -90,20 +91,22 @@ namespace DubHero_UI.Vistas
         /// "midimap.midi" and the song file "song.mp3" for it to work.
         /// </summary>
         /// <param name="e"></param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
 
-            string songName = @"..\..\..\..\Assets\Songs\Seven_Nation_Army.mp3";
-            _playback = new PlaybackManager(@"..\..\..\..\Assets\sevenNationArmyMap.mid");
-            _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(songName));
+            
 
             if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
             {
-                //var songName = (string)e.Parameter;
-                //_playback = new PlaybackManager(songName + "/midimap.midi");
-                //_mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(songName + "/song.mp3")); 
-                
-                
+                var songName = (string)e.Parameter;
+                var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
+                var songListFolder = await assetsFolder.GetFolderAsync("Songs");
+                var songFolder = await songListFolder.GetFolderAsync(songName);
+                var mp3File = await songFolder.GetFileAsync("song.mp3");
+                var midiFile = await songFolder.GetFileAsync("map.mid");
+                //TODO Try-catch file access
+                _playback = new PlaybackManager(mp3File.Path);
+                _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(midiFile.Path));
             }
             base.OnNavigatedTo(e);
         }
