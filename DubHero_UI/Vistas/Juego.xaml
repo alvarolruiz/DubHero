@@ -18,17 +18,67 @@
         <Storyboard x:Name="succesAnimation">
             <DoubleAnimation
             Storyboard.TargetName="succesImg"
-            Storyboard.TargetProperty="Opacity"
-            From="1.5" To="0" Duration="0:0:0.5"/>
-
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.5" To="0" Duration="0:0:0.5"/>
         </Storyboard>
 
         <Storyboard x:Name="failAnimation">
             <DoubleAnimation
+            Storyboard.TargetName="failImg"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.5" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+        <Storyboard x:Name="succesAnimation2">
+            <DoubleAnimation
             Storyboard.TargetName="succesImg2"
-            Storyboard.TargetProperty="Opacity"
-            From="1.5" To="0" Duration="0:0:0.5"/>
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.5" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
 
+        <Storyboard x:Name="failAnimation2">
+            <DoubleAnimation
+            Storyboard.TargetName="failImg2"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.5" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+        <Storyboard x:Name="succesAnimation3">
+            <DoubleAnimation
+            Storyboard.TargetName="succesImg3"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.5" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+
+        <Storyboard x:Name="failAnimation3">
+            <DoubleAnimation
+            Storyboard.TargetName="failImg3"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.5" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+        <Storyboard x:Name="succesAnimation4">
+            <DoubleAnimation
+            Storyboard.TargetName="succesImg4"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.5" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+
+        <Storyboard x:Name="failAnimation4">
+            <DoubleAnimation
+            Storyboard.TargetName="failImg4"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.5" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+        <Storyboard x:Name="succesAnimation5">
+            <DoubleAnimation
+            Storyboard.TargetName="succesImg5"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.5" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+
+        <Storyboard x:Name="failAnimation5">
+            <DoubleAnimation
+            Storyboard.TargetName="failImg5"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.5" To="0" Duration="0:0:0.5"/>
         </Storyboard>
 
 
@@ -67,18 +117,18 @@
 
             <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg1" Source="/Assets/Imagenes/gameView/failEffect.gif" Width="250" Height="250" Canvas.Left="198" Canvas.Top="750"   />
             <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg1" Source="/Assets/Imagenes/gameView/fireEffect.gif" Canvas.Left="45" Canvas.Top="700"   Width="500" Height="400"   />
-            
+
             <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg2" Source="/Assets/Imagenes/gameView/failEffect.gif" Width="250" Height="250" Canvas.Left="420" Canvas.Top="750"   />
             <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg2" Source="/Assets/Imagenes/gameView/fireEffect.gif" Canvas.Left="280" Canvas.Top="700"   Width="500" Height="400"   />
 
             <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg3" Source="/Assets/Imagenes/gameView/failEffect.gif" Width="250" Height="250" Canvas.Left="640" Canvas.Top="750"   />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg3" Source="/Assets/Imagenes/gameView/fireEffect.gif" Canvas.Left="500" Canvas.Top="700"   Width="500" Height="400"   />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg3" Source="/Assets/Imagenes/gameView/fireEffect.gif" Canvas.Left="510" Canvas.Top="700"   Width="500" Height="400"   />
 
             <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg4" Source="/Assets/Imagenes/gameView/failEffect.gif" Width="250" Height="250" Canvas.Left="870" Canvas.Top="750"   />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg4" Source="/Assets/Imagenes/gameView/fireEffect.gif" Canvas.Left="750" Canvas.Top="700"   Width="500" Height="400"   />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg4" Source="/Assets/Imagenes/gameView/fireEffect.gif" Canvas.Left="740" Canvas.Top="700"   Width="500" Height="400"   />
 
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg5" Source="/Assets/Imagenes/gameView/failEffect.gif" Width="250" Height="250" Canvas.Left="198" Canvas.Top="750"   />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg5" Source="/Assets/Imagenes/gameView/fireEffect.gif" Canvas.Left="45" Canvas.Top="700"   Width="500" Height="400"   />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg5" Source="/Assets/Imagenes/gameView/failEffect.gif" Width="250" Height="250" Canvas.Left="1100" Canvas.Top="750"   />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg5" Source="/Assets/Imagenes/gameView/fireEffect.gif" Canvas.Left="970" Canvas.Top="700"   Width="500" Height="400"   />
 
 
 

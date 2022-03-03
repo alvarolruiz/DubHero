@@ -37,9 +37,22 @@ namespace DubHero_UI.Vistas
         {
             this.InitializeComponent();
 
+            
 
-            succesAnimation.Begin();
-            failAnimation.Begin();
+
+            do {
+                succesAnimation.Begin();
+                succesAnimation2.Begin();
+                succesAnimation3.Begin();
+                succesAnimation4.Begin();
+                succesAnimation5.Begin();
+                failAnimation.Begin();
+                failAnimation2.Begin();
+                failAnimation3.Begin();
+                failAnimation4.Begin();
+                failAnimation5.Begin();
+
+            } while (true);
 
             //myPlayBack myPlayBack = new myPlayBack();
             //generarNota(new GameNote(67, 55));
