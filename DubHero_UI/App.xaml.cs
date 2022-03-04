@@ -50,6 +50,7 @@ namespace DubHero_UI
             {
                 // Crear un marco para que actúe como contexto de navegación y navegar a la primera página.
                 rootFrame = new Frame();
+                ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
@@ -69,7 +70,7 @@ namespace DubHero_UI
                     // Cuando no se restaura la pila de navegación, navegar a la primera página,
                     // configurando la nueva página pasándole la información requerida como
                     //parámetro de navegación
-                    rootFrame.Navigate(typeof(Juego), e.Arguments);
+                    rootFrame.Navigate(typeof(SelectSong), e.Arguments);
                 }
                 // Asegurarse de que la ventana actual está activa.
                 Window.Current.Activate();

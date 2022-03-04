@@ -15,16 +15,16 @@
             <Setter Property="StrokeThickness" Value="4"/>
         </Style>
 
-        <Storyboard x:Name="succesAnimation">
+        <Storyboard x:Name="succesAnimation1">
             <DoubleAnimation
-            Storyboard.TargetName="succesImg"
+            Storyboard.TargetName="succesImg1"
                     Storyboard.TargetProperty="Opacity"
                     From="1.5" To="0" Duration="0:0:0.5"/>
         </Storyboard>
 
-        <Storyboard x:Name="failAnimation">
+        <Storyboard x:Name="failAnimation1">
             <DoubleAnimation
-            Storyboard.TargetName="failImg"
+            Storyboard.TargetName="failImg1"
                     Storyboard.TargetProperty="Opacity"
                     From="1.5" To="0" Duration="0:0:0.5"/>
         </Storyboard>
@@ -88,13 +88,16 @@
         </ResourceDictionary>
     </Page.Resources>
     <RelativePanel>
+        
         <media:RelativePanel.Background>
             <media:LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <media:GradientStop Color="Black" Offset="0.707"/>
                 <media:GradientStop Color="#FF250909" Offset="1"/>
             </media:LinearGradientBrush>
         </media:RelativePanel.Background>
-        <Canvas x:Name="pistaObjetivo">
+
+
+        <Canvas x:Name="pistaObjetivo" >
             <Image x:Name="imgIconoAltavoz" Source="/Assets/Imagenes/icono.png" RelativePanel.AlignLeftWithPanel="True"  Width="334" Height="392" media:Canvas.Left="579" media:Canvas.Top="356" media:Canvas.ZIndex="1" Opacity="0.517" />
             <Path Data="M20.2,0 L51, 0 75,30 0,30 z" Height="724" Stretch="Fill"  Width="1245" UseLayoutRounding="False" Canvas.Left="142" Canvas.Top="271.54" FocusVisualPrimaryBrush="#FFBD6767" FocusVisualSecondaryBrush="#99FFFFFF">
                 <media:Path.Fill>
@@ -129,10 +132,6 @@
 
             <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg5" Source="/Assets/Imagenes/gameView/failEffect.gif" Width="250" Height="250" Canvas.Left="1100" Canvas.Top="750"   />
             <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg5" Source="/Assets/Imagenes/gameView/fireEffect.gif" Canvas.Left="970" Canvas.Top="700"   Width="500" Height="400"   />
-
-
-
-
         </Canvas>
         <!--<Ellipse Width="190" Height="190" Fill="Aqua" RelativePanel.AlignBottomWithPanel="True" Margin="230,30"/>-->
 
