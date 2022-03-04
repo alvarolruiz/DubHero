@@ -8,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -48,6 +49,7 @@ namespace DubHero_UI
             {
                 // Crear un marco para que actúe como contexto de navegación y navegar a la primera página.
                 rootFrame = new Frame();
+                ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 

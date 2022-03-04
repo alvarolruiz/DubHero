@@ -37,25 +37,31 @@ namespace DubHero_UI.Vistas
         {
             this.InitializeComponent();
 
+            succesAnimation1.Begin();
+            succesAnimation2.Begin();
+            succesAnimation3.Begin();
+            succesAnimation4.Begin();
+            succesAnimation5.Begin();
+            failAnimation1.Begin();
+            failAnimation2.Begin();
+            failAnimation3.Begin();
+            failAnimation4.Begin();
+            failAnimation5.Begin();
 
-            
-                succesAnimation.Begin();
-                succesAnimation2.Begin();
-                succesAnimation3.Begin();
-                succesAnimation4.Begin();
-                succesAnimation5.Begin();
-                failAnimation.Begin();
-                failAnimation2.Begin();
-                failAnimation3.Begin();
-                failAnimation4.Begin();
-                failAnimation5.Begin();
 
-           
 
             //myPlayBack myPlayBack = new myPlayBack();
-            //generarNota(new GameNote(67, 55));
-            //generarNota(new GameNote(65, 100));
-            //generarNota(new GameNote(64, 55));
+            generarNota(new GameNote(60, 55));
+            generarNota(new GameNote(62, 55));
+            generarNota(new GameNote(64, 55));
+            generarNota(new GameNote(65, 55));
+            generarNota(new GameNote(67, 55));
+
+            generarNota(new GameNote(60, 55));
+            generarNota(new GameNote(62, 55));
+            generarNota(new GameNote(64, 55));
+            generarNota(new GameNote(65, 55));
+            generarNota(new GameNote(67, 55));
 
         }
 
@@ -73,7 +79,7 @@ namespace DubHero_UI.Vistas
 
 
 
-        
+
 
 
         private DoubleAnimation CreateDoubleAnimation(DependencyObject frameworkElement, double fromX, double toX, string propertyToAnimate, Double interval)
@@ -92,11 +98,11 @@ namespace DubHero_UI.Vistas
 
 
 
-        private void crearAnimacionBajadaEncoger(Rectangle elemento, Double tiempo, int xInit,int xFin)
+        private void crearAnimacionBajadaEncoger(Rectangle elemento, Double tiempo, int xInit, int xFin)
         {
             Storyboard storyboardTamanio = new Storyboard();
             //desde donde hasta donde quieres que se anime
-            DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 0, 800, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo);
+            DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 100, 1000, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo);
             storyboardTamanio.Children.Add(traslacionY);
 
             //desde donde hasta donde quieres que se anime
@@ -104,12 +110,12 @@ namespace DubHero_UI.Vistas
             storyboardTamanio.Children.Add(traslacionX);
 
             // desde que tamanio hasta que tamanio
-            DoubleAnimation animacionTamanio = CreateDoubleAnimation(elemento, 115, 60, "Rectangle.Width", tiempo);
+            DoubleAnimation animacionTamanio = CreateDoubleAnimation(elemento, 60, 150, "Rectangle.Width", tiempo);
             animacionTamanio.EnableDependentAnimation = true;
             storyboardTamanio.Children.Add(animacionTamanio);
             // anhadir animacion de traslacion en el eje x
 
-
+            storyboardTamanio.RepeatBehavior = RepeatBehavior.Forever;
             storyboardTamanio.Begin();
         }
 
@@ -117,59 +123,62 @@ namespace DubHero_UI.Vistas
 
         public Rectangle generarNota(GameNote nota)
         {
-            //String nombrePista = (string)pistaObjetivo.GetType().GetProperty("Name").GetValue(pistaObjetivo, null);
-            int tipo  = 0, xInit=0, xFin=0;
+
+            //habira que hacerlas relativas a la pantalla
+            int tipo = 0, xInit = 0, xFin = 0;
 
             SolidColorBrush scb = new SolidColorBrush();
             switch (nota.Type)
             {
                 case 60:
                     scb = new SolidColorBrush(Colors.Red); // hacer que aparezca en una coordinada 
-                    xInit = 200;
-                    xFin = 100;
+                    xInit = 530;
+                    xFin = 200;
                     break;
 
                 case 62:
                     scb = new SolidColorBrush(Colors.Gray);
-                    xInit = 400;
-                    xFin = 100;
+                    xInit = 600;
+                    xFin = 500;
                     break;
 
                 case 64:
                     scb = new SolidColorBrush(Colors.Pink);
-                    xInit = 500;
-                    xFin = 100;
+                    xInit = 700;
+                    xFin = 700;
                     break;
 
                 case 65:
                     scb = new SolidColorBrush(Colors.Purple);
-                    xInit = 600;
-                    xFin = 100;
+                    xInit = 800;
+                    xFin = 1000;
                     break;
 
                 case 67:
                     scb = new SolidColorBrush(Colors.Green);
-                    xInit = 700;
-                    xFin = 100;
+                    xInit = 890;
+                    xFin = 1200;
                     break;
             }
 
             Rectangle rec = new Rectangle
             {
                 Width = 80,
-                Height = nota.Duration * 2, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
+                Height = nota.Duration * 1.5, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
                 Fill = scb,
+                //CornerRadius = 5,
                 VerticalAlignment = VerticalAlignment.Top,
                 RenderTransform = new CompositeTransform { TranslateX = 0, TranslateY = 0 }
+
             };
-            crearAnimacionBajadaEncoger(rec, nota.Duration, xInit, xFin);
+
+            rec.SetValue(Canvas.ZIndexProperty, 6);
+
+            crearAnimacionBajadaEncoger(rec, nota.Duration / 30, xInit, xFin);
             pistaObjetivo.Children.Add(rec);
             return rec;
         }
     }
-
-
-
 
 
 
@@ -221,11 +230,12 @@ namespace DubHero_UI.Vistas
             // rawNoteData.Channel);
             // reproductorMidi.EventPlayed += ReproductorMidi_EventPlayed;
             // reproductorMidi.TrackNotes = true;
-            
+
 
         }
 
-        public void empezarMidi() {
+        public void empezarMidi()
+        {
 
             reproductorMidi.Start();
 
@@ -234,13 +244,13 @@ namespace DubHero_UI.Vistas
 
         private NotePlaybackData EventoNota(NotePlaybackData rawData, long rawTime, long rawLength, TimeSpan playbackTime)
         {
-            
+
 
             return rawData;
 
         }
 
-     
+
         private void ReproductorMidi_EventPlayed(object sender, MidiEventPlayedEventArgs e)
         {
 
@@ -255,7 +265,7 @@ namespace DubHero_UI.Vistas
         }
 
         public Playback ReproductorMidi { get => reproductorMidi; set => reproductorMidi = value; }
- 
+
 
 
 
