@@ -19,6 +19,12 @@ namespace DubHero_UI.Models
             this.Dificulty = dificulty;
         }
 
+        public SongView(string name, int dificulty)
+        {
+            this.name=name;
+            this.dificulty=dificulty;
+        }
+
         public string Name { get => name; set => name = value; }
         public string SrcImage { get => srcImage; set => srcImage = value; }
         public int Dificulty { get => dificulty; set => dificulty = value; }

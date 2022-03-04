@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DubHero_UI", "DubHero_UI\DubHero_UI.csproj", "{946B11E3-74ED-4F33-AB53-B2FDDA4D4794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pruebas", "Pruebas\Pruebas.csproj", "{9136573C-703E-49A2-B6D1-EA25FB625007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pruebas", "Pruebas\Pruebas.csproj", "{9136573C-703E-49A2-B6D1-EA25FB625007}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DubHero_UI.DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,30 +23,8 @@ namespace DubHero_UI.Models
 
         private void generateSongs()
         {
-
-            int i = 0;
-
-            SongList.Add(new SongView("Cancion" + i++, "/Assets/Imagenes/icono.png", 1));
-            SongList.Add(new SongView("Cancion" + i++, "/Assets/SongsImages/PERRO.jfif", 2));
-            SongList.Add(new SongView("Cancion" + i++, "/Assets/SongsImages/PERRO.jfif", 3));
-            SongList.Add(new SongView("Cancion" + i++, "/Assets/SongsImages/PERRO.jfif", 1));
-            SongList.Add(new SongView("Cancion" + i++, "/Assets/SongsImages/PERRO.jfif", 2));
-            SongList.Add(new SongView("Cancion" + i++, "/Assets/SongsImages/PERRO.jfif", 3));
-
-
-            //string docPath = @"D:\source\repos\Sistemas de gestion\Prueba directorios\PruebaComponente\Assets";
-            //string docPath2 = @"C:\Users\sadac\source\repos\alvarolruiz\DubHero\DubHero_UI\Assets\" ;
-            //string cancion;
-
-            //List<string> dirs = new List<string>(Directory.EnumerateDirectories(docPath2));
-
-            //foreach (var dir in dirs)
-            //{
-            //    cancion = $"{dir.Substring(dir.LastIndexOf(Path.DirectorySeparatorChar) + 1)}";
-
-            //    SongList.Add(new SongView(cancion, "/Assets/Imagenes/icono.png",1)); 
-            //}
-           
+            ListadosCarpetas listadosCarpetas = new ListadosCarpetas(@"..\..\..\Assets\Songs\");
+            songList = listadosCarpetas.getListadoCancionesDisponibles();
 
         }
 

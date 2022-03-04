@@ -12,13 +12,14 @@ namespace Pruebas
             Console.WriteLine(docPath);
             string cancion;
 
-            List<string> dirs = new List<string>(Directory.EnumerateDirectories(@"..\..\..\Assets\songs"));
+            List<string> dirs = new List<String>(Directory.EnumerateFiles(@"..\..\..\Assets\"));
 
             foreach (var dir in dirs)
             {
                 cancion = $"{dir.Substring(dir.LastIndexOf(Path.DirectorySeparatorChar) + 1)}";
                 Console.WriteLine($"{dir.Substring(dir.LastIndexOf(Path.DirectorySeparatorChar) + 1)}");
             }
+        
         }
     }
 }
