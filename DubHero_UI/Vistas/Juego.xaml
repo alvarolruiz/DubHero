@@ -17,14 +17,14 @@
 
         <Storyboard x:Name="succesAnimation">
             <DoubleAnimation
-            Storyboard.TargetName="succesImg"
+            Storyboard.TargetName="succesImg1"
                     Storyboard.TargetProperty="Opacity"
                     From="1.5" To="0" Duration="0:0:0.5"/>
         </Storyboard>
 
         <Storyboard x:Name="failAnimation">
             <DoubleAnimation
-            Storyboard.TargetName="failImg"
+            Storyboard.TargetName="failImg1"
                     Storyboard.TargetProperty="Opacity"
                     From="1.5" To="0" Duration="0:0:0.5"/>
         </Storyboard>

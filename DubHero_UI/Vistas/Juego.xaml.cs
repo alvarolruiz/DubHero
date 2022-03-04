@@ -37,10 +37,8 @@ namespace DubHero_UI.Vistas
         {
             this.InitializeComponent();
 
+
             
-
-
-            do {
                 succesAnimation.Begin();
                 succesAnimation2.Begin();
                 succesAnimation3.Begin();
@@ -52,7 +50,7 @@ namespace DubHero_UI.Vistas
                 failAnimation4.Begin();
                 failAnimation5.Begin();
 
-            } while (true);
+           
 
             //myPlayBack myPlayBack = new myPlayBack();
             //generarNota(new GameNote(67, 55));
