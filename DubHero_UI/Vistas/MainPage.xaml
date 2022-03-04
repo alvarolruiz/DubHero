@@ -41,6 +41,18 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.15"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
+            
+        </Storyboard>
+        
+        <Storyboard x:Key="Pulse2" x:Name="pulse2" RepeatBehavior="Forever">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="PulseBox2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="PulseBox">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
 
@@ -67,8 +79,36 @@
                 </Border>
                 <!-- End Pulse -->
             </Grid>
-            <Image x:Name="presione" Source="/Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  Margin="0,50,0,0"  Width="500"  />
-            <Image Source="/Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="350" Margin="0,-30"  />
+            <Border x:Name="PulseBox2"
+                         RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <Image x:Name="presione" Source="/Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  Margin="0,50,0,0"  Width="500"  />
+                
+            </Border>
+            <Border x:Name="PulseBox3"
+                         RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <Image Source="/Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="350" Margin="0,-30"  />
+
+            </Border>
+
+
+
+
         </StackPanel>
     </Grid>
 </Page>
