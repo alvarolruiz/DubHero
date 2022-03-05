@@ -18,7 +18,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
 using Windows.UI.Xaml.Shapes;
-using Windows.Storage;
 using Windows.ApplicationModel;
 
 namespace DubHero_UI.Vistas
@@ -71,6 +70,8 @@ namespace DubHero_UI.Vistas
         /// A list of tracks containing a heap of notes that are already falling.
         /// </summary>
         LinkedList<Classes.GameNote>[] _tracks;
+
+        string _songName;
         #endregion
 
         #region UWP Related
@@ -83,7 +84,11 @@ namespace DubHero_UI.Vistas
                 _tracks[i] = new LinkedList<Classes.GameNote>();
             }
             _playerThread = new Thread(SongUpdate);
+            _playback = new PlaybackManager();
+            _playback.AnimationCallback += AnimateNote;
+            _mediaPlayer = new MediaPlayer();
             this.InitializeComponent();
+            this.Loaded += LoadSong;
         }
 
         /// <summary>
@@ -91,40 +96,174 @@ namespace DubHero_UI.Vistas
         /// "midimap.midi" and the song file "song.mp3" for it to work.
         /// </summary>
         /// <param name="e"></param>
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
-            
-
             if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
             {
-                var songName = (string)e.Parameter;
-                var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
-                var songListFolder = await assetsFolder.GetFolderAsync("Songs");
-                var songFolder = await songListFolder.GetFolderAsync(songName);
-                var mp3File = await songFolder.GetFileAsync("song.mp3");
-                var midiFile = await songFolder.GetFileAsync("map.mid");
-                //TODO Try-catch file access
-                _playback = new PlaybackManager(mp3File.Path);
-                _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(midiFile.Path));
+                _songName = (string)e.Parameter;
             }
             base.OnNavigatedTo(e);
         }
         #endregion
 
+        #region Events
+        private async void LoadSong(Object sender, RoutedEventArgs e)
+        {
+            var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            var songListFolder = await assetsFolder.GetFolderAsync("Songs");
+            var songFolder = await songListFolder.GetFolderAsync(_songName);
+
+            var mp3File = await songFolder.GetFileAsync("song.mp3");
+            var midiFile = await songFolder.GetFileAsync("map.mid");
+
+            
+            _playback.InitReader(midiFile);
+
+            _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(mp3File.Path));
+
+            StartSong();
+        }
+
+        #endregion
 
         #region Flow control
+        /// <summary>
+        /// Starts the game, initializing all components for it.
+        /// </summary>
+        public void StartSong()
+        {
+            _playback.StartReading();
+            _stopwatch.Reset();
+            _currentTime = 0L;
+            _stopwatch.Start();
+            var songInitThread = new Thread(StartMusicAfterOffset);
+            songInitThread.Start();
+            _playerThread.Start();
+        }
+
+        /// <summary>
+        /// Starts playing the music after <see cref="_timeToFall"/> has passed, making the
+        /// song playable.
+        /// </summary>
+        void StartMusicAfterOffset()
+        {
+            var startTime = _currentTime;
+            var started = false;
+            while (!started)
+            {
+                //Thread.Sleep((int)_timeToFall);?? Parece regulero así que mejor me quedo con el bucle más legible
+                var waitedTime = _currentTime - startTime;
+                if(waitedTime >= _timeToFall)
+                {
+                    _mediaPlayer.Volume = 1;
+                    _mediaPlayer.Play();
+                    started = true ;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Pauses the song and the midi reproduction.
+        /// </summary>
+        [Obsolete]
+        //Como el hilo no accede a nada de valor no es necesario usar una
+        //implementación más actual.
+        public void PauseSong()
+        {
+            _mediaPlayer.Pause();
+            _playback.PauseReading();
+            _stopwatch.Stop();
+            _playerThread.Suspend();
+        }
+
+        /// <summary>
+        /// Resumes the song from the position it was paused at.
+        /// </summary>
+        [Obsolete]
+        //Como el hilo no accede a nada de valor no es necesario usar una
+        //implementación más actual.
+        public void ResumeSong()
+        {
+            _mediaPlayer.Play();
+            _playback.ResumeReading();
+            _stopwatch.Start();
+            _playerThread.Resume();
+        }
+
+        /// <summary>
+        /// Checks all the necessary song logic every system tick.
+        /// </summary>
+        void SongUpdate()
+        {
+            while (true)
+            {
+                _currentTime = _stopwatch.ElapsedMilliseconds;
+                CheckNotesToDestroy();
+            }
+        }
+
+        /// <summary>
+        /// Checks all the falling notes and destroys them after the needed time.
+        /// </summary>
+        private void CheckNotesToDestroy()
+        {
+            foreach (var track in _tracks)
+            {
+                if (track.Count > 0)
+                {
+                    var note = track.First();
+                    if (note.MillisSinceRead >= _timeToFall + _failOffset)
+                    {
+                        //Destroy note in the view
+                        track.Remove(note);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks if there's a note to play in the correct zone at the played track referenced by
+        /// parameter. 
+        /// Note is too far - Nothing happens
+        /// Note it's close but it's further than failOffset - Failed note
+        /// Note isOnTime - Correct note
+        /// </summary>
+        /// <param name="trackIndex"></param>
+        void CheckPlayedNote(int trackIndex)
+        {
+            var targetTrack = _tracks[trackIndex];
+            var nextNote = targetTrack.First.Value;
+            if (nextNote != null)
+            {
+                var differenceToPerfect = Math.Abs(nextNote.MillisSinceRead - _timeToFall);//0 is perfect
+                var isOnTime = differenceToPerfect <= _failOffset;
+                if (isOnTime)
+                {
+                    targetTrack.RemoveFirst();
+                    //TODO Destroy the note (Correct note animation)
+                    //TODO Manage correct note
+                }
+                else if (differenceToPerfect <= _tooSoonOffset)
+                {
+                    targetTrack.RemoveFirst();
+                    //TODO Destroy note (Failed note animation)
+                    //TODO manage failed note
+                }
+            }
+        }
+        #endregion
+
+        #region Animation
         /// <summary>
         /// Starts the animation for a given note.
         /// </summary>
         /// <param name="note"></param>
         /// <exception cref="NotImplementedException"></exception>
-        
-        
         public void AnimateNote(Classes.GameNote note)
         {
             //TODO haser bomnito esto
             generarNota(note);
+            _tracks[note.NoteNumber].AddLast(note);
         }
 
         private DoubleAnimation CreateDoubleAnimation(DependencyObject frameworkElement, double fromX, double toX, string propertyToAnimate, Double interval)
@@ -218,130 +357,6 @@ namespace DubHero_UI.Vistas
             return rec;
         }
 
-
-    
-
-    /// <summary>
-    /// Starts the game, initializing all components for it.
-    /// </summary>
-    public void StartSong()
-        {
-           
-            _playback.StartReading();
-            _stopwatch.Reset();
-            _currentTime = 0L;
-            _stopwatch.Start();
-            var songInitThread = new Thread(StartMusicAfterOffset);
-            songInitThread.Start();
-            _playerThread.Start();
-        }
-
-        /// <summary>
-        /// Starts playing the music after <see cref="_timeToFall"/> has passed, making the
-        /// song playable.
-        /// </summary>
-        void StartMusicAfterOffset()
-        {
-            var startTime = _currentTime;
-            var started = false;
-            while (!started)
-            {
-                //Thread.Sleep((int)_timeToFall);?? Parece regulero así que mejor me quedo con el bucle más legible
-                var waitedTime = _currentTime - startTime;
-                if(waitedTime >= _timeToFall)
-                {
-                    _mediaPlayer.Play();
-                    started = true;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Pauses the song and the midi reproduction.
-        /// </summary>
-        [Obsolete]
-        //Como el hilo no accede a nada de valor no es necesario usar una
-        //implementación más actual.
-        public void PauseSong()
-        {
-            _mediaPlayer.Pause();
-            _playback.PauseReading();
-            _stopwatch.Stop();
-            _playerThread.Suspend();
-        }
-
-        /// <summary>
-        /// Resumes the song from the position it was paused at.
-        /// </summary>
-        [Obsolete]
-        //Como el hilo no accede a nada de valor no es necesario usar una
-        //implementación más actual.
-        public void ResumeSong()
-        {
-            _mediaPlayer.Play();
-            _playback.ResumeReading();
-            _stopwatch.Start();
-            _playerThread.Resume();
-        }
-
-        /// <summary>
-        /// Checks all the necessary song logic every system tick.
-        /// </summary>
-        void SongUpdate()
-        {
-            while (true)
-            {
-                _currentTime = _stopwatch.ElapsedMilliseconds;
-                CheckNotesToDestroy();
-            }
-        }
-
-        /// <summary>
-        /// Checks all the falling notes and destroys them after the needed time.
-        /// </summary>
-        private void CheckNotesToDestroy()
-        {
-            foreach (var track in _tracks)
-            {
-                var note = track.First();
-                if (note.MillisSinceRead >= _timeToFall + _failOffset)
-                {
-                    //Destroy note in the view
-                    track.Remove(note);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Checks if there's a note to play in the correct zone at the played track referenced by
-        /// parameter. 
-        /// Note is too far - Nothing happens
-        /// Note it's close but it's further than failOffset - Failed note
-        /// Note isOnTime - Correct note
-        /// </summary>
-        /// <param name="trackIndex"></param>
-        void CheckPlayedNote(int trackIndex)
-        {
-            var targetTrack = _tracks[trackIndex];
-            var nextNote = targetTrack.First.Value;
-            if (nextNote != null)
-            {
-                var differenceToPerfect = Math.Abs(nextNote.MillisSinceRead - _timeToFall);//0 is perfect
-                var isOnTime = differenceToPerfect <= _failOffset;
-                if (isOnTime)
-                {
-                    targetTrack.RemoveFirst();
-                    //TODO Destroy the note (Correct note animation)
-                    //TODO Manage correct note
-                }
-                else if (differenceToPerfect <= _tooSoonOffset)
-                {
-                    targetTrack.RemoveFirst();
-                    //TODO Destroy note (Failed note animation)
-                    //TODO manage failed note
-                }
-            }
-        }
         #endregion
 
         #region User Input
@@ -369,6 +384,6 @@ namespace DubHero_UI.Vistas
                 CheckPlayedNote(4);
         }
 
-        #endregion
+            #endregion
     }
 }

@@ -1,42 +1,43 @@
-﻿using Melanchall.DryWetMidi.Common;
-using Melanchall.DryWetMidi.Core;
+﻿using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Multimedia;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using Windows.Storage;
 
 namespace DubHero_UI.Classes
 {
     public class PlaybackManager
     {
-        private Playback midiPlayer;
-        private MidiFile midiFile;
-        public AnimationCallback AnimationCallback;
+        private Playback _midiPlayer;
+        private MidiFile _midiFile;
+        public AnimationCallback AnimationCallback { get; set; }
 
-        public PlaybackManager(string midiPath)
+        public PlaybackManager()
         {
-            midiFile = MidiFile.Read(midiPath);
-            this.midiPlayer = midiFile.GetPlayback();
-            this.midiPlayer.NoteCallback += NoteEvent;
+        }
 
+        public async void InitReader(StorageFile midiFile)
+        {
+            var stream = await midiFile.OpenAsync(FileAccessMode.Read);
+            _midiFile = MidiFile.Read(stream.AsStream());
+            _midiPlayer = _midiFile.GetPlayback();
+            // _midiPlayer.NoteCallback += NoteEvent; hacer esto en el hilo de la vista, en GameView
         }
 
         public void StartReading()
         {
-            midiPlayer.MoveToStart();
-            midiPlayer.Start();
+            _midiPlayer.MoveToStart();
+            _midiPlayer.Start();
         }
 
         public void PauseReading()
         {
-            midiPlayer.Stop();
+            _midiPlayer.Stop();
         }
 
         public void ResumeReading()
         {
-            midiPlayer.Start();
+            _midiPlayer.Start();
         }
 
 
@@ -47,7 +48,7 @@ namespace DubHero_UI.Classes
             return null;
         }
 
-        public Playback ReproductorMidi { get => midiPlayer; set => midiPlayer = value; }
+        public Playback ReproductorMidi { get => _midiPlayer; set => _midiPlayer = value; }
     }
 
 
