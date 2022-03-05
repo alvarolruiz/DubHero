@@ -66,6 +66,8 @@ namespace DubHero_UI.Vistas
         /// </summary>
         Thread _playerThread;
 
+        private readonly object _tracklock = new object();
+
         /// <summary>
         /// A list of tracks containing a heap of notes that are already falling.
         /// </summary>
@@ -85,6 +87,7 @@ namespace DubHero_UI.Vistas
             }
             _playerThread = new Thread(SongUpdate);
             _playback = new PlaybackManager();
+            _playback.Dispatcher = this.Dispatcher;
             _playback.AnimationCallback += AnimateNote;
             _mediaPlayer = new MediaPlayer();
             this.InitializeComponent();
@@ -115,7 +118,6 @@ namespace DubHero_UI.Vistas
 
             var mp3File = await songFolder.GetFileAsync("song.mp3");
             var midiFile = await songFolder.GetFileAsync("map.mid");
-
             
             _playback.InitReader(midiFile);
 
@@ -198,7 +200,11 @@ namespace DubHero_UI.Vistas
             while (true)
             {
                 _currentTime = _stopwatch.ElapsedMilliseconds;
-                CheckNotesToDestroy();
+                lock(_tracklock) 
+                {
+                    CheckNotesToDestroy();
+                }
+                
             }
         }
 
@@ -263,7 +269,10 @@ namespace DubHero_UI.Vistas
         {
             //TODO haser bomnito esto
             generarNota(note);
-            _tracks[note.NoteNumber].AddLast(note);
+            lock (_tracklock) 
+            {
+                _tracks[note.TrackIndex].AddLast(note);
+            }
         }
 
         private DoubleAnimation CreateDoubleAnimation(DependencyObject frameworkElement, double fromX, double toX, string propertyToAnimate, Double interval)
@@ -279,80 +288,88 @@ namespace DubHero_UI.Vistas
         }
 
 
-        private void crearAnimacionBajadaEncoger(Rectangle elemento, Double tiempo, int xInit, int xFin)
-        {
 
-            tiempo = tiempo / 20;
+
+
+        private void crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
+        {
             Storyboard storyboardTamanio = new Storyboard();
             //desde donde hasta donde quieres que se anime
-            DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 0, 800, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo); //todo change time to fall
+            DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 100, 1000, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo);
             storyboardTamanio.Children.Add(traslacionY);
 
             //desde donde hasta donde quieres que se anime
-            DoubleAnimation traslacionX = CreateDoubleAnimation(elemento, xInit, xFin, "(Rectangle.RenderTransform).(CompositeTransform.TranslateX)", tiempo); //todo change time to fall
+            DoubleAnimation traslacionX = CreateDoubleAnimation(elemento, xInit, xFin, "(Rectangle.RenderTransform).(CompositeTransform.TranslateX)", tiempo);
             storyboardTamanio.Children.Add(traslacionX);
 
             // desde que tamanio hasta que tamanio
-            DoubleAnimation animacionTamanio = CreateDoubleAnimation(elemento, 115, 60, "Rectangle.Width", tiempo);
-            animacionTamanio.EnableDependentAnimation = true;
-            storyboardTamanio.Children.Add(animacionTamanio);
+            DoubleAnimation animacionAncho = CreateDoubleAnimation(elemento, 60, 150, "Rectangle.Width", tiempo);
+            animacionAncho.EnableDependentAnimation = true;
+            storyboardTamanio.Children.Add(animacionAncho);
+
+            DoubleAnimation animacionAlto = CreateDoubleAnimation(elemento, 60, 150, "Rectangle.Height", tiempo);
+            animacionAlto.EnableDependentAnimation = true;
+            storyboardTamanio.Children.Add(animacionAlto);
             // anhadir animacion de traslacion en el eje x
-
-
             storyboardTamanio.Begin();
         }
 
 
 
-
-        public Rectangle generarNota(Classes.GameNote nota)
+        public Ellipse generarNota(Classes.GameNote nota)
         {
-            //String nombrePista = (string)pistaObjetivo.GetType().GetProperty("Name").GetValue(pistaObjetivo, null);
-            int xInit = 0, xFin = 0;
+
+            //habira que hacerlas relativas a la pantalla
+            int tipo = 0, xInit = 0, xFin = 0;
 
             SolidColorBrush scb = new SolidColorBrush();
             switch (nota.NoteNumber)
             {
                 case 60:
                     scb = new SolidColorBrush(Colors.Red); // hacer que aparezca en una coordinada 
-                    xInit = 200;
-                    xFin = 100;
+                    xInit = 530;
+                    xFin = 200;
                     break;
 
                 case 62:
                     scb = new SolidColorBrush(Colors.Gray);
-                    xInit = 400;
-                    xFin = 100;
+                    xInit = 600;
+                    xFin = 500;
                     break;
 
                 case 64:
                     scb = new SolidColorBrush(Colors.Pink);
-                    xInit = 500;
-                    xFin = 100;
+                    xInit = 700;
+                    xFin = 700;
                     break;
 
                 case 65:
                     scb = new SolidColorBrush(Colors.Purple);
-                    xInit = 600;
-                    xFin = 100;
+                    xInit = 800;
+                    xFin = 1000;
                     break;
 
                 case 67:
                     scb = new SolidColorBrush(Colors.Green);
-                    xInit = 700;
-                    xFin = 100;
+                    xInit = 890;
+                    xFin = 1200;
                     break;
             }
 
-            Rectangle rec = new Rectangle
+            Ellipse rec = new Ellipse
             {
                 Width = 80,
-                Height = nota.MillisSinceRead, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
+                Height = 100 * 1.5, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
                 Fill = scb,
+                //CornerRadius = 5,
                 VerticalAlignment = VerticalAlignment.Top,
                 RenderTransform = new CompositeTransform { TranslateX = 0, TranslateY = 0 }
+
             };
-            crearAnimacionBajadaEncoger(rec, nota.MillisSinceRead, xInit, xFin);
+
+            rec.SetValue(Canvas.ZIndexProperty, 6);
+
+            crearAnimacionBajadaEncoger(rec, 100 / 30, xInit, xFin);
             pistaObjetivo.Children.Add(rec);
             return rec;
         }

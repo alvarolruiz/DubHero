@@ -3,6 +3,9 @@ using Melanchall.DryWetMidi.Multimedia;
 using System;
 using System.IO;
 using Windows.Storage;
+using System.ServiceModel.Dispatcher;
+using Windows.UI.Core;
+using System.Threading.Tasks;
 
 namespace DubHero_UI.Classes
 {
@@ -11,6 +14,7 @@ namespace DubHero_UI.Classes
         private Playback _midiPlayer;
         private MidiFile _midiFile;
         public AnimationCallback AnimationCallback { get; set; }
+        public CoreDispatcher Dispatcher { get; set; }
 
         public PlaybackManager()
         {
@@ -21,11 +25,16 @@ namespace DubHero_UI.Classes
             var stream = await midiFile.OpenAsync(FileAccessMode.Read);
             _midiFile = MidiFile.Read(stream.AsStream());
             _midiPlayer = _midiFile.GetPlayback();
-            // _midiPlayer.NoteCallback += NoteEvent; hacer esto en el hilo de la vista, en GameView
+            _midiPlayer.NoteCallback += NoteEvent;
         }
 
         public void StartReading()
         {
+            if(_midiPlayer == null)
+            {
+                StartReading();
+                return;
+            }
             _midiPlayer.MoveToStart();
             _midiPlayer.Start();
         }
@@ -44,7 +53,10 @@ namespace DubHero_UI.Classes
         private NotePlaybackData NoteEvent(NotePlaybackData rawData, long rawTime, long rawLength, TimeSpan playbackTime)
         {
             var readNote = new GameNote(rawData.NoteNumber);
-            AnimationCallback(readNote);
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                AnimationCallback(readNote);
+            });
             return null;
         }
 
