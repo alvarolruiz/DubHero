@@ -82,7 +82,13 @@ namespace DubHero_UI.Vistas
                 _tracks[i] = new LinkedList<Classes.GameNote>();
             }
             _playerThread = new Thread(SongUpdate);
+            this.Loaded += Init;
             this.InitializeComponent();
+        }
+
+        private void Init(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -92,11 +98,6 @@ namespace DubHero_UI.Vistas
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
-            string songName = @"..\..\..\..\Assets\Songs\Seven_Nation_Army.mp3";
-            _playback = new PlaybackManager(@"..\..\..\..\Assets\sevenNationArmyMap.mid");
-            _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(songName));
-
             if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
             {
                 //var songName = (string)e.Parameter;

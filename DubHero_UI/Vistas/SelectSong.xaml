@@ -15,8 +15,7 @@
     <Page.DataContext>
         <vm:SongSelect></vm:SongSelect>
     </Page.DataContext>
-
-
+    
     <RelativePanel>
         <RelativePanel.Background>
             <ImageBrush ImageSource="/Assets/Imagenes/fondoSimple.jpg"    ></ImageBrush>

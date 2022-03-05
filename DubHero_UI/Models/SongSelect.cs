@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace DubHero_UI.Models
 {
@@ -16,15 +17,23 @@ namespace DubHero_UI.Models
         public SongSelect()
         {
             SongList = new List<SongView>();
-            generateSongs();
+            generateSongsAsync();
         }
 
         public List<SongView> SongList { get => songList; set => songList = value; }
 
-        private void generateSongs()
+        private async void generateSongsAsync()
         {
-            ListadosCarpetas listadosCarpetas = new ListadosCarpetas(@"..\..\..\Assets\Songs\");
-            songList = listadosCarpetas.getListadoCancionesDisponibles();
+            try
+            {
+                ListadosAssets listadosCarpetas = new ListadosAssets();
+                //TODO -> Cuando no se debuguea la información no llega correctamente
+                Task<List<SongView>> obtne = listadosCarpetas.getSongViewListAsync();
+                songList = obtne.GetAwaiter().GetResult() ;
+            }catch (Exception ex)
+            {
+
+            }
 
         }
 
