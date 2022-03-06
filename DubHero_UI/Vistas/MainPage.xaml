@@ -34,8 +34,8 @@
 
         <Storyboard x:Key="Pulse" x:Name="pulse" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="PulseBox">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.15"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.25"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1.15"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="PulseBox">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.15"/>
@@ -49,7 +49,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.15"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="PulseBox">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="PulseBox2">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.15"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
@@ -59,26 +59,28 @@
     <Page.Background>
         <ImageBrush ImageSource="/Assets/Imagenes/fondoSimple.jpg"   Stretch="None"  ></ImageBrush>
     </Page.Background>
+    <RelativePanel  KeyUp="Grid_KeyUp">
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-
-        <StackPanel>
+        <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" >
             <!-- Pulse : Will not skew other elements location like width/height animations would. -->
-            <Grid>
-                <Border x:Name="PulseBox"
+
+            <Border x:Name="PulseBox"
                          RenderTransformOrigin="0.5,0.5">
-                    <Border.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Border.RenderTransform>
-                    <Image Height="375" Source="/Assets/Imagenes/icono.png"></Image>
-                </Border>
-                <!-- End Pulse -->
-            </Grid>
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <StackPanel KeyUp="Grid_KeyUp">
+                    <Image Height="460" Source="/Assets/Imagenes/icono.png"></Image>
+                </StackPanel>
+
+            </Border>
+            <!-- End Pulse -->
+
             <Border x:Name="PulseBox2"
                          RenderTransformOrigin="0.5,0.5">
                 <Border.RenderTransform>
@@ -89,26 +91,27 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Border.RenderTransform>
-                <Image x:Name="presione" Source="/Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  Margin="0,50,0,0"  Width="500"  />
-                
-            </Border>
-            <Border x:Name="PulseBox3"
-                         RenderTransformOrigin="0.5,0.5">
-                <Border.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Border.RenderTransform>
-                <Image Source="/Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="350" Margin="0,-30"  />
+                <StackPanel>
+                    <Image x:Name="presione" Source="/Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  Margin="0,50,0,0"  Width="600"  />
+                    <Image Source="/Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="450" Margin="0,-30"  />
+                </StackPanel>
 
             </Border>
-
-
-
 
         </StackPanel>
-    </Grid>
+
+
+        <AppBarButton RelativePanel.AlignRightWithPanel="True" Margin="200,0" x:Name="viewBtn" Label="Stop"  Icon="Previous" Background="#00000000" FontWeight="Bold" Click="viewBtn_Click">
+            <AppBarButton.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FFD1DD0A" Offset="1"/>
+                </LinearGradientBrush>
+            </AppBarButton.Foreground>
+            <AppBarButton.RenderTransform>
+                <CompositeTransform ScaleX="4" ScaleY="4"/>
+            </AppBarButton.RenderTransform>
+        </AppBarButton>
+
+    </RelativePanel>
 </Page>

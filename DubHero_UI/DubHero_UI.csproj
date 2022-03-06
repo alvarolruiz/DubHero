@@ -168,6 +168,7 @@
     <Content Include="Assets\Songs\Rubadub\info.txt" />
     <Content Include="Assets\Songs\MamaDeLaMama\info.txt" />
     <Content Include="Assets\Songs\Rubadub\foto.jpg" />
+    <Content Include="Assets\Songs\Rubadub\Rubadub.mp3" />
     <Content Include="Assets\Songs\SevenNationArmy\foto.jpg" />
     <Content Include="Assets\Songs\SevenNationArmy\info.txt" />
     <Content Include="Assets\Songs\Seven_Nation_Army.mp3" />

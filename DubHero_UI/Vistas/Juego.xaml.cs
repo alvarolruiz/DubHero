@@ -105,14 +105,14 @@ namespace DubHero_UI.Vistas
 
 
 
-        /// <summary>
-        /// funcion que crea la animacion y los storyboards, y la inicia
-        /// </summary>
-        /// <param name="elemento">Elemento a animar</param>
-        /// <param name="tiempo">Duracion de la animacion</param>
-        /// <param name="xInit"> punto de inicio</param>
-        /// <param name="xFin">punto final</param>
-        private void crearAnimacionBajadaEncoger(Rectangle elemento, Double tiempo, int xInit, int xFin)
+
+        /**
+         *  
+         * 
+         * 
+         */
+        
+        private void crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
         {
             Storyboard storyboardTamanio = new Storyboard();
             //desde donde hasta donde quieres que se anime
@@ -124,9 +124,13 @@ namespace DubHero_UI.Vistas
             storyboardTamanio.Children.Add(traslacionX);
 
             // desde que tamanio hasta que tamanio
-            DoubleAnimation animacionTamanio = CreateDoubleAnimation(elemento, 60, 150, "Rectangle.Width", tiempo);
-            animacionTamanio.EnableDependentAnimation = true;
-            storyboardTamanio.Children.Add(animacionTamanio);
+            DoubleAnimation animacionAncho = CreateDoubleAnimation(elemento, 60, 150, "Rectangle.Width", tiempo);
+            animacionAncho.EnableDependentAnimation = true;
+            storyboardTamanio.Children.Add(animacionAncho);
+
+            DoubleAnimation animacionAlto = CreateDoubleAnimation(elemento, 60, 150, "Rectangle.Height", tiempo);
+            animacionAlto.EnableDependentAnimation = true;
+            storyboardTamanio.Children.Add(animacionAlto);
             // anhadir animacion de traslacion en el eje x
 
             storyboardTamanio.RepeatBehavior = RepeatBehavior.Forever;
@@ -134,12 +138,8 @@ namespace DubHero_UI.Vistas
         }
 
 
-        /// <summary>
-        /// Funcion que crea un rectangulo dada la nota
-        /// </summary>
-        /// <param name="nota">Nota que contiene la posicion y la altura del cuadrado</param>
-        /// <returns>Rectangulo posicionado en la pista indicada</returns>
-        public Rectangle generarNota(GameNote nota)
+
+        public Ellipse generarNota(GameNote nota)
         {
 
             //habira que hacerlas relativas a la pantalla
@@ -150,36 +150,36 @@ namespace DubHero_UI.Vistas
             {
                 case 60:
                     scb = new SolidColorBrush(Colors.Red); // hacer que aparezca en una coordinada 
-                    xInit = 530;
-                    xFin = 200;
+                    xInit = 390;
+                    xFin = 60;
                     break;
 
                 case 62:
                     scb = new SolidColorBrush(Colors.Gray);
-                    xInit = 600;
-                    xFin = 500;
+                    xInit = 460;
+                    xFin = 300;
                     break;
 
                 case 64:
                     scb = new SolidColorBrush(Colors.Pink);
-                    xInit = 700;
-                    xFin = 700;
+                    xInit = 550;
+                    xFin = 550;
                     break;
 
                 case 65:
                     scb = new SolidColorBrush(Colors.Purple);
-                    xInit = 800;
-                    xFin = 1000;
+                    xInit = 630;
+                    xFin = 830;
                     break;
 
                 case 67:
                     scb = new SolidColorBrush(Colors.Green);
-                    xInit = 890;
-                    xFin = 1200;
+                    xInit = 720;
+                    xFin = 1060;
                     break;
             }
 
-            Rectangle rec = new Rectangle
+            Ellipse rec = new Ellipse
             {
                 Width = 80,
                 Height = nota.Duration * 1.5, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
@@ -196,11 +196,10 @@ namespace DubHero_UI.Vistas
             pistaObjetivo.Children.Add(rec);
             return rec;
         }
-    }
+        }
 
 
-
-    public class GameNote
+        public class GameNote
     {
         private int type;
         private float duration;
