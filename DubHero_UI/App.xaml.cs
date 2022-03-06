@@ -42,14 +42,12 @@ namespace DubHero_UI
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
-            ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
             // No repetir la inicialización de la aplicación si la ventana tiene contenido todavía,
             // solo asegurarse de que la ventana está activa.
             if (rootFrame == null)
             {
                 // Crear un marco para que actúe como contexto de navegación y navegar a la primera página.
                 rootFrame = new Frame();
-                ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
@@ -69,7 +67,7 @@ namespace DubHero_UI
                     // Cuando no se restaura la pila de navegación, navegar a la primera página,
                     // configurando la nueva página pasándole la información requerida como
                     //parámetro de navegación
-                    rootFrame.Navigate(typeof(SelectSong), e.Arguments);
+                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
                 // Asegurarse de que la ventana actual está activa.
                 Window.Current.Activate();

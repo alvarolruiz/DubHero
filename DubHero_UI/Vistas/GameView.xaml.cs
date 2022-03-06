@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Media.Animation;
 
 using Windows.UI.Xaml.Shapes;
 using Windows.ApplicationModel;
+using DubHero_UI.Classes;
 
 namespace DubHero_UI.Vistas
 {
@@ -73,7 +74,15 @@ namespace DubHero_UI.Vistas
         /// </summary>
         LinkedList<Classes.GameNote>[] _tracks;
 
+        /// <summary>
+        /// Name of the song, used to fing the necessary files.
+        /// </summary>
         string _songName;
+
+        /// <summary>
+        /// Tracks current score
+        /// </summary>
+        Score _scoreboard;
         #endregion
 
         #region UWP Related
@@ -116,6 +125,11 @@ namespace DubHero_UI.Vistas
         #endregion
 
         #region Events
+        /// <summary>
+        /// Loads async all the data required for the game (song and midi files, score with total amount of notes)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void LoadSong(Object sender, RoutedEventArgs e)
         {
             var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -128,6 +142,9 @@ namespace DubHero_UI.Vistas
             await _playback.InitReader(midiFile);
 
             _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(mp3File.Path));
+
+            _scoreboard = new Score();
+            _scoreboard.CorrectValue = 1000000 / _playback.GetNoteQuantity();
 
             StartSong();
         }
@@ -262,6 +279,7 @@ namespace DubHero_UI.Vistas
                     {
                         targetTrack.RemoveFirst();
                         nextNote.DeleteFromView();
+                        _scoreboard.Correct();
                     }
                     else if (differenceToPerfect <= _tooSoonOffset)
                     {
@@ -291,6 +309,15 @@ namespace DubHero_UI.Vistas
             }
         }
 
+        /// <summary>
+        /// funcion que crea y devuelve una animacion doble dado un rctangulo y una serie de parametros
+        /// </summary>
+        /// <param name="frameworkElement">Elemento a animar</param>
+        /// <param name="fromX">posicion inicial</param>
+        /// <param name="toX"> posicion final</param>
+        /// <param name="propertyToAnimate">que especto del elmento se quiere animar</param>
+        /// <param name="interval">duracion de la animacion</param>
+        /// <returns>una animacion con los parametros introducidos</returns>
         private DoubleAnimation CreateDoubleAnimation(DependencyObject frameworkElement, double fromX, double toX, string propertyToAnimate, Double interval)
         {
             DoubleAnimation animation = new DoubleAnimation();
@@ -303,11 +330,19 @@ namespace DubHero_UI.Vistas
             return animation;
         }
 
-        private Storyboard crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
+
+
+
+
+        private void crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
         {
-            Storyboard storyboardTamanio = new Storyboard();
+
+            double timeFinishLine = (tiempo / 800) * 200;
+            tiempo += timeFinishLine;
+
+            Storyboard storyboardTamanio = new Storyboard(); // tiene que moveerse 200p mas
             //desde donde hasta donde quieres que se anime
-            DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 100, 1000, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo);
+            DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 100, 1100, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo);
             storyboardTamanio.Children.Add(traslacionY);
 
             //desde donde hasta donde quieres que se anime
@@ -322,69 +357,67 @@ namespace DubHero_UI.Vistas
             DoubleAnimation animacionAlto = CreateDoubleAnimation(elemento, 60, 150, "Rectangle.Height", tiempo);
             animacionAlto.EnableDependentAnimation = true;
             storyboardTamanio.Children.Add(animacionAlto);
-            // anhadir animacion de traslacion en el eje x
 
             storyboardTamanio.Begin();
-
-            return storyboardTamanio;
         }
 
 
 
-        public Ellipse generarNota(Classes.GameNote nota)
+        public Ellipse generarNota(GameNote nota)
         {
 
             //habira que hacerlas relativas a la pantalla
             int xInit = 0, xFin = 0;
 
             SolidColorBrush scb = new SolidColorBrush();
-            switch (nota.TrackIndex)
+            switch (nota.NoteNumber)
             {
-                case 0:
+                case 60:
                     scb = new SolidColorBrush(Colors.Red); // hacer que aparezca en una coordinada 
-                    xInit = 530;
-                    xFin = 200;
+                    xInit = 390;
+                    xFin = 60;
                     break;
 
-                case 1:
+                case 62:
                     scb = new SolidColorBrush(Colors.Gray);
-                    xInit = 600;
-                    xFin = 500;
+                    xInit = 460;
+                    xFin = 300;
                     break;
 
-                case 2:
+                case 64:
                     scb = new SolidColorBrush(Colors.Pink);
-                    xInit = 700;
-                    xFin = 700;
+                    xInit = 550;
+                    xFin = 550;
                     break;
 
-                case 3:
+                case 65:
                     scb = new SolidColorBrush(Colors.Purple);
-                    xInit = 800;
-                    xFin = 1000;
+                    xInit = 630;
+                    xFin = 830;
                     break;
 
-                case 4:
+                case 67:
                     scb = new SolidColorBrush(Colors.Green);
-                    xInit = 890;
-                    xFin = 1200;
+                    xInit = 720;
+                    xFin = 1060;
                     break;
             }
 
             Ellipse rec = new Ellipse
             {
                 Width = 80,
-                Height = 100 * 1.5, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
+                Height = (_currentTime - nota.ReadTime) * 1.5, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
                 Fill = scb,
+                //CornerRadius = 5,
                 VerticalAlignment = VerticalAlignment.Top,
                 RenderTransform = new CompositeTransform { TranslateX = 0, TranslateY = 0 }
+
             };
 
             rec.SetValue(Canvas.ZIndexProperty, 6);
-            crearAnimacionBajadaEncoger(rec, (_timeToFall + _failOffset)/1000, xInit, xFin);
+
+            crearAnimacionBajadaEncoger(rec, (_timeToFall + _failOffset) / 1000, xInit, xFin);
             pistaObjetivo.Children.Add(rec);
-            nota.Shape = rec;
-            nota.Track = pistaObjetivo;
             return rec;
         }
 
