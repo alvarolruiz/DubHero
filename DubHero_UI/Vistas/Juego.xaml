@@ -94,9 +94,23 @@
                 <media:GradientStop Color="#FF250909" Offset="1"/>
             </media:LinearGradientBrush>
         </media:RelativePanel.Background>
-        <Canvas x:Name="pistaObjetivo">
-            <Image x:Name="imgIconoAltavoz" Source="/Assets/Imagenes/icono.png" RelativePanel.AlignLeftWithPanel="True"  Width="334" Height="392" media:Canvas.Left="579" media:Canvas.Top="356" media:Canvas.ZIndex="1" Opacity="0.517" />
-            <Path Data="M20.2,0 L51, 0 75,30 0,30 z" Height="724" Stretch="Fill"  Width="1245" UseLayoutRounding="False" Canvas.Left="142" Canvas.Top="271.54" FocusVisualPrimaryBrush="#FFBD6767" FocusVisualSecondaryBrush="#99FFFFFF">
+        <Grid x:Name="Marcador" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Marcador"/>
+            <TextBlock Grid.ColumnSpan="2" Grid.Row="1" Margin="50,0,0,0" Text="1000298"/>
+            <TextBlock Grid.Row="2" Text="+132000"/>
+        </Grid>
+        <Canvas x:Name="pistaObjetivo"  Width="1200" RelativePanel.AlignHorizontalCenterWithPanel="True">
+            <Image x:Name="imgIconoAltavoz" Source="/Assets/Imagenes/icono.png" RelativePanel.AlignLeftWithPanel="True"  Width="334" Height="392" media:Canvas.Left="435" media:Canvas.Top="350" media:Canvas.ZIndex="1" Opacity="0.517" />
+            <Path Data="M20.2,0 L51, 0 75,30 0,30 z" Height="724" Stretch="Fill"  Width="1245" UseLayoutRounding="False" Canvas.Left="0" Canvas.Top="271.54" FocusVisualPrimaryBrush="#FFBD6767" FocusVisualSecondaryBrush="#99FFFFFF">
                 <media:Path.Fill>
                     <media:LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <media:GradientStop Color="#FF219232" Offset="0.004"/>
