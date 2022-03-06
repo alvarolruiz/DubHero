@@ -105,18 +105,16 @@ namespace DubHero_UI.Vistas
 
 
 
-
-        /**
-         *  
-         * 
-         * 
-         */
         
         private void crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
         {
-            Storyboard storyboardTamanio = new Storyboard();
+
+            double timeFinishLine = (800 / tiempo) * 200;
+            tiempo += timeFinishLine;
+
+            Storyboard storyboardTamanio = new Storyboard(); // tiene que moveerse 200p mas
             //desde donde hasta donde quieres que se anime
-            DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 100, 1000, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo);
+            DoubleAnimation traslacionY = CreateDoubleAnimation(elemento, 100, 1100, "(Rectangle.RenderTransform).(CompositeTransform.TranslateY)", tiempo);
             storyboardTamanio.Children.Add(traslacionY);
 
             //desde donde hasta donde quieres que se anime
@@ -237,16 +235,6 @@ namespace DubHero_UI.Vistas
             this.reproductorMidi = midiFile.GetPlayback();
             this.reproductorMidi.NoteCallback += EventoNota;
 
-
-            //(rawNoteData, rawTime, rawLength, playbackTime) =>
-
-            // new NotePlaybackData(
-            // rawNoteData.NoteNumber,
-            // rawNoteData.Velocity,     // leave velocity as is
-            // rawNoteData.OffVelocity,  // leave off velocity as is
-            // rawNoteData.Channel);
-            // reproductorMidi.EventPlayed += ReproductorMidi_EventPlayed;
-            // reproductorMidi.TrackNotes = true;
 
 
         }
