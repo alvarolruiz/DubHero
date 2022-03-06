@@ -16,20 +16,29 @@ namespace DubHero_UI.DataAccessLayer
         {
         }
 
+        /// <summary>
+        /// Obtiene la carpeta en la que se guarda todas la información de las canciones
+        /// </summary>
+        /// <returns></returns>
         private async Task<IReadOnlyList<StorageFolder>> getSongsFolder()
         {
             var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
             var songListFolder = await assetsFolder.GetFolderAsync("Songs");
-            var listCarpetas = songListFolder.GetFoldersAsync();
-            return listCarpetas.GetResults();
+            var listCarpetas = await songListFolder.GetFoldersAsync();
+            return listCarpetas;
 
         }
 
+        /// <summary>
+        /// Obtiene un listado de todas las carpetas y busca dentro de ellas la información necesaria para crear un list de SongView
+        ///
+        /// </summary>
+        /// <returns></returns>
        public async Task<List<SongView>> getSongViewListAsync()
         {
             List<SongView> list = new List<SongView>();
-           var listaCarpetas =  await getSongsFolder();
-           var ll =  listaCarpetas.AsEnumerable();
+            var listaCarpetas =  await getSongsFolder();
+            var ll =  listaCarpetas.AsEnumerable();
             String nombreCancion="";
             int dificultad=0;
             String fotoFilePath="";
@@ -38,22 +47,26 @@ namespace DubHero_UI.DataAccessLayer
                 try
                 {
                     nombreCancion = l.Name;
-                    var infoFile = l.GetFileAsync("info.txt");
-                    dificultad = getDificultad(infoFile.GetResults().Path);
+                    var infoFile = await l.GetFileAsync("info.txt");
+                    dificultad = getDificulty(infoFile.Path);
 
-                    var fotoFile = l.GetFileAsync("foto.jpg");
-                     fotoFilePath = fotoFile.GetResults().Path;
+                    var fotoFile = await l.GetFileAsync("foto.jpg");
+                    fotoFilePath = fotoFile.Path;
                 }catch (Exception ex)
                 {
 
                 }
                 list.Add(new SongView(nombreCancion, fotoFilePath, dificultad));
-
             }
             return list;
         }
 
-        private int getDificultad(String filePath)
+        /// <summary>
+        /// Obtiene la dificultad de la canción de un archivo txt con la información.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        private int getDificulty(String filePath)
         {
             int dificultad = 0;
             foreach (string line in System.IO.File.ReadLines(filePath)) 

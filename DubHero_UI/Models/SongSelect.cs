@@ -16,20 +16,17 @@ namespace DubHero_UI.Models
 
         public SongSelect()
         {
-            SongList = new List<SongView>();
-            generateSongsAsync();
+            Task.Run(() => this.generateSongsAsync()).Wait();
         }
 
         public List<SongView> SongList { get => songList; set => songList = value; }
 
-        private async void generateSongsAsync()
+        public async Task generateSongsAsync()
         {
             try
             {
                 ListadosAssets listadosCarpetas = new ListadosAssets();
-                //TODO -> Cuando no se debuguea la información no llega correctamente
-                Task<List<SongView>> obtne = listadosCarpetas.getSongViewListAsync();
-                songList = obtne.GetAwaiter().GetResult() ;
+                songList = await listadosCarpetas.getSongViewListAsync();
             }catch (Exception ex)
             {
 
