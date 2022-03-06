@@ -43,13 +43,13 @@
                             <SolidColorBrush Color="Black" Opacity="0.3"/>
                         </Grid.Background>
                         <Grid.RowDefinitions>
-                            <RowDefinition MinHeight="130"></RowDefinition>
-                            <RowDefinition  Height="2*"></RowDefinition>
-                            <RowDefinition Height="6*"></RowDefinition>
+                            <RowDefinition Height="130"></RowDefinition>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="90"></ColumnDefinition>
+                            <ColumnDefinition Width="90"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Image MaxHeight="170"  Margin="10,10,10,0" Source="{Binding SrcImage}" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" >
                         </Image>
