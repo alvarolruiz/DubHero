@@ -298,10 +298,6 @@ namespace DubHero_UI.Vistas
             return animation;
         }
 
-
-
-
-
         private Storyboard crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
         {
             Storyboard storyboardTamanio = new Storyboard();
