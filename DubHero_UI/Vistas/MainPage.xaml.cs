@@ -56,6 +56,7 @@ namespace DubHero_UI.Vistas
 
         private void viewBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             mediaPlayer.Pause();
             Frame.Navigate(typeof(SelectSong), mediaPlayer);
         }
