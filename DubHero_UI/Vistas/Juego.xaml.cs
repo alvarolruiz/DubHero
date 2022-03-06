@@ -81,7 +81,15 @@ namespace DubHero_UI.Vistas
 
 
 
-
+        /// <summary>
+        /// funcion que crea y devuelve una animacion doble dado un rctangulo y una serie de parametros
+        /// </summary>
+        /// <param name="frameworkElement">Elemento a animar</param>
+        /// <param name="fromX">posicion inicial</param>
+        /// <param name="toX"> posicion final</param>
+        /// <param name="propertyToAnimate">que especto del elmento se quiere animar</param>
+        /// <param name="interval">duracion de la animacion</param>
+        /// <returns>una animacion con los parametros introducidos</returns>
         private DoubleAnimation CreateDoubleAnimation(DependencyObject frameworkElement, double fromX, double toX, string propertyToAnimate, Double interval)
         {
             DoubleAnimation animation = new DoubleAnimation();
@@ -97,7 +105,13 @@ namespace DubHero_UI.Vistas
 
 
 
-
+        /// <summary>
+        /// funcion que crea la animacion y los storyboards, y la inicia
+        /// </summary>
+        /// <param name="elemento">Elemento a animar</param>
+        /// <param name="tiempo">Duracion de la animacion</param>
+        /// <param name="xInit"> punto de inicio</param>
+        /// <param name="xFin">punto final</param>
         private void crearAnimacionBajadaEncoger(Rectangle elemento, Double tiempo, int xInit, int xFin)
         {
             Storyboard storyboardTamanio = new Storyboard();
@@ -120,7 +134,11 @@ namespace DubHero_UI.Vistas
         }
 
 
-
+        /// <summary>
+        /// Funcion que crea un rectangulo dada la nota
+        /// </summary>
+        /// <param name="nota">Nota que contiene la posicion y la altura del cuadrado</param>
+        /// <returns>Rectangulo posicionado en la pista indicada</returns>
         public Rectangle generarNota(GameNote nota)
         {
 

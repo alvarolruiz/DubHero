@@ -34,13 +34,23 @@ namespace DubHero_UI.Vistas
             this.InitializeComponent();
         }
 
+
+        /// <summary>
+        /// funcion que navega a la pantalla de juego tras seleccionar una cancion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             String cancion = ((SongView)e.ClickedItem).Name;
             Frame.Navigate(typeof(Juego), cancion);
 
         }
-
+        /// <summary>
+        /// funcion que navega a la pantalla principal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void viewBtn_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
