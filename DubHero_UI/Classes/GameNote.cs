@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Core;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Shapes;
 
 namespace DubHero_UI.Classes
 {
     public class GameNote
     {
         public int NoteNumber { get; }
-        public long MillisSinceRead { get; set; }
+        public long ReadTime { get; set; }
+        public Ellipse Shape { get; set; }
+        public Canvas Track { get; set; }
 
         public int TrackIndex {
             get
@@ -30,7 +36,19 @@ namespace DubHero_UI.Classes
         public GameNote(int noteNumber)
         {
             this.NoteNumber = noteNumber;
-            MillisSinceRead = 0L;
+            ReadTime = 0L;
+        }
+
+        public void DeleteFromView()
+        {
+            if (Shape != null && Track != null)
+            {
+                var dispatcher = Shape.Dispatcher;
+                dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    Track.Children.Remove(Shape);
+                });
+            }
         }
     }
 }

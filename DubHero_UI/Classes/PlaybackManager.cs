@@ -20,21 +20,16 @@ namespace DubHero_UI.Classes
         {
         }
 
-        public async void InitReader(StorageFile midiFile)
+        public async Task InitReader(StorageFile midiFile)
         {
             var stream = await midiFile.OpenAsync(FileAccessMode.Read);
             _midiFile = MidiFile.Read(stream.AsStream());
             _midiPlayer = _midiFile.GetPlayback();
-            _midiPlayer.NoteCallback += NoteEvent;
+            _midiPlayer.NoteCallback += NoteEvent; 
         }
 
         public void StartReading()
-        {
-            if(_midiPlayer == null)
-            {
-                StartReading();
-                return;
-            }
+        { 
             _midiPlayer.MoveToStart();
             _midiPlayer.Start();
         }

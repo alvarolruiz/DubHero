@@ -92,6 +92,7 @@ namespace DubHero_UI.Vistas
             _mediaPlayer = new MediaPlayer();
             this.InitializeComponent();
             this.Loaded += LoadSong;
+            Window.Current.CoreWindow.KeyDown += MainPage_KeyDown;
         }
 
         /// <summary>
@@ -119,7 +120,7 @@ namespace DubHero_UI.Vistas
             var mp3File = await songFolder.GetFileAsync("song.mp3");
             var midiFile = await songFolder.GetFileAsync("map.mid");
             
-            _playback.InitReader(midiFile);
+            await _playback.InitReader(midiFile);
 
             _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(mp3File.Path));
 
@@ -204,24 +205,30 @@ namespace DubHero_UI.Vistas
                 {
                     CheckNotesToDestroy();
                 }
-                
             }
         }
 
         /// <summary>
         /// Checks all the falling notes and destroys them after the needed time.
         /// </summary>
-        private void CheckNotesToDestroy()
+        private async void CheckNotesToDestroy()
         {
+            
             foreach (var track in _tracks)
             {
                 if (track.Count > 0)
                 {
                     var note = track.First();
-                    if (note.MillisSinceRead >= _timeToFall + _failOffset)
+                    if (_currentTime - note.ReadTime >= _timeToFall + _failOffset)
                     {
-                        //Destroy note in the view
-                        track.Remove(note);
+                        lock (_tracklock)
+                        {
+                            track.RemoveFirst();
+                        }
+                        this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            note.DeleteFromView();
+                        });
                     }
                 }
             }
@@ -237,23 +244,26 @@ namespace DubHero_UI.Vistas
         /// <param name="trackIndex"></param>
         void CheckPlayedNote(int trackIndex)
         {
-            var targetTrack = _tracks[trackIndex];
-            var nextNote = targetTrack.First.Value;
-            if (nextNote != null)
+            lock (_tracklock)
             {
-                var differenceToPerfect = Math.Abs(nextNote.MillisSinceRead - _timeToFall);//0 is perfect
-                var isOnTime = differenceToPerfect <= _failOffset;
-                if (isOnTime)
+                var targetTrack = _tracks[trackIndex];
+                if (targetTrack.First != null)
                 {
-                    targetTrack.RemoveFirst();
-                    //TODO Destroy the note (Correct note animation)
-                    //TODO Manage correct note
-                }
-                else if (differenceToPerfect <= _tooSoonOffset)
-                {
-                    targetTrack.RemoveFirst();
-                    //TODO Destroy note (Failed note animation)
-                    //TODO manage failed note
+                    var nextNote = targetTrack.First.Value;
+                    var timeSinceRead = _currentTime - nextNote.ReadTime;
+                    var differenceToPerfect = Math.Abs(timeSinceRead - _timeToFall);//0 is perfect
+                    var isOnTime = differenceToPerfect <= _failOffset;
+                    if (isOnTime)
+                    {
+                        targetTrack.RemoveFirst();
+                        nextNote.DeleteFromView();
+                    }
+                    else if (differenceToPerfect <= _tooSoonOffset)
+                    {
+                        targetTrack.RemoveFirst();
+                        nextNote.DeleteFromView();
+                        //TODO manage failed note
+                    }
                 }
             }
         }
@@ -268,6 +278,7 @@ namespace DubHero_UI.Vistas
         public void AnimateNote(Classes.GameNote note)
         {
             //TODO haser bomnito esto
+            note.ReadTime = _currentTime;
             generarNota(note);
             lock (_tracklock) 
             {
@@ -291,7 +302,7 @@ namespace DubHero_UI.Vistas
 
 
 
-        private void crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
+        private Storyboard crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
         {
             Storyboard storyboardTamanio = new Storyboard();
             //desde donde hasta donde quieres que se anime
@@ -311,7 +322,10 @@ namespace DubHero_UI.Vistas
             animacionAlto.EnableDependentAnimation = true;
             storyboardTamanio.Children.Add(animacionAlto);
             // anhadir animacion de traslacion en el eje x
+
             storyboardTamanio.Begin();
+
+            return storyboardTamanio;
         }
 
 
@@ -320,36 +334,36 @@ namespace DubHero_UI.Vistas
         {
 
             //habira que hacerlas relativas a la pantalla
-            int tipo = 0, xInit = 0, xFin = 0;
+            int xInit = 0, xFin = 0;
 
             SolidColorBrush scb = new SolidColorBrush();
-            switch (nota.NoteNumber)
+            switch (nota.TrackIndex)
             {
-                case 60:
+                case 0:
                     scb = new SolidColorBrush(Colors.Red); // hacer que aparezca en una coordinada 
                     xInit = 530;
                     xFin = 200;
                     break;
 
-                case 62:
+                case 1:
                     scb = new SolidColorBrush(Colors.Gray);
                     xInit = 600;
                     xFin = 500;
                     break;
 
-                case 64:
+                case 2:
                     scb = new SolidColorBrush(Colors.Pink);
                     xInit = 700;
                     xFin = 700;
                     break;
 
-                case 65:
+                case 3:
                     scb = new SolidColorBrush(Colors.Purple);
                     xInit = 800;
                     xFin = 1000;
                     break;
 
-                case 67:
+                case 4:
                     scb = new SolidColorBrush(Colors.Green);
                     xInit = 890;
                     xFin = 1200;
@@ -361,16 +375,15 @@ namespace DubHero_UI.Vistas
                 Width = 80,
                 Height = 100 * 1.5, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
                 Fill = scb,
-                //CornerRadius = 5,
                 VerticalAlignment = VerticalAlignment.Top,
                 RenderTransform = new CompositeTransform { TranslateX = 0, TranslateY = 0 }
-
             };
 
             rec.SetValue(Canvas.ZIndexProperty, 6);
-
-            crearAnimacionBajadaEncoger(rec, 100 / 30, xInit, xFin);
+            crearAnimacionBajadaEncoger(rec, (_timeToFall + _failOffset)/1000, xInit, xFin);
             pistaObjetivo.Children.Add(rec);
+            nota.Shape = rec;
+            nota.Track = pistaObjetivo;
             return rec;
         }
 
@@ -385,20 +398,15 @@ namespace DubHero_UI.Vistas
         /// <param name="args"></param>
         public void MainPage_KeyDown(object sender, KeyEventArgs args)
         {
-            if (args.VirtualKey == VirtualKey.W)
-                CheckPlayedNote(0);
-
-            if (args.VirtualKey == VirtualKey.D)
-                CheckPlayedNote(1);
-
-            if (args.VirtualKey == VirtualKey.J)
-                CheckPlayedNote(2);
-
-            if (args.VirtualKey == VirtualKey.I)
-                CheckPlayedNote(3);
-
-            if (args.VirtualKey == VirtualKey.O)
-                CheckPlayedNote(4);
+            
+            switch (args.VirtualKey)
+            {
+                case VirtualKey.W: CheckPlayedNote(0); ; break;
+                case VirtualKey.D: CheckPlayedNote(1); ; break;
+                case VirtualKey.J: CheckPlayedNote(2); ; break;
+                case VirtualKey.I: CheckPlayedNote(3); ; break;
+                case VirtualKey.O: CheckPlayedNote(4); ; break;
+            }
         }
 
             #endregion
