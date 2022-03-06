@@ -109,7 +109,7 @@ namespace DubHero_UI.Vistas
         private void crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
         {
 
-            double timeFinishLine = (800 / tiempo) * 200;
+            double timeFinishLine = (tiempo / 800) * 200; 
             tiempo += timeFinishLine;
 
             Storyboard storyboardTamanio = new Storyboard(); // tiene que moveerse 200p mas
