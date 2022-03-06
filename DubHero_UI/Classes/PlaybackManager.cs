@@ -6,6 +6,7 @@ using Windows.Storage;
 using System.ServiceModel.Dispatcher;
 using Windows.UI.Core;
 using System.Threading.Tasks;
+using Melanchall.DryWetMidi.Interaction;
 
 namespace DubHero_UI.Classes
 {
@@ -26,6 +27,11 @@ namespace DubHero_UI.Classes
             _midiFile = MidiFile.Read(stream.AsStream());
             _midiPlayer = _midiFile.GetPlayback();
             _midiPlayer.NoteCallback += NoteEvent; 
+        }
+
+        public int GetNoteQuantity()
+        {
+            return _midiFile.GetNotes().Count;
         }
 
         public void StartReading()

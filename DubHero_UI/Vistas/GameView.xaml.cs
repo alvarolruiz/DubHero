@@ -73,7 +73,15 @@ namespace DubHero_UI.Vistas
         /// </summary>
         LinkedList<Classes.GameNote>[] _tracks;
 
+        /// <summary>
+        /// Name of the song, used to fing the necessary files.
+        /// </summary>
         string _songName;
+
+        /// <summary>
+        /// Tracks current score
+        /// </summary>
+        Score _scoreboard;
         #endregion
 
         #region UWP Related
@@ -116,6 +124,11 @@ namespace DubHero_UI.Vistas
         #endregion
 
         #region Events
+        /// <summary>
+        /// Loads async all the data required for the game (song and midi files, score with total amount of notes)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void LoadSong(Object sender, RoutedEventArgs e)
         {
             var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -128,6 +141,9 @@ namespace DubHero_UI.Vistas
             await _playback.InitReader(midiFile);
 
             _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(mp3File.Path));
+
+            _scoreboard = new Score();
+            _scoreboard.CorrectValue = 1000000 / _playback.GetNoteQuantity();
 
             StartSong();
         }
@@ -262,6 +278,7 @@ namespace DubHero_UI.Vistas
                     {
                         targetTrack.RemoveFirst();
                         nextNote.DeleteFromView();
+                        _scoreboard.Correct();
                     }
                     else if (differenceToPerfect <= _tooSoonOffset)
                     {
