@@ -119,7 +119,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Score.cs" />
     <Compile Include="DataAccessLayer\ListadosAssets.cs" />
     <Compile Include="Models\SongView.cs" />
     <Compile Include="Models\SongSelect.cs" />
@@ -137,6 +136,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vistas\SelectorSim.xaml.cs">
+      <DependentUpon>SelectorSim.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\SelectSong.xaml.cs">
       <DependentUpon>SelectSong.xaml</DependentUpon>
     </Compile>
@@ -166,15 +168,17 @@
     <Content Include="Assets\Imagenes\presioneBtn.png" />
     <Content Include="Assets\Imagenes\SongsImages\PERRRO.jfif" />
     <Content Include="Assets\PERRRO.jfif" />
+    <Content Include="Assets\Songs\MamaDeLaMama\foto.jpg" />
     <Content Include="Assets\Songs\sevenNationArmy\map.mid" />
     <Content Include="Assets\Songs\sevenNationArmy\song.mp3" />
-    <Content Include="Assets\Songs\MamaDeLaMama\foto.jpg" />
+    <Content Include="Assets\sevenNationArmyMap.mid" />
     <Content Include="Assets\Songs\Rubadub\info.txt" />
     <Content Include="Assets\Songs\MamaDeLaMama\info.txt" />
     <Content Include="Assets\Songs\Rubadub\foto.jpg" />
     <Content Include="Assets\Songs\Rubadub\Rubadub.mp3" />
     <Content Include="Assets\Songs\SevenNationArmy\foto.jpg" />
     <Content Include="Assets\Songs\SevenNationArmy\info.txt" />
+    <Content Include="Assets\Songs\Seven_Nation_Army.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -200,6 +204,10 @@
     <Page Include="Vistas\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vistas\SelectorSim.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\SelectSong.xaml">
       <SubType>Designer</SubType>
