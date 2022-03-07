@@ -82,7 +82,7 @@ namespace DubHero_UI.Vistas
         /// <summary>
         /// Tracks current score
         /// </summary>
-        Score _scoreboard;
+       // Score _scoreboard;
         #endregion
 
         #region UWP Related
@@ -143,8 +143,8 @@ namespace DubHero_UI.Vistas
 
             _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(mp3File.Path));
 
-            _scoreboard = new Score();
-            _scoreboard.CorrectValue = 1000000 / _playback.GetNoteQuantity();
+            //_scoreboard = new Score();
+            //_scoreboard.CorrectValue = 1000000 / _playback.GetNoteQuantity();
 
             StartSong();
         }
@@ -279,7 +279,7 @@ namespace DubHero_UI.Vistas
                     {
                         targetTrack.RemoveFirst();
                         nextNote.DeleteFromView();
-                        _scoreboard.Correct();
+                        //_scoreboard.Correct();
                     }
                     else if (differenceToPerfect <= _tooSoonOffset)
                     {

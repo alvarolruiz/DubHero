@@ -16,6 +16,15 @@
         <vm:SongSelect></vm:SongSelect>
     </Page.DataContext>
     <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="infoGridView">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="ExtraBold"/>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Arial Black"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
         <Storyboard x:Key="Pulse" x:Name="pulse" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="imgIconoAltavoz">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.05"/>
@@ -28,19 +37,7 @@
         </Storyboard>
 
     </Page.Resources>
-    
-
-    <Page.Resources>
-
-        <Style TargetType="TextBlock" x:Key="infoGridView">
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="ExtraBold"/>
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="Arial Black"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-    </Page.Resources>
+   
     <RelativePanel>
         <RelativePanel.Background>
             <ImageBrush ImageSource="/Assets/Imagenes/fondoSimple.jpg"    ></ImageBrush>
@@ -117,26 +114,16 @@
 
 
 
-        <StackPanel RelativePanel.AlignRightWithPanel="True" >
+        <StackPanel Orientation="Horizontal" RelativePanel.AlignRightWithPanel="True" >
             <AppBarButton RelativePanel.AlignRightWithPanel="True"  x:Name="btnexit" Label="Exit"  Background="#00000000" Foreground="Yellow" FontWeight="Bold" Click="btnexit_Click" Icon="Clear">
             </AppBarButton>
-            <AppBarButton RelativePanel.AlignRightWithPanel="True"  x:Name="viewBtn" Label="Stop" Icon="Previous" Background="#00000000" Foreground="Yellow" FontWeight="Bold" Click="viewBtn_Click">
+            <AppBarButton RelativePanel.AlignRightWithPanel="True"  x:Name="viewBtn" Label="Stop" Icon="Previous" Background="#00000000"  Foreground="Yellow" FontWeight="Bold" Click="viewBtn_Click">
+             
+
             </AppBarButton>
         </StackPanel>
 
-        <AppBarButton RelativePanel.AlignRightWithPanel="True"  Margin="0,80,160,0" x:Name="viewBtn" Label="Salir" Icon="Previous" Background="#00000000" FontWeight="Bold" Click="viewBtn_Click">
-            <AppBarButton.Foreground>
-                <LinearGradientBrush>
-                    <GradientStop Color="#FF219232" Offset="0.004"/>
-                    <GradientStop Color="#FF436F11" Offset="0.90"/>
-                    <GradientStop Color="#FF747507" Offset="0.655"/>
-                    <GradientStop Color="#FF6E2908" Offset="0.008"/>
-                </LinearGradientBrush>
-            </AppBarButton.Foreground>
-            <AppBarButton.RenderTransform>
-                <CompositeTransform ScaleX="3" ScaleY="3"/>
-            </AppBarButton.RenderTransform>
-        </AppBarButton>
+
 
 
     </RelativePanel>
