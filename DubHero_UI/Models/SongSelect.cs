@@ -26,7 +26,7 @@ namespace DubHero_UI.Models
             try
             {
                 ListadosAssets listadosCarpetas = new ListadosAssets();
-                songList = await listadosCarpetas.getSongViewListAsync();
+                songList = await listadosCarpetas.GetSongViewListAsync();
             }catch (Exception ex)
             {
 

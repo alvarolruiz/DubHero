@@ -100,19 +100,25 @@
                 <media:GradientStop Color="#FF250909" Offset="1"/>
             </media:LinearGradientBrush>
         </media:RelativePanel.Background>
-        <Grid x:Name="Marcador" >
+        <Grid Margin="0,100,100,0" RelativePanel.AlignRightWithPanel="True" x:Name="Marcador" CornerRadius="6" BorderThickness="4" BorderBrush="BurlyWood">
+            <Grid.Background>
+                <ImageBrush ImageSource="../Assets/Imagenes/backgroundMarcador.jpg"/>
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Marcador">
-
-            </TextBlock>
+            <TextBlock Text="Puntuación" FontSize="20" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+            <Grid Grid.Row="1" Width="260" Height="40" Grid.ColumnSpan="2" HorizontalAlignment="Center"  CornerRadius="10">
+                <Grid.Background>
+                    <ImageBrush ImageSource="../Assets/Imagenes/backgroundMarcador4.jpg" />
+                </Grid.Background>
+                <TextBlock Name="ScoreText" Margin="2" Text="0" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
         </Grid>
         <Canvas x:Name="pistaObjetivo"  Width="1200" RelativePanel.AlignHorizontalCenterWithPanel="True">
             <Image x:Name="imgIconoAltavoz" Source="/Assets/Imagenes/icono.png" RelativePanel.AlignLeftWithPanel="True"  Width="334" Height="392" media:Canvas.Left="435" media:Canvas.Top="350" media:Canvas.ZIndex="1" Opacity="0.517" />

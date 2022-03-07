@@ -82,7 +82,7 @@ namespace DubHero_UI.Vistas
         /// <summary>
         /// Tracks current score
         /// </summary>
-       // Score _scoreboard;
+        Score _scoreboard;
         #endregion
 
         #region UWP Related
@@ -102,11 +102,6 @@ namespace DubHero_UI.Vistas
             this.InitializeComponent();
             this.Loaded += LoadSong;
             Window.Current.CoreWindow.KeyDown += MainPage_KeyDown;
-        }
-
-        private void Init(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -142,11 +137,26 @@ namespace DubHero_UI.Vistas
             await _playback.InitReader(midiFile);
 
             _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(mp3File.Path));
+            _mediaPlayer.MediaEnded += SongEnded;
 
-            //_scoreboard = new Score();
-            //_scoreboard.CorrectValue = 1000000 / _playback.GetNoteQuantity();
+            _scoreboard = new Score();
+            _scoreboard.ScoreText = this.ScoreText;
+            _scoreboard.CorrectValue = 1000000 / _playback.GetNoteQuantity();
 
             StartSong();
+        }
+
+        /// <summary>
+        /// Navigates to results page after the song ends.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void SongEnded(MediaPlayer sender, object args)
+        {
+            this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                this.Frame.Navigate(typeof(Results), _scoreboard);
+            });
         }
 
         #endregion
@@ -178,7 +188,7 @@ namespace DubHero_UI.Vistas
             {
                 //Thread.Sleep((int)_timeToFall);?? Parece regulero así que mejor me quedo con el bucle más legible
                 var waitedTime = _currentTime - startTime;
-                if (waitedTime >= _timeToFall)
+                if (waitedTime >= _timeToFall + 700)//Los 700 es una regulación a mano, corregir el midi o animaciones
                 {
                     _mediaPlayer.Volume = 1;
                     _mediaPlayer.Play();
@@ -277,14 +287,21 @@ namespace DubHero_UI.Vistas
                     var isOnTime = differenceToPerfect <= _failOffset;
                     if (isOnTime)
                     {
+                        this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            nextNote.DeleteFromView();
+                        });
                         targetTrack.RemoveFirst();
-                        nextNote.DeleteFromView();
-                        //_scoreboard.Correct();
+                        _scoreboard.Correct();
+                        
                     }
                     else if (differenceToPerfect <= _tooSoonOffset)
                     {
+                        this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            nextNote.DeleteFromView();
+                        });
                         targetTrack.RemoveFirst();
-                        nextNote.DeleteFromView();
                         //TODO manage failed note
                     }
                 }
@@ -426,8 +443,9 @@ namespace DubHero_UI.Vistas
             };
 
             rec.SetValue(Canvas.ZIndexProperty, 6);
-
-            crearAnimacionBajadaEncoger(rec, (_timeToFall + _failOffset) / 1000, xInit, xFin);
+            nota.Shape = rec;
+            nota.Track = pistaObjetivo;
+            crearAnimacionBajadaEncoger(rec, (double)(_timeToFall + _failOffset) / 1000, xInit, xFin);
             pistaObjetivo.Children.Add(rec);
             return rec;
         }
