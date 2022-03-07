@@ -87,7 +87,7 @@ namespace DubHero_UI.Vistas
 
 
         //Image of notes
-        ImageBrush imgB;
+        ImageBrush imgB;ImageBrush imgB2;ImageBrush imgB3;ImageBrush imgB4;ImageBrush imgB5;
 
         #endregion
 
@@ -125,6 +125,7 @@ namespace DubHero_UI.Vistas
             base.OnNavigatedTo(e);
             initFailSuccesAnimation();
             initImage();
+
         }
         #endregion
 
@@ -348,12 +349,32 @@ namespace DubHero_UI.Vistas
         public void initImage() {
 
             imgB = new ImageBrush();
-
             BitmapImage btpImg = new BitmapImage();
-
-            btpImg.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/nota2.gif");
-
+            btpImg.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/amarilla2.png");
             imgB.ImageSource = btpImg;
+
+
+            imgB2 = new ImageBrush();
+            BitmapImage btpImg2 = new BitmapImage();
+            btpImg2.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/azul.png");
+            imgB2.ImageSource = btpImg2;
+
+
+            imgB3 = new ImageBrush();
+            BitmapImage btpImg3 = new BitmapImage();
+            btpImg3.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/dorada.png");
+            imgB3.ImageSource = btpImg3;
+
+
+            imgB4 = new ImageBrush();
+            BitmapImage btpImg4 = new BitmapImage();
+            btpImg4.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/roja.png");
+            imgB4.ImageSource = btpImg4;
+
+            imgB5 = new ImageBrush();
+            BitmapImage btpImg5 = new BitmapImage();
+            btpImg5.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/verde.png");
+            imgB5.ImageSource = btpImg5;
 
         }
 
@@ -523,6 +544,7 @@ namespace DubHero_UI.Vistas
 
             //habira que hacerlas relativas a la pantalla
             int xInit = 0, xFin = 0;
+            ImageBrush imageBrush = null;
 
             SolidColorBrush scb = new SolidColorBrush();
             switch (nota.NoteNumber)
@@ -531,30 +553,39 @@ namespace DubHero_UI.Vistas
                     scb = new SolidColorBrush(Colors.Red); // hacer que aparezca en una coordinada 
                     xInit = 380;
                     xFin = 15;
+                    imageBrush = imgB;
                     break;
 
                 case 62:
                     scb = new SolidColorBrush(Colors.Gray);
                     xInit = 468;
                     xFin = 286;
+                    imageBrush = imgB2;
+
                     break;
 
                 case 64:
                     scb = new SolidColorBrush(Colors.Pink);
                     xInit = 564;
                     xFin = 552;
+                    imageBrush = imgB3;
+
                     break;
 
                 case 65:
                     scb = new SolidColorBrush(Colors.Purple);
                     xInit = 665;
                     xFin = 835;
+                    imageBrush = imgB4;
+
                     break;
 
                 case 67:
                     scb = new SolidColorBrush(Colors.Green);
                     xInit = 760;
                     xFin = 1091;
+                    imageBrush = imgB5;
+
                     break;
             }
 
@@ -564,7 +595,7 @@ namespace DubHero_UI.Vistas
             {
                 Width = 80,
                 Height = (_currentTime - nota.ReadTime) * 1.5, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
-                Fill = imgB,
+                Fill = imageBrush,
 
                 //CornerRadius = 5,
                 VerticalAlignment = VerticalAlignment.Top,

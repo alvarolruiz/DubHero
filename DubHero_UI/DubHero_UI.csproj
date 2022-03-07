@@ -166,6 +166,8 @@
     <Content Include="Assets\Imagenes\icono.png" />
     <Content Include="Assets\Imagenes\linea.png" />
     <Content Include="Assets\Imagenes\Notas\amarilla.png" />
+    <Content Include="Assets\Imagenes\Notas\amarilla2.png" />
+    <Content Include="Assets\Imagenes\Notas\dorada.png" />
     <Content Include="Assets\Imagenes\Notas\azul.png" />
     <Content Include="Assets\Imagenes\Notas\nota.gif" />
     <Content Include="Assets\Imagenes\Notas\nota2.gif" />
