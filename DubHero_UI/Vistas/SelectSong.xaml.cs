@@ -42,8 +42,8 @@ namespace DubHero_UI.Vistas
         /// <param name="e"></param>
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            String cancion = ((SongView)e.ClickedItem).Name;
-            Frame.Navigate(typeof(GameView), cancion);
+            String songFolder = ((SongView)e.ClickedItem).FolderName;
+            Frame.Navigate(typeof(GameView), songFolder);
 
         }
         /// <summary>

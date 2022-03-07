@@ -15,16 +15,29 @@
     <Page.DataContext>
         <vm:SongSelect></vm:SongSelect>
     </Page.DataContext>
-    
+
+    <Page.Resources>
+
+        <Style TargetType="TextBlock" x:Key="infoGridView">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="ExtraBold"/>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Arial Black"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Page.Resources>
     <RelativePanel>
         <RelativePanel.Background>
             <ImageBrush ImageSource="/Assets/Imagenes/fondoSimple.jpg"    ></ImageBrush>
         </RelativePanel.Background>
-        <TextBlock  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Above="SongList" Margin="100,0,100,200" Text="Elige la canción" FontSize="72" FontFamily="Calibri" FontWeight="Bold" FocusVisualPrimaryBrush="#FFC31111">
+        <TextBlock Text="Elige la canción" x:Name="elige" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Above="SongList" Margin="100,0,100,150"  FontSize="72" FontFamily="Calibri" FontWeight="Bold">
             <TextBlock.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFD6E20A" Offset="1"/>
+                <LinearGradientBrush >
+                    <GradientStop Color="#FF219232" Offset="0.004"/>
+                    <GradientStop Color="#FF436F11" Offset="0.90"/>
+                    <GradientStop Color="#FF747507" Offset="0.655"/>
+                    <GradientStop Color="#FF6E2908" Offset="0.008"/>
                 </LinearGradientBrush>
             </TextBlock.Foreground>
         </TextBlock>
@@ -38,27 +51,33 @@
             <!-- con la cita seleccionada podriamos enviarsela a la otra pantalla -->
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid BorderBrush="#FF065426" BorderThickness="4" >
+                    <Grid  BorderThickness="3" CornerRadius="8" Margin="20">
+                        <Grid.BorderBrush>
+                            <LinearGradientBrush>
+                                <GradientStop Color="#FF219232" Offset="0.004"/>
+                                <GradientStop Color="#FF436F11" Offset="0.90"/>
+                                <GradientStop Color="#FF747507" Offset="0.655"/>
+                                <GradientStop Color="#FF6E2908" Offset="0.008"/>
+                            </LinearGradientBrush>
+                        </Grid.BorderBrush>
                         <Grid.Background>
-                            <SolidColorBrush Color="Black" Opacity="0.3"/>
+                            <SolidColorBrush Color="Black" Opacity="0.6"/>
                         </Grid.Background>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="130"></RowDefinition>
-                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
                             <RowDefinition Height="40"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="90"></ColumnDefinition>
-                            <ColumnDefinition Width="90"></ColumnDefinition>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Image MaxHeight="170"  Margin="10,10,10,0" Source="{Binding SrcImage}" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" >
+                        <Image MinHeight="120" Margin="10,10,10,0" Source="{Binding SrcImage}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" >
                         </Image>
-                        <TextBlock Foreground="White"  Margin="10" Text="Nombre: " TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" FontSize="14" FontFamily="Arial Black"></TextBlock>
-                        <TextBlock Foreground="White"  Margin="10" Text="Dificultad: " Grid.ColumnSpan="2" TextWrapping="Wrap" Grid.Column="0" Grid.Row="2"></TextBlock>
-                        <TextBlock Foreground="White" Margin="10,8,10,10" HorizontalTextAlignment="Right" Text="{Binding Name}"  Grid.Column="1" Grid.Row="1"
-                                               FontWeight="ExtraBold" ></TextBlock>
-                        <TextBlock Foreground="White" Margin="10" HorizontalTextAlignment="Right" Text="{Binding Dificulty}"  Grid.Column="1" Grid.Row="2"
-                                               FontWeight="ExtraBold" ></TextBlock>
+                        <TextBlock Text="{Binding Name}"   Grid.Row="1" Style="{StaticResource infoGridView}"/>
+                        <TextBlock Text="{Binding Artist}"  Grid.Row="2" Style="{StaticResource infoGridView}"/>
+                        <RatingControl Value="{Binding Dificulty}"  Grid.Row="3"/>
+
                         <!-- como bindear algo fuera de la lista-->
                         <!-- en que se diferencia bind del binding-->
                         <!-- <Image Source="{Binding MvListaCitras.SrcUbicacionImagen}"></Image>-->
@@ -71,11 +90,13 @@
 
 
 
-        <AppBarButton RelativePanel.AlignRightWithPanel="True" Margin="130,0" x:Name="viewBtn" Label="Salir" Icon="Previous" Background="#00000000" FontWeight="Bold" Click="viewBtn_Click">
+        <AppBarButton RelativePanel.AlignRightWithPanel="True"  Margin="0,80,160,0" x:Name="viewBtn" Label="Salir" Icon="Previous" Background="#00000000" FontWeight="Bold" Click="viewBtn_Click">
             <AppBarButton.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFD1DD0A" Offset="1"/>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF219232" Offset="0.004"/>
+                    <GradientStop Color="#FF436F11" Offset="0.90"/>
+                    <GradientStop Color="#FF747507" Offset="0.655"/>
+                    <GradientStop Color="#FF6E2908" Offset="0.008"/>
                 </LinearGradientBrush>
             </AppBarButton.Foreground>
             <AppBarButton.RenderTransform>

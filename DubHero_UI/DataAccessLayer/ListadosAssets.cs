@@ -39,16 +39,17 @@ namespace DubHero_UI.DataAccessLayer
             List<SongView> list = new List<SongView>();
             var listaCarpetas =  await getSongsFolder();
             var ll =  listaCarpetas.AsEnumerable();
-            String nombreCancion="";
+            String folderName="";
             int dificultad=0;
             String fotoFilePath="";
+            var info = new Dictionary<string, string>();
             foreach (var l in ll)
             {
                 try
                 {
-                    nombreCancion = l.Name;
+                    folderName = l.Name;
                     var infoFile = await l.GetFileAsync("info.txt");
-                    dificultad = getDificulty(infoFile.Path);
+                    info = getInfo(infoFile.Path);
 
                     var fotoFile = await l.GetFileAsync("foto.jpg");
                     fotoFilePath = fotoFile.Path;
@@ -56,7 +57,7 @@ namespace DubHero_UI.DataAccessLayer
                 {
 
                 }
-                list.Add(new SongView(nombreCancion, fotoFilePath, dificultad));
+                list.Add(new SongView(folderName,info["songName"], info["artist"],int.Parse(info["dificulty"]), fotoFilePath));
             }
             return list;
         }
@@ -66,14 +67,25 @@ namespace DubHero_UI.DataAccessLayer
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        private int getDificulty(String filePath)
+        private Dictionary<String, String> getInfo(String filePath)
         {
-            int dificultad = 0;
+            var info = new Dictionary<string, string>();
+            int contador = 0;
             foreach (string line in System.IO.File.ReadLines(filePath)) 
             {
-                dificultad = int.Parse(line);
+                if(contador == 0)
+                {
+                    info["songName"] = line;
+                }else if(contador == 1)
+                {
+                    info["artist"] = line;
+                }else if(contador == 2)
+                {
+                    info["dificulty"] = line;
+                }
+                contador++;
             }
-            return dificultad;
+            return info;
         }
 
     }
