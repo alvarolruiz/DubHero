@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Media.Animation;
 
 using Windows.UI.Xaml.Shapes;
 using Windows.ApplicationModel;
-using DubHero_UI.Classes;
+
 
 namespace DubHero_UI.Vistas
 {
@@ -138,7 +138,7 @@ namespace DubHero_UI.Vistas
 
             var mp3File = await songFolder.GetFileAsync("song.mp3");
             var midiFile = await songFolder.GetFileAsync("map.mid");
-            
+
             await _playback.InitReader(midiFile);
 
             _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(mp3File.Path));
@@ -178,11 +178,11 @@ namespace DubHero_UI.Vistas
             {
                 //Thread.Sleep((int)_timeToFall);?? Parece regulero así que mejor me quedo con el bucle más legible
                 var waitedTime = _currentTime - startTime;
-                if(waitedTime >= _timeToFall)
+                if (waitedTime >= _timeToFall)
                 {
                     _mediaPlayer.Volume = 1;
                     _mediaPlayer.Play();
-                    started = true ;
+                    started = true;
                 }
             }
         }
@@ -223,7 +223,7 @@ namespace DubHero_UI.Vistas
             while (true)
             {
                 _currentTime = _stopwatch.ElapsedMilliseconds;
-                lock(_tracklock) 
+                lock (_tracklock)
                 {
                     CheckNotesToDestroy();
                 }
@@ -235,7 +235,7 @@ namespace DubHero_UI.Vistas
         /// </summary>
         private async void CheckNotesToDestroy()
         {
-            
+
             foreach (var track in _tracks)
             {
                 if (track.Count > 0)
@@ -303,7 +303,7 @@ namespace DubHero_UI.Vistas
             //TODO haser bomnito esto
             note.ReadTime = _currentTime;
             generarNota(note);
-            lock (_tracklock) 
+            lock (_tracklock)
             {
                 _tracks[note.TrackIndex].AddLast(note);
             }
@@ -331,7 +331,13 @@ namespace DubHero_UI.Vistas
         }
 
 
-
+        /// <summary>
+        /// Crea una animacion sobre un elemnto de la vista pasado por parametreos
+        /// </summary>
+        /// <param name="elemento"></param>
+        /// <param name="tiempo"></param>
+        /// <param name="xInit"></param>
+        /// <param name="xFin"></param>
 
 
         private void crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
@@ -363,6 +369,11 @@ namespace DubHero_UI.Vistas
 
 
 
+        /// <summary>
+        /// Genera una elipse con los datos de la nota pasada, que luega se anima y se muestra en pantalla
+        /// </summary>
+        /// <param name="nota"></param>
+        /// <returns></returns>
         public Ellipse generarNota(GameNote nota)
         {
 
@@ -432,7 +443,7 @@ namespace DubHero_UI.Vistas
         /// <param name="args"></param>
         public void MainPage_KeyDown(object sender, KeyEventArgs args)
         {
-            
+
             switch (args.VirtualKey)
             {
                 case VirtualKey.W: CheckPlayedNote(0); ; break;
@@ -443,6 +454,6 @@ namespace DubHero_UI.Vistas
             }
         }
 
-            #endregion
+        #endregion
     }
 }

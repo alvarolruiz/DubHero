@@ -33,14 +33,13 @@
 
         <Storyboard x:Key="Pulse" x:Name="pulse" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="PulseBox">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.15"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1.15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="PulseBox">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.15"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1.15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
-
         </Storyboard>
 
         <Storyboard x:Key="Pulse2" x:Name="pulse2" RepeatBehavior="Forever">
@@ -101,7 +100,7 @@
 
 
         <StackPanel RelativePanel.AlignRightWithPanel="True" >
-            <AppBarButton RelativePanel.AlignRightWithPanel="True"  x:Name="btnexit" Label="Exit"  Background="#00000000" Foreground="Yellow" FontWeight="Bold" Click="viewBtn_Click" Icon="Clear">
+            <AppBarButton RelativePanel.AlignRightWithPanel="True"  x:Name="btnexit" Label="Exit"  Background="#00000000" Foreground="Yellow" FontWeight="Bold" Click="btnexit_Click" Icon="Clear">
             </AppBarButton>
             <AppBarButton RelativePanel.AlignRightWithPanel="True"  x:Name="viewBtn" Label="Stop" Icon="Previous" Background="#00000000" Foreground="Yellow" FontWeight="Bold" Click="viewBtn_Click">
             </AppBarButton>

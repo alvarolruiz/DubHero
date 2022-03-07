@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.UI.Xaml;
@@ -25,8 +27,10 @@ namespace DubHero_UI.Vistas
     public sealed partial class MainPage : Page
     {
         #region 
-        private bool firstTime = true;
+       
         private MediaPlayer mediaPlayer;
+        private MediaTimelineController _mediaTimelineController;
+
 #endregion
 
 
@@ -37,50 +41,69 @@ namespace DubHero_UI.Vistas
             pulse.Begin();
             pulse2.Begin();
 
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Songs/Rubadub/Rubadub.mp3"));
-            var session = mediaPlayer.PlaybackSession;
-            session.Position = session.Position + TimeSpan.FromSeconds(41);
-            if (firstTime)
-            {
-                mediaPlayer.Play();
-            }
+            mediaPlayerInit();
         }
 
 
-        void Grid_KeyUp(object sender, KeyRoutedEventArgs e)
+        /// <summary>
+        /// Inicia la cancion que va a sonar de fondo de todo el programa
+        /// </summary>
+        private void mediaPlayerInit()
         {
-            Frame.Navigate(typeof(SelectSong), mediaPlayer);
-            firstTime = false;
+   
+
+            mediaPlayer = new MediaPlayer();
+            //mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Songs/Rubadub/Rubadub.mp3"));
+            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Songs/cristina.mp3"));
+            _mediaTimelineController = new MediaTimelineController();
+            mediaPlayer.CommandManager.IsEnabled = false;
+            mediaPlayer.TimelineController = _mediaTimelineController;
+           
+            _mediaTimelineController.Start();
+            
         }
+
+        /// <summary>
+        /// Cambia a la pantalla siguiente 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void Grid_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SelectSong), _mediaTimelineController);
+        }
+
+
+        /// <summary>
+        /// Pausa o renuda la cancion que se inicia al principio de la aplcacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void viewBtn_Click(object sender, RoutedEventArgs e)
         {
-            
-            mediaPlayer.Pause();
-            Frame.Navigate(typeof(SelectSong), mediaPlayer);
-        }
+            var yoquerese = mediaPlayer.PlaybackSession.PlaybackState;
 
-
-
-        protected override void OnNavigatedTo(NavigationEventArgs e) // para recuperar los parametros 
-        {
-            if (e.Parameter == "False")
-            {
-                firstTime = false;
+            if (_mediaTimelineController.State == MediaTimelineControllerState.Running) {
+                _mediaTimelineController.Pause();
             }
-
-
-            base.OnNavigatedTo(e);
-
-
-
-            //String nombre = (RestaurantParams)e.Parameter;
-
-            // parameters.Name
-            // parameters.Text
-            // ...
+            else {
+                _mediaTimelineController.Resume();
+            }
+            
         }
 
+
+        /// <summary>
+        /// Sale de toda la aplicacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void btnexit_Click(object sender, RoutedEventArgs e)
+        {
+            CoreApplication.Exit();
+        }
     }
 }

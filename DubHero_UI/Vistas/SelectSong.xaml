@@ -15,6 +15,20 @@
     <Page.DataContext>
         <vm:SongSelect></vm:SongSelect>
     </Page.DataContext>
+    <Page.Resources>
+        <Storyboard x:Key="Pulse" x:Name="pulse" RepeatBehavior="Forever">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="imgIconoAltavoz">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.05"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="imgIconoAltavoz">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.05"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </Page.Resources>
+    
 
     <Page.Resources>
 
@@ -42,7 +56,21 @@
             </TextBlock.Foreground>
         </TextBlock>
 
-        <Image x:Name="imgIconoAltavoz" Source="/Assets/Imagenes/icono.png" RelativePanel.AlignLeftWithPanel="True"  Width="300" Height="300" />
+
+        <Border x:Name="imgIconoAltavoz"
+                         RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <Image   Source="/Assets/Imagenes/icono.png" RelativePanel.AlignLeftWithPanel="True"  Width="300" Height="300" />
+
+
+        </Border>
 
         <GridView x:Name="SongList" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" MinWidth="500"  IsItemClickEnabled="True"
                   ItemClick="GridView_ItemClick"
@@ -89,6 +117,12 @@
 
 
 
+        <StackPanel RelativePanel.AlignRightWithPanel="True" >
+            <AppBarButton RelativePanel.AlignRightWithPanel="True"  x:Name="btnexit" Label="Exit"  Background="#00000000" Foreground="Yellow" FontWeight="Bold" Click="btnexit_Click" Icon="Clear">
+            </AppBarButton>
+            <AppBarButton RelativePanel.AlignRightWithPanel="True"  x:Name="viewBtn" Label="Stop" Icon="Previous" Background="#00000000" Foreground="Yellow" FontWeight="Bold" Click="viewBtn_Click">
+            </AppBarButton>
+        </StackPanel>
 
         <AppBarButton RelativePanel.AlignRightWithPanel="True"  Margin="0,80,160,0" x:Name="viewBtn" Label="Salir" Icon="Previous" Background="#00000000" FontWeight="Bold" Click="viewBtn_Click">
             <AppBarButton.Foreground>

@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,10 +30,12 @@ namespace DubHero_UI.Vistas
     /// </summary>
     public sealed partial class SelectSong : Page
     {
+        private MediaTimelineController _mediaTimelineController;
 
         public SelectSong()
         {
             this.InitializeComponent();
+            pulse.Begin();
         }
 
 
@@ -42,19 +46,64 @@ namespace DubHero_UI.Vistas
         /// <param name="e"></param>
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            String songFolder = ((SongView)e.ClickedItem).FolderName;
-            Frame.Navigate(typeof(GameView), songFolder);
+            
+            String cancion = ((SongView)e.ClickedItem).Name;
+            TutorialWrapper wrap = new TutorialWrapper(cancion, _mediaTimelineController);
+            Frame.Navigate(typeof(Tutorial), wrap);
 
         }
+
+
         /// <summary>
-        /// funcion que navega a la pantalla principal
+        /// Recoge parametros de otra pantalla
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnNavigatedTo(NavigationEventArgs e) // para recuperar los parametros 
+        {
+            base.OnNavigatedTo(e);
+            _mediaTimelineController = e.Parameter as MediaTimelineController;
+            if (_mediaTimelineController.State != MediaTimelineControllerState.Running)
+            {
+
+                _mediaTimelineController.Resume();
+              
+            }
+         
+
+        }
+
+
+        /// <summary>
+        /// Pausa o renuda la cancion que se inicia al principio de la aplcacion
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void viewBtn_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainPage));
+
+
+            if (_mediaTimelineController.State == MediaTimelineControllerState.Running)
+            {
+                _mediaTimelineController.Pause();
+            }
+            else
+            {
+                _mediaTimelineController.Resume();
+            }
+
         }
+
+        /// <summary>
+        /// Sale de toda la aplicacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnexit_Click(object sender, RoutedEventArgs e)
+        {
+            CoreApplication.Exit();
+        }
+
+
     }
 }
 

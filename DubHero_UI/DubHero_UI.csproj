@@ -125,6 +125,7 @@
     <Compile Include="Classes\AnimationCallback.cs" />
     <Compile Include="Classes\GameNote.cs" />
     <Compile Include="Classes\PlaybackManager.cs" />
+    <Compile Include="Models\TutorialWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vistas\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
@@ -141,6 +142,9 @@
     </Compile>
     <Compile Include="Vistas\SelectSong.xaml.cs">
       <DependentUpon>SelectSong.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Tutorial.xaml.cs">
+      <DependentUpon>Tutorial.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +171,7 @@
     <Content Include="Assets\Imagenes\presion.png" />
     <Content Include="Assets\Imagenes\presioneBtn.png" />
     <Content Include="Assets\Imagenes\SongsImages\PERRRO.jfif" />
+    <Content Include="Assets\Imagenes\teclado.png" />
     <Content Include="Assets\PERRRO.jfif" />
     <Content Include="Assets\Songs\MamaDeLaMama\foto.jpg" />
     <Content Include="Assets\Songs\sevenNationArmy\map.mid" />
@@ -177,6 +182,8 @@
     <Content Include="Assets\Songs\Rubadub\song.mp3" />
     <Content Include="Assets\Songs\SevenNationArmy\foto.jpg" />
     <Content Include="Assets\Songs\SevenNationArmy\info.txt" />
+    <Content Include="Assets\Songs\cristina.mp3" />
+    <Content Include="Assets\Songs\introSong.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -208,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\SelectSong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Tutorial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
