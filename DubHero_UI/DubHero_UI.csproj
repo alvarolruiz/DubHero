@@ -178,9 +178,12 @@
     <Content Include="Assets\Imagenes\teclado.png" />
     <Content Include="Assets\PERRRO.jfif" />
     <Content Include="Assets\Songs\MamaDeLaMama\foto.jpg" />
+    <Content Include="Assets\Songs\MamaDeLaMama\map.mid" />
+    <Content Include="Assets\Songs\MamaDeLaMama\song.mp3.mp3" />
     <Content Include="Assets\Songs\Rubadub\info.txt" />
     <Content Include="Assets\Songs\MamaDeLaMama\info.txt" />
     <Content Include="Assets\Songs\Rubadub\foto.jpg" />
+    <Content Include="Assets\Songs\Rubadub\map.mid" />
     <Content Include="Assets\Songs\Rubadub\song.mp3" />
     <Content Include="Assets\Songs\cristina.mp3" />
     <Content Include="Assets\Songs\introSong.mp3" />

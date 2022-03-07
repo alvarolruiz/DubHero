@@ -100,16 +100,6 @@
                 <media:GradientStop Color="#FF250909" Offset="1"/>
             </media:LinearGradientBrush>
         </media:RelativePanel.Background>
-        <Grid RelativePanel.AlignLeftWithPanel="True" x:Name="infoCancion" Margin="70,70,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="60"/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Seven Nation Army" FontSize="40" Margin="10"/>
-            <TextBlock Grid.Row="1" Text="The White Stripes" FontSize="30" Margin="10"/>
-            <RatingControl Grid.Row="2" MaxRating="5" HorizontalAlignment="Left" Value="4" Margin="10"/>
-        </Grid>
         <Grid x:Name="Marcador" Margin="0,100,100,0" RelativePanel.AlignRightWithPanel="True" CornerRadius="6" BorderThickness="4" BorderBrush="BurlyWood">
             <Grid.Background>
                 <ImageBrush ImageSource="../Assets/Imagenes/backgroundMarcador.jpg"/>

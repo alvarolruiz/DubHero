@@ -100,7 +100,17 @@
                 <media:GradientStop Color="#FF250909" Offset="1"/>
             </media:LinearGradientBrush>
         </media:RelativePanel.Background>
-        <Grid Margin="0,100,100,0" RelativePanel.AlignRightWithPanel="True" x:Name="Marcador" CornerRadius="6" BorderThickness="4" BorderBrush="BurlyWood">
+        <Grid RelativePanel.AlignLeftWithPanel="True" x:Name="infoCancion" Margin="70,70,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="nombreCancion" Text="" FontSize="40" Margin="10"/>
+            <TextBlock x:Name="artista" Grid.Row="1" Text="" FontSize="30" Margin="10"/>
+            <RatingControl x:Name="dificulty" IsEnabled="False" Grid.Row="2" MaxRating="5" HorizontalAlignment="Left"  Margin="10"/>
+        </Grid>
+        <Grid Margin="0,100,100,0" RelativePanel.AlignRightWithPanel="True" x:Name="Marcador" CornerRadius="3" BorderThickness="4" BorderBrush="Gray" >
             <Grid.Background>
                 <ImageBrush ImageSource="../Assets/Imagenes/backgroundMarcador.jpg"/>
             </Grid.Background>

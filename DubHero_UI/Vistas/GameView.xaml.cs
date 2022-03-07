@@ -77,7 +77,7 @@ namespace DubHero_UI.Vistas
         /// <summary>
         /// Name of the song, used to fing the necessary files.
         /// </summary>
-        TutorialWrapper wrapper;
+        SongView songView;
 
         /// <summary>
         /// Tracks current score
@@ -111,9 +111,9 @@ namespace DubHero_UI.Vistas
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
+            if (e.Parameter is SongView)
             {
-                wrapper = (TutorialWrapper)e.Parameter;
+                songView = (SongView)e.Parameter;
             }
             base.OnNavigatedTo(e);
         }
@@ -129,9 +129,12 @@ namespace DubHero_UI.Vistas
         {
             var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
             var songListFolder = await assetsFolder.GetFolderAsync("Songs");
-            var songFolder = await songListFolder.GetFolderAsync(wrapper.SongView.FolderName);
+            var songFolder = await songListFolder.GetFolderAsync(songView.FolderName);
             var mp3File = await songFolder.GetFileAsync("song.mp3");
             var midiFile = await songFolder.GetFileAsync("map.mid");
+            this.nombreCancion.Text= songView.Name;
+            this.artista.Text = songView.Artist;
+            this.dificulty.Value = songView.Dificulty;
 
             await _playback.InitReader(midiFile);
 
