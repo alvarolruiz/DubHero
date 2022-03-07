@@ -264,7 +264,7 @@ namespace DubHero_UI.Vistas
                         }
                         this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
-                            animateFail(note);
+                            AnimateFail(note);
                             note.DeleteFromView();
                         });
                     }
@@ -297,7 +297,7 @@ namespace DubHero_UI.Vistas
 
                         this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
-                            animateSucces(nextNote);
+                            AnimateSuccess(nextNote);
                             nextNote.DeleteFromView();
                             
                         });
@@ -310,7 +310,7 @@ namespace DubHero_UI.Vistas
                     {
                         this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
-                            animateFail(nextNote);
+                            AnimateFail(nextNote);
                             nextNote.DeleteFromView();
                         });
                         targetTrack.RemoveFirst();
@@ -331,7 +331,7 @@ namespace DubHero_UI.Vistas
         {
             //TODO haser bomnito esto
             note.ReadTime = _currentTime;
-            generarNota(note);
+            GenerateNote(note);
             lock (_tracklock)
             {
                 _tracks[note.TrackIndex].AddLast(note);
@@ -362,7 +362,7 @@ namespace DubHero_UI.Vistas
         /// Lanza una animacion de fuego segun la nota que se haya acertado
         /// </summary>
         /// <param name="note"></param>
-        private void animateSucces(Classes.GameNote note)
+        private void AnimateSuccess(Classes.GameNote note)
         {
 
             switch (note.NoteNumber)
@@ -399,7 +399,7 @@ namespace DubHero_UI.Vistas
         /// </summary>
         /// <param name="note"></param>
 
-        private void animateFail(Classes.GameNote note)
+        private void AnimateFail(Classes.GameNote note)
         {
 
             switch (note.NoteNumber)
@@ -465,7 +465,7 @@ namespace DubHero_UI.Vistas
         /// <param name="xFin"></param>
 
 
-        private void crearAnimacionBajadaEncoger(Ellipse elemento, Double tiempo, int xInit, int xFin)
+        private void CreateDownAnimation(Ellipse elemento, Double tiempo, int xInit, int xFin)
         {
 
             double timeFinishLine = (tiempo / 800) * 200;
@@ -499,7 +499,7 @@ namespace DubHero_UI.Vistas
         /// </summary>
         /// <param name="nota"></param>
         /// <returns></returns>
-        public Ellipse generarNota(GameNote nota)
+        public Ellipse GenerateNote(GameNote nota)
         {
 
             //habira que hacerlas relativas a la pantalla
@@ -566,7 +566,7 @@ namespace DubHero_UI.Vistas
             rec.SetValue(Canvas.ZIndexProperty, 6);
             nota.Shape = rec;
             nota.Track = pistaObjetivo;
-            crearAnimacionBajadaEncoger(rec, (double)(_timeToFall + _failOffset) / 1000, xInit, xFin);
+            CreateDownAnimation(rec, (double)(_timeToFall + _failOffset) / 1000, xInit, xFin);
             pistaObjetivo.Children.Add(rec);
             return rec;
         }
