@@ -131,18 +131,12 @@
     <Compile Include="Vistas\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Juego.xaml.cs">
-      <DependentUpon>Juego.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Vistas\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vistas\Results.xaml.cs">
       <DependentUpon>Results.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\SelectorSim.xaml.cs">
-      <DependentUpon>SelectorSim.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\SelectSong.xaml.cs">
       <DependentUpon>SelectSong.xaml</DependentUpon>
@@ -215,19 +209,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vistas\Juego.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Vistas\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vistas\Results.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Vistas\SelectorSim.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
