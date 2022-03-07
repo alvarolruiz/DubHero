@@ -151,23 +151,23 @@
             <Polyline x:Name="l6" Style="{StaticResource propLineas }" Points="839,270,1240,1000" Canvas.ZIndex="3"/>
 
             <Line X1="0" X2="1200" RelativePanel.AlignBottomWithPanel="True" Margin="150,20" StrokeThickness="10" Fill="Black" Canvas.ZIndex="1" />
-
+            <Grid Margin="0,00,0,0" media:Canvas.Top="890" Canvas.Left="45" Width="1150" Height="30" Background="Black" Canvas.ZIndex="3" CornerRadius="30"> </Grid>
 
             <Line X1="0" X2="1200" Canvas.Top="900"  Canvas.ZIndex="6"  StrokeThickness="100" Fill="Black"/>
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg1" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="50" Canvas.Top="800" Height="160"  Canvas.ZIndex="1" />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg1" Source="/Assets/Imagenes/gameView/fireEffect.gif"  Style="{StaticResource styleSuccessAnimation}" Canvas.Left="-100" Canvas.Top="690" Canvas.ZIndex="1"    />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg1" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="50" Canvas.Top="800" Height="160"  Canvas.ZIndex="4" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg1" Source="/Assets/Imagenes/gameView/fireEffect.gif"  Style="{StaticResource styleSuccessAnimation}" Canvas.Left="-100" Canvas.Top="690" Canvas.ZIndex="4"    />
 
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg2" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="275" Canvas.Top="800" Height="160"  Canvas.ZIndex="1" />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg2" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}" Canvas.Left="135" Canvas.Top="690" Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg2" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="275" Canvas.Top="800" Height="160"  Canvas.ZIndex="4" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg2" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}" Canvas.Left="135" Canvas.Top="690" Canvas.ZIndex="4" />
 
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg3" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="505"  Canvas.Top="800" Height="160" Canvas.ZIndex="1" />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg3" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}" Canvas.Left="365" Canvas.Top="690" Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg3" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="505"  Canvas.Top="800" Height="160" Canvas.ZIndex="4" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg3" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}" Canvas.Left="365" Canvas.Top="690" Canvas.ZIndex="4" />
 
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg4" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="725"  Canvas.Top="800" Height="160"  Canvas.ZIndex="1" />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg4" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}"  Canvas.Left="585" Canvas.Top="690" Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg4" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="725"  Canvas.Top="800" Height="160"  Canvas.ZIndex="4" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg4" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}"  Canvas.Left="585" Canvas.Top="690" Canvas.ZIndex="4" />
 
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg5" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="950"  Canvas.Top="800" Height="160"  Canvas.ZIndex="1" />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg5" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}"  Canvas.Left="810" Canvas.Top="690" Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg5" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="950"  Canvas.Top="800" Height="160"  Canvas.ZIndex="4" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg5" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}"  Canvas.Left="810" Canvas.Top="690" Canvas.ZIndex="4" />
         </Canvas>
         <!--<Ellipse Width="190" Height="190" Fill="Aqua" RelativePanel.AlignBottomWithPanel="True" Margin="230,30"/>-->
 
