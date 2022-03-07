@@ -92,7 +92,7 @@ namespace DubHero_UI.Vistas
         private void RelativePanel_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             _mediaTimelineController.Pause();
-            Frame.Navigate(typeof(Juego), tutorialWrapper.SongView);
+            Frame.Navigate(typeof(GameView), tutorialWrapper.SongName);
         }
     }
 }

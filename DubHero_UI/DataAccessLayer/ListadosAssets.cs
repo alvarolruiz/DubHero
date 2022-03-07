@@ -20,7 +20,7 @@ namespace DubHero_UI.DataAccessLayer
         /// Obtiene la carpeta en la que se guarda todas la información de las canciones
         /// </summary>
         /// <returns></returns>
-        private async Task<IReadOnlyList<StorageFolder>> getSongsFolder()
+        private async Task<IReadOnlyList<StorageFolder>> GetSongsFolder()
         {
             var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
             var songListFolder = await assetsFolder.GetFolderAsync("Songs");
@@ -34,13 +34,12 @@ namespace DubHero_UI.DataAccessLayer
         ///
         /// </summary>
         /// <returns></returns>
-       public async Task<List<SongView>> getSongViewListAsync()
+       public async Task<List<SongView>> GetSongViewListAsync()
         {
             List<SongView> list = new List<SongView>();
-            var listaCarpetas =  await getSongsFolder();
+            var listaCarpetas =  await GetSongsFolder();
             var ll =  listaCarpetas.AsEnumerable();
             String folderName="";
-            int dificultad=0;
             String fotoFilePath="";
             var info = new Dictionary<string, string>();
             foreach (var l in ll)
@@ -49,7 +48,7 @@ namespace DubHero_UI.DataAccessLayer
                 {
                     folderName = l.Name;
                     var infoFile = await l.GetFileAsync("info.txt");
-                    info = getInfo(infoFile.Path);
+                    info = GetInfo(infoFile.Path);
 
                     var fotoFile = await l.GetFileAsync("foto.jpg");
                     fotoFilePath = fotoFile.Path;
@@ -67,7 +66,7 @@ namespace DubHero_UI.DataAccessLayer
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        private Dictionary<String, String> getInfo(String filePath)
+        private Dictionary<String, String> GetInfo(String filePath)
         {
             var info = new Dictionary<string, string>();
             int contador = 0;
