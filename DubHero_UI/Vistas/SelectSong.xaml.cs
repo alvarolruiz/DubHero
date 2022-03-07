@@ -47,8 +47,8 @@ namespace DubHero_UI.Vistas
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             
-            String cancion = ((SongView)e.ClickedItem).Name;
-            TutorialWrapper wrap = new TutorialWrapper(cancion, _mediaTimelineController);
+            SongView songView = ((SongView)e.ClickedItem);
+            TutorialWrapper wrap = new TutorialWrapper(songView, _mediaTimelineController);
             Frame.Navigate(typeof(Tutorial), wrap);
 
         }
