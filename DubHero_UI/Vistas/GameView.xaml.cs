@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Media.Animation;
 
 using Windows.UI.Xaml.Shapes;
 using Windows.ApplicationModel;
-
+using DubHero_UI.Models;
 
 namespace DubHero_UI.Vistas
 {
@@ -77,7 +77,7 @@ namespace DubHero_UI.Vistas
         /// <summary>
         /// Name of the song, used to fing the necessary files.
         /// </summary>
-        string _songName;
+        TutorialWrapper wrapper;
 
         /// <summary>
         /// Tracks current score
@@ -118,7 +118,7 @@ namespace DubHero_UI.Vistas
         {
             if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
             {
-                _songName = (string)e.Parameter;
+                wrapper = (TutorialWrapper)e.Parameter;
             }
             base.OnNavigatedTo(e);
         }
@@ -134,8 +134,7 @@ namespace DubHero_UI.Vistas
         {
             var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
             var songListFolder = await assetsFolder.GetFolderAsync("Songs");
-            var songFolder = await songListFolder.GetFolderAsync(_songName);
-
+            var songFolder = await songListFolder.GetFolderAsync(wrapper.SongView.FolderName);
             var mp3File = await songFolder.GetFileAsync("song.mp3");
             var midiFile = await songFolder.GetFileAsync("map.mid");
 
