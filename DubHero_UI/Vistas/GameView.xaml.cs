@@ -540,13 +540,13 @@ namespace DubHero_UI.Vistas
             }
 
 
-            ImageBrush imgB = new ImageBrush();
+            //ImageBrush imgB = new ImageBrush();
 
-            BitmapImage btpImg = new BitmapImage();
+            //BitmapImage btpImg = new BitmapImage();
 
-            btpImg.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/azul.png");
+            //btpImg.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/nota.gif");
 
-            imgB.ImageSource = btpImg;
+            //imgB.ImageSource = btpImg;
 
 
 
@@ -554,7 +554,7 @@ namespace DubHero_UI.Vistas
             {
                 Width = 80,
                 Height = (_currentTime - nota.ReadTime) * 1.5, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
-                Fill = imgB,
+                Fill = scb,
 
                 //CornerRadius = 5,
                 VerticalAlignment = VerticalAlignment.Top,

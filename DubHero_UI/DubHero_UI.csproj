@@ -173,6 +173,7 @@
     <Content Include="Assets\Imagenes\linea.png" />
     <Content Include="Assets\Imagenes\Notas\amarilla.png" />
     <Content Include="Assets\Imagenes\Notas\azul.png" />
+    <Content Include="Assets\Imagenes\Notas\nota.gif" />
     <Content Include="Assets\Imagenes\Notas\roja.png" />
     <Content Include="Assets\Imagenes\Notas\verde.png" />
     <Content Include="Assets\Imagenes\paracom.png" />
