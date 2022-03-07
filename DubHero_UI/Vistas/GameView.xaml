@@ -28,7 +28,7 @@
             <DoubleAnimation
             Storyboard.TargetName="succesImg1"
             Storyboard.TargetProperty="Opacity"
-            From="1.5" To="0" Duration="0:0:0.5"/>
+            From="1.5" To="0" Duration="0:0:0.2"/>
 
         </Storyboard>
 
@@ -36,59 +36,59 @@
             <DoubleAnimation
             Storyboard.TargetName="failImg1"
                     Storyboard.TargetProperty="Opacity"
-                    From="1.5" To="0" Duration="0:0:0.5"/>
+                    From="1.5" To="0" Duration="0:0:0.2"/>
         </Storyboard>
         <Storyboard x:Name="succesAnimation2">
             <DoubleAnimation
             Storyboard.TargetName="succesImg2"
                     Storyboard.TargetProperty="Opacity"
-                    From="1.5" To="0" Duration="0:0:0.5"/>
+                    From="1.5" To="0" Duration="0:0:0.2"/>
         </Storyboard>
 
         <Storyboard x:Name="failAnimation2">
             <DoubleAnimation
             Storyboard.TargetName="failImg2"
                     Storyboard.TargetProperty="Opacity"
-                    From="1.5" To="0" Duration="0:0:0.5"/>
+                    From="1.5" To="0" Duration="0:0:0.2"/>
         </Storyboard>
         <Storyboard x:Name="succesAnimation3">
             <DoubleAnimation
             Storyboard.TargetName="succesImg3"
                     Storyboard.TargetProperty="Opacity"
-                    From="1.5" To="0" Duration="0:0:0.5"/>
+                    From="1.5" To="0" Duration="0:0:0.2"/>
         </Storyboard>
 
         <Storyboard x:Name="failAnimation3">
             <DoubleAnimation
             Storyboard.TargetName="failImg3"
                     Storyboard.TargetProperty="Opacity"
-                    From="1.5" To="0" Duration="0:0:0.5"/>
+                    From="1.5" To="0" Duration="0:0:0.2"/>
         </Storyboard>
         <Storyboard x:Name="succesAnimation4">
             <DoubleAnimation
             Storyboard.TargetName="succesImg4"
                     Storyboard.TargetProperty="Opacity"
-                    From="1.5" To="0" Duration="0:0:0.5"/>
+                    From="1.5" To="0" Duration="0:0:0.2"/>
         </Storyboard>
 
         <Storyboard x:Name="failAnimation4">
             <DoubleAnimation
             Storyboard.TargetName="failImg4"
                     Storyboard.TargetProperty="Opacity"
-                    From="1.5" To="0" Duration="0:0:0.5"/>
+                    From="1.5" To="0" Duration="0:0:0.2"/>
         </Storyboard>
         <Storyboard x:Name="succesAnimation5">
             <DoubleAnimation
             Storyboard.TargetName="succesImg5"
                     Storyboard.TargetProperty="Opacity"
-                    From="1.5" To="0" Duration="0:0:0.5"/>
+                    From="1.5" To="0" Duration="0:0:0.2"/>
         </Storyboard>
 
         <Storyboard x:Name="failAnimation5">
             <DoubleAnimation
             Storyboard.TargetName="failImg5"
                     Storyboard.TargetProperty="Opacity"
-                    From="1.5" To="0" Duration="0:0:0.5"/>
+                    From="1.5" To="0" Duration="0:0:0.2"/>
         </Storyboard>
 
     </Page.Resources>
@@ -154,20 +154,20 @@
 
 
             <Line X1="0" X2="1200" Canvas.Top="900"  Canvas.ZIndex="6"  StrokeThickness="100" Fill="Black"/>
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg1" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="50" Canvas.Top="750"  Canvas.ZIndex="1" />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg1" Source="/Assets/Imagenes/gameView/fireEffect.gif"  Style="{StaticResource styleSuccessAnimation}" Canvas.Left="-100" Canvas.Top="700" Canvas.ZIndex="1"    />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg1" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="50" Canvas.Top="800" Height="160"  Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg1" Source="/Assets/Imagenes/gameView/fireEffect.gif"  Style="{StaticResource styleSuccessAnimation}" Canvas.Left="-100" Canvas.Top="690" Canvas.ZIndex="1"    />
 
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg2" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="275" Canvas.Top="750" Canvas.ZIndex="1" />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg2" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}" Canvas.Left="135" Canvas.Top="700" Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg2" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="275" Canvas.Top="800" Height="160"  Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg2" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}" Canvas.Left="135" Canvas.Top="690" Canvas.ZIndex="1" />
 
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg3" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="505" Canvas.Top="750" Canvas.ZIndex="1" />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg3" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}" Canvas.Left="365" Canvas.Top="700" Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg3" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="505"  Canvas.Top="800" Height="160" Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg3" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}" Canvas.Left="365" Canvas.Top="690" Canvas.ZIndex="1" />
 
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg4" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="725" Canvas.Top="750" Canvas.ZIndex="1" />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg4" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}"  Canvas.Left="585" Canvas.Top="700" Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg4" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="725"  Canvas.Top="800" Height="160"  Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg4" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}"  Canvas.Left="585" Canvas.Top="690" Canvas.ZIndex="1" />
 
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg5" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="950" Canvas.Top="750" Canvas.ZIndex="1" />
-            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg5" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}"  Canvas.Left="810" Canvas.Top="700" Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="succesImg5" Source="/Assets/Imagenes/gameView/failEffect.gif" Style="{StaticResource styleFailAnimation}" Canvas.Left="950"  Canvas.Top="800" Height="160"  Canvas.ZIndex="1" />
+            <Image RelativePanel.AlignBottomWithPanel="True" x:Name="failImg5" Source="/Assets/Imagenes/gameView/fireEffect.gif" Style="{StaticResource styleSuccessAnimation}"  Canvas.Left="810" Canvas.Top="690" Canvas.ZIndex="1" />
         </Canvas>
         <!--<Ellipse Width="190" Height="190" Fill="Aqua" RelativePanel.AlignBottomWithPanel="True" Margin="230,30"/>-->
 

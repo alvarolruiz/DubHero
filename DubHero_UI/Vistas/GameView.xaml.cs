@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Shapes;
 using Windows.ApplicationModel;
 using DubHero_UI.Models;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace DubHero_UI.Vistas
 {
@@ -104,6 +105,7 @@ namespace DubHero_UI.Vistas
             Window.Current.CoreWindow.KeyDown += MainPage_KeyDown;
         }
 
+
         /// <summary>
         /// OnNavigatedTo parameter must be the name of the map's directory. The midi file must be named
         /// "midimap.midi" and the song file "song.mp3" for it to work.
@@ -116,6 +118,7 @@ namespace DubHero_UI.Vistas
                 songView = (SongView)e.Parameter;
             }
             base.OnNavigatedTo(e);
+            initFailSuccesAnimation();
         }
         #endregion
 
@@ -132,7 +135,7 @@ namespace DubHero_UI.Vistas
             var songFolder = await songListFolder.GetFolderAsync(songView.FolderName);
             var mp3File = await songFolder.GetFileAsync("song.mp3");
             var midiFile = await songFolder.GetFileAsync("map.mid");
-            this.nombreCancion.Text= songView.Name;
+            this.nombreCancion.Text = songView.Name;
             this.artista.Text = songView.Artist;
             this.dificulty.Value = songView.Dificulty;
 
@@ -261,6 +264,7 @@ namespace DubHero_UI.Vistas
                         }
                         this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
+                            animateFail(note);
                             note.DeleteFromView();
                         });
                     }
@@ -289,18 +293,24 @@ namespace DubHero_UI.Vistas
                     var isOnTime = differenceToPerfect <= _failOffset;
                     if (isOnTime)
                     {
+
+
                         this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
+                            animateSucces(nextNote);
                             nextNote.DeleteFromView();
+                            
                         });
                         targetTrack.RemoveFirst();
                         _scoreboard.Correct();
-                        
+
+
                     }
                     else if (differenceToPerfect <= _tooSoonOffset)
                     {
                         this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
+                            animateFail(nextNote);
                             nextNote.DeleteFromView();
                         });
                         targetTrack.RemoveFirst();
@@ -327,6 +337,102 @@ namespace DubHero_UI.Vistas
                 _tracks[note.TrackIndex].AddLast(note);
             }
         }
+
+
+
+        /// <summary>
+        /// Execute all of the animations
+        /// </summary>
+        private void initFailSuccesAnimation()
+        {
+
+            failAnimation1.Begin();
+            failAnimation2.Begin();
+            failAnimation3.Begin();
+            failAnimation4.Begin();
+            failAnimation5.Begin();
+            succesAnimation1.Begin();
+            succesAnimation2.Begin();
+            succesAnimation3.Begin();
+            succesAnimation4.Begin();
+            succesAnimation5.Begin();
+        }
+
+        /// <summary>
+        /// Lanza una animacion de fuego segun la nota que se haya acertado
+        /// </summary>
+        /// <param name="note"></param>
+        private void animateSucces(Classes.GameNote note)
+        {
+
+            switch (note.NoteNumber)
+            {
+                case 60:
+                    succesAnimation1.Begin();
+
+                    break;
+
+                case 62:
+                    succesAnimation2.Begin();
+
+                    break;
+
+                case 64:
+                    succesAnimation3.Begin();
+
+                    break;
+
+                case 65:
+                    succesAnimation4.Begin();
+
+                    break;
+
+                case 67:
+                    succesAnimation5.Begin();
+
+                    break;
+            }
+
+        }
+        /// <summary>
+        /// Lanza una animacion roja segun la nota que se haya fallado
+        /// </summary>
+        /// <param name="note"></param>
+
+        private void animateFail(Classes.GameNote note)
+        {
+
+            switch (note.NoteNumber)
+            {
+                case 60:
+                    failAnimation1.Begin();
+
+                    break;
+
+                case 62:
+                    failAnimation2.Begin();
+
+                    break;
+
+                case 64:
+                    failAnimation3.Begin();
+
+                    break;
+
+                case 65:
+                    failAnimation4.Begin();
+
+                    break;
+
+                case 67:
+                    failAnimation5.Begin();
+
+                    break;
+            }
+
+        }
+
+
 
         /// <summary>
         /// funcion que crea y devuelve una animacion doble dado un rctangulo y una serie de parametros
@@ -433,14 +539,27 @@ namespace DubHero_UI.Vistas
                     break;
             }
 
+
+            ImageBrush imgB = new ImageBrush();
+
+            BitmapImage btpImg = new BitmapImage();
+
+            btpImg.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/azul.png");
+
+            imgB.ImageSource = btpImg;
+
+
+
             Ellipse rec = new Ellipse
             {
                 Width = 80,
                 Height = (_currentTime - nota.ReadTime) * 1.5, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
-                Fill = scb,
+                Fill = imgB,
+
                 //CornerRadius = 5,
                 VerticalAlignment = VerticalAlignment.Top,
                 RenderTransform = new CompositeTransform { TranslateX = 0, TranslateY = 0 }
+
 
             };
 
