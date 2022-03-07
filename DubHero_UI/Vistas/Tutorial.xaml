@@ -81,16 +81,13 @@
                         Pulse las teclas al ritmo de la canción para conseguir la mayor puntuacion posible, pero sin pasarte, el momento tiene que ser el justo. 
                        
                         
-                        Los controles son W, D, J, I, O
-                   "  FocusVisualPrimaryBrush="White" FontSize="25" RenderTransformOrigin="0.5,0.5" FontFamily="Arial Black" FontWeight="SemiBold" >
-                <TextBlock.RenderTransform>
-                    <CompositeTransform SkewY="0.066" TranslateY="2.247"/>
-                </TextBlock.RenderTransform>
+                        Los controles son W, D, J, I, O"
+                   Foreground="Yellow" FontSize="25" RenderTransformOrigin="0.5,0.5" FontFamily="Arial Black" FontWeight="SemiBold" >
+               
             </TextBlock>
         </Border>
 
         <Image RelativePanel.RightOf="Texto" RelativePanel.Below="Titulo" RelativePanel.AlignVerticalCenterWith="Texto"  Source="/Assets/Imagenes/teclado.png" RelativePanel.AlignHorizontalCenterWithPanel ="True"  Width="750" Height="300" />
-
 
         <Border x:Name="imgPresionar"
                          RenderTransformOrigin="0.5,0.5"
@@ -107,7 +104,7 @@
             </Border.RenderTransform>
             <Image   Source="/Assets/Imagenes/presioneBtn.png" Width="500" Height="300" />
         </Border>
-
+        <Button Height="0.1"></Button>
         
 
 

@@ -93,9 +93,7 @@
                     <Image x:Name="presione" Source="/Assets/Imagenes/presioneBtn.png" RelativePanel.AlignHorizontalCenterWithPanel="True"  Margin="0,50,0,0"  Width="600"  />
                     <Image Source="/Assets/Imagenes/paracom.png" RelativePanel.Below="presione" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="450" Margin="0,-30"  />
                 </StackPanel>
-
             </Border>
-
         </StackPanel>
 
 
@@ -105,8 +103,6 @@
             <AppBarButton RelativePanel.AlignRightWithPanel="True"  x:Name="viewBtn" Label="Stop" Icon="Previous" Background="#00000000" Foreground="Yellow" FontWeight="Bold" Click="viewBtn_Click">
             </AppBarButton>
         </StackPanel>
-       
-
-
+      
     </RelativePanel>
 </Page>

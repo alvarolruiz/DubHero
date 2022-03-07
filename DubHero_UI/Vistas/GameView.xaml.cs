@@ -375,11 +375,11 @@ namespace DubHero_UI.Vistas
             storyboardTamanio.Children.Add(traslacionX);
 
             // desde que tamanio hasta que tamanio
-            DoubleAnimation animacionAncho = CreateDoubleAnimation(elemento, 60, 150, "Rectangle.Width", tiempo);
+            DoubleAnimation animacionAncho = CreateDoubleAnimation(elemento, 40, 180, "Rectangle.Width", tiempo);
             animacionAncho.EnableDependentAnimation = true;
             storyboardTamanio.Children.Add(animacionAncho);
 
-            DoubleAnimation animacionAlto = CreateDoubleAnimation(elemento, 60, 150, "Rectangle.Height", tiempo);
+            DoubleAnimation animacionAlto = CreateDoubleAnimation(elemento, 40, 180, "Rectangle.Height", tiempo);
             animacionAlto.EnableDependentAnimation = true;
             storyboardTamanio.Children.Add(animacionAlto);
 
@@ -404,32 +404,32 @@ namespace DubHero_UI.Vistas
             {
                 case 60:
                     scb = new SolidColorBrush(Colors.Red); // hacer que aparezca en una coordinada 
-                    xInit = 390;
-                    xFin = 60;
+                    xInit = 380;
+                    xFin = 15;
                     break;
 
                 case 62:
                     scb = new SolidColorBrush(Colors.Gray);
-                    xInit = 460;
-                    xFin = 300;
+                    xInit = 468;
+                    xFin = 286;
                     break;
 
                 case 64:
                     scb = new SolidColorBrush(Colors.Pink);
-                    xInit = 550;
-                    xFin = 550;
+                    xInit = 564;
+                    xFin = 552;
                     break;
 
                 case 65:
                     scb = new SolidColorBrush(Colors.Purple);
-                    xInit = 630;
-                    xFin = 830;
+                    xInit = 665;
+                    xFin = 835;
                     break;
 
                 case 67:
                     scb = new SolidColorBrush(Colors.Green);
-                    xInit = 720;
-                    xFin = 1060;
+                    xInit = 760;
+                    xFin = 1091;
                     break;
             }
 
