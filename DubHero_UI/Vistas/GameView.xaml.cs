@@ -84,6 +84,11 @@ namespace DubHero_UI.Vistas
         /// Tracks current score
         /// </summary>
         Score _scoreboard;
+
+
+        //Image of notes
+        ImageBrush imgB;
+
         #endregion
 
         #region UWP Related
@@ -119,6 +124,7 @@ namespace DubHero_UI.Vistas
             }
             base.OnNavigatedTo(e);
             initFailSuccesAnimation();
+            initImage();
         }
         #endregion
 
@@ -264,7 +270,7 @@ namespace DubHero_UI.Vistas
                         }
                         this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
-                            animateSucces(note);
+                            animateFail(note);
                             note.DeleteFromView();
                         });
                     }
@@ -297,7 +303,7 @@ namespace DubHero_UI.Vistas
 
                         this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
-                            animateFail(nextNote);
+                            animateSucces(nextNote);
                             nextNote.DeleteFromView();
                             
                         });
@@ -310,7 +316,7 @@ namespace DubHero_UI.Vistas
                     {
                         this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
-                            animateSucces(nextNote);
+                            animateFail(nextNote);
                             nextNote.DeleteFromView();
                         });
                         targetTrack.RemoveFirst();
@@ -336,6 +342,19 @@ namespace DubHero_UI.Vistas
             {
                 _tracks[note.TrackIndex].AddLast(note);
             }
+        }
+
+
+        public void initImage() {
+
+            imgB = new ImageBrush();
+
+            BitmapImage btpImg = new BitmapImage();
+
+            btpImg.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/nota2.gif");
+
+            imgB.ImageSource = btpImg;
+
         }
 
 
@@ -540,21 +559,12 @@ namespace DubHero_UI.Vistas
             }
 
 
-            //ImageBrush imgB = new ImageBrush();
-
-            //BitmapImage btpImg = new BitmapImage();
-
-            //btpImg.UriSource = new Uri(@"ms-appx:///Assets/Imagenes/Notas/nota.gif");
-
-            //imgB.ImageSource = btpImg;
-
-
 
             Ellipse rec = new Ellipse
             {
                 Width = 80,
                 Height = (_currentTime - nota.ReadTime) * 1.5, // esta mal pero habria que ponerlo segun la velocidad de la cancion 
-                Fill = scb,
+                Fill = imgB,
 
                 //CornerRadius = 5,
                 VerticalAlignment = VerticalAlignment.Top,
